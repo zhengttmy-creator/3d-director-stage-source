@@ -1,0 +1,62 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const parser = require('@babel/parser');
+const traverse = require('@babel/traverse').default;
+
+module.exports = function patchCameraCutSequencer(factories) {
+  let source = factories['53401'];
+  const replace = (label, before, after) => {
+    assert.equal(source.split(before).length, 2, 'Camera cuts patch anchor changed: ' + label);
+    source = source.replace(before, after);
+  };
+  const replaceFunction = (name, value) => {
+    let found;
+    traverse(parser.parse('(' + source + ')'), {FunctionDeclaration(entry) {
+      if (entry.node.id?.name === name) {assert.equal(found, undefined); found = entry.node;}
+    }});
+    assert.ok(found, 'Camera cuts function missing: ' + name);
+    source = source.slice(0, found.start - 1) + value + source.slice(found.end - 1);
+  };
+  replaceFunction('rO', 'function rO(e,t){return __localNormalizeShots(e?.clips,t)}');
+  replaceFunction('rV', 'function rV(e){return __localNormalizeShots(e)}');
+  replaceFunction('rH', 'function rH(e,t,r){const c=rO(e).clips.find(c=>c.id===t);return c?__localEditShot(e,t,{endFrame:c.startFrame+Math.max(1,rQ(r))}):rO(e)}');
+  replaceFunction('hk', 'function hk(e){return (0,i.jsx)(__LocalShotTrack,e)}');
+  replace('runtime', 'function rO(e,t){', fs.readFileSync(path.join(__dirname, 'camera-cut-sequencer-runtime.js'), 'utf8') + '\nfunction rO(e,t){');
+  replace('shot metadata', 'function rW(e){return{id:e.id,cameraId:e.cameraId,startFrame:e.startFrame,endFrame:e.endFrame,createdAt:e.createdAt,',
+    'function rW(e){return{id:e.id,cameraId:e.cameraId,startFrame:e.startFrame,endFrame:e.endFrame,createdAt:e.createdAt,...e.enabled===false?{enabled:false}:{},');
+  replace('import shot enabled', 'createdAt:e.createdAt,...iY(e.provenance)', 'createdAt:e.createdAt,...e.enabled===false?{enabled:false}:{},...iY(e.provenance)');
+  replace('import preserve gaps', 'r={...e,startFrame:a,endFrame:a+t};return a=r.endFrame,r})}}(e.cameraCutTrack)',
+    'r={...e,startFrame:Math.max(a,e.startFrame),endFrame:Math.max(a,e.startFrame)+t};return a=r.endFrame,r})}}(e.cameraCutTrack)');
+  replace('fps preserve placement', 'startFrame:0,endFrame:Math.max(1,Math.round((e.endFrame-e.startFrame)/n*o))',
+    'startFrame:Math.max(0,Math.round(e.startFrame/n*o)),endFrame:Math.max(Math.round(e.startFrame/n*o)+1,Math.round(e.endFrame/n*o))');
+  replace('legacy append placement', 'cameraId:e.cameraId,startFrame:0,endFrame:r,createdAt:e.createdAt',
+    'cameraId:e.cameraId,startFrame:rU(t),endFrame:rU(t)+r,createdAt:e.createdAt');
+  replace('disabled playback', 'a=r.track)?void 0:a.clips.filter(e=>l.has(e.cameraId))',
+    'a=r.track)?void 0:a.clips.filter(e=>l.has(e.cameraId)&&e.enabled!==false)');
+  replace('storyboard gap fallback', 'let t=e.document.cameras.find(e=>{let{id:t}=e;return t===r.clips[0].cameraId})??ci(e.document);return{source:{kind:"storyboard"}',
+    'let t=ci(e.document);return{source:{kind:"storyboard"}');
+  replace('storyboard full timeline', 'cameraCutTrack:r,durationSec:rU(r)/i,sceneCamera:t0(t)',
+    'cameraCutTrack:r,durationSec:Math.max(n,rU(r)/i),sceneCamera:t0(t)');
+  replace('gesture equality', 'a.startFrame===e.startFrame&&a.endFrame===e.endFrame})}function hy',
+    'a.startFrame===e.startFrame&&a.endFrame===e.endFrame&&(a.enabled!==false)===(e.enabled!==false)})}function hy');
+  replace('canonical enabled validation', 'e.endFrame>e.startFrame&&kR(e.createdAt)&&(void 0===e.provenance',
+    'e.endFrame>e.startFrame&&kR(e.createdAt)&&(void 0===e.enabled||typeof e.enabled==="boolean")&&(void 0===e.provenance');
+  replace('timeline props', 'onAppendStoryboardClip:H,onChangeStoryboardTrack:B,',
+    'onAppendStoryboardClip:H,onInsertStoryboardClip:__localInsertStoryboard,onPreviewStoryboard:__localPreviewStoryboard,onChangeStoryboardTrack:B,');
+  replace('track props', 'onAppend:H,onChange:B,onSelectCamera:G,',
+    'onAppend:H,onInsert:__localInsertStoryboard,onPreview:__localPreviewStoryboard,onChange:B,onSelectCamera:G,');
+  replace('workspace callbacks', 'onAppendStoryboardClip:d7,onChangeStoryboardTrack:d8,', `onAppendStoryboardClip:d7,
+    onPreviewStoryboard:()=>{rr({kind:"storyboard"});re({kind:"storyboard"})},
+    onInsertStoryboardClip:request=>{
+      if(!C||rC||cO)return false;
+      const yaw=ii.yaw*Math.PI/180,pitch=ii.pitch*Math.PI/180,horizontal=Math.cos(pitch);
+      const view={position:{x:ii.x,y:ii.y,z:ii.z},target:{x:ii.x+Math.sin(yaw)*horizontal*5,y:ii.y+5*Math.sin(pitch),z:ii.z-Math.cos(yaw)*horizontal*5},fov:ii.fov,roll:0,aspectRatio:a2};
+      const insertion={...request,id:"storyboard-shot-"+crypto.randomUUID(),newCameraId:"shot-camera-"+crypto.randomUUID(),createdAt:new Date().toISOString()};
+      const result=__localInsertShotInState(iK,insertion,view);
+      if(!result.ok){iT(result.reason);return false}
+      dN();sQ(state=>{const next=__localInsertShotInState(state,insertion,view);return next.ok?next.state:state},"director.timeline.storyboard.insert");
+      nP(insertion.startFrame/iK.timeline.displayFps);rr({kind:"storyboard"});re({kind:"storyboard"});return true;
+    },onChangeStoryboardTrack:d8,`);
+  factories['53401'] = source;
+};

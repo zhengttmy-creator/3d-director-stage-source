@@ -1,0 +1,15 @@
+# Source-only checkout: runtime/vendor and third-party assets stay local.
+/src/vendor/*
+!/src/vendor/README.md
+/web/vendor/*
+!/web/vendor/README.md
+/web/assets/*
+!/web/assets/README.md
+/sources/motions/**/*.fbx
+/sources/motions/**/*.glb
+/sources/motions/**/*.bin
+*.fbx
+*.glb
+*.wasm
+*.zip
+*.exe

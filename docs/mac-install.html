@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>绮绘预演台V1.0 · Mac 安装说明</title>
+  <style>
+    :root { color-scheme: light; font-family: "PingFang SC", "Noto Sans SC", "Microsoft YaHei UI", -apple-system, sans-serif; color: #171717; background: #fff; font-synthesis: none; }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-size: 15px; line-height: 1.85; letter-spacing: 0; }
+    main { max-width: 860px; margin: 0 auto; padding: 44px 32px 56px; }
+    header { padding-bottom: 24px; border-bottom: 1px solid #d4d4d4; margin-bottom: 28px; }
+    .edition { font-size: 12px; font-weight: 600; color: #737373; margin: 0 0 8px; }
+    h1 { font-size: 30px; line-height: 1.4; margin: 0 0 8px; }
+    h2 { font-size: 20px; line-height: 1.5; margin: 0 0 12px; }
+    section { margin: 0 0 28px; padding-bottom: 24px; border-bottom: 1px solid #e5e5e5; }
+    p { margin: 10px 0; }
+    ol { padding-left: 24px; margin: 12px 0; }
+    li { margin: 8px 0; padding-left: 3px; }
+    a { color: #164e63; text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid #164e63; outline-offset: 4px; }
+    code { font-family: Menlo, Consolas, monospace; font-size: 0.9em; overflow-wrap: anywhere; }
+    kbd { display: inline-block; font-family: -apple-system, "Segoe UI", sans-serif; font-size: 12px; line-height: 1.8; background: #fafafa; border: 1px solid #d4d4d4; border-bottom-width: 2px; padding: 0 5px; border-radius: 4px; white-space: nowrap; }
+    .note { padding: 12px 16px; background: #f5f5f5; border-left: 3px solid #737373; margin: 18px 0; font-size: 14px; }
+    .note p { margin: 0; }
+    .table-wrap { overflow-x: auto; border: 1px solid #d4d4d4; border-radius: 6px; margin: 14px 0; }
+    table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    th, td { padding: 10px 12px; border-bottom: 1px solid #e5e5e5; vertical-align: top; overflow-wrap: anywhere; }
+    th { background: #f5f5f5; font-weight: 600; }
+    tr:last-child td { border-bottom: 0; }
+    .small, footer { color: #737373; font-size: 12px; }
+    @media (max-width: 540px) { main { padding: 26px 18px 36px; } body { font-size: 14px; } h1 { font-size: 25px; } h2 { font-size: 19px; } th, td { padding: 8px 9px; } }
+    @media print { @page { size: A4; margin: 18mm 16mm; } main { max-width: none; padding: 0; } body { font-size: 10.5pt; line-height: 1.65; } h1 { font-size: 22pt; } h2 { font-size: 14pt; break-after: avoid; } tr, .note { break-inside: avoid; } section { margin-bottom: 20px; padding-bottom: 16px; } .table-wrap { overflow: visible; } a { color: inherit; } .note, th { print-color-adjust: exact; } }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="edition">macOS · APPLE SILICON 原生版 · 2026-09-28</p>
+      <h1>绮绘预演台V1.0</h1>
+      <p>Mac 安装说明 · M 系列芯片 · macOS 11 或更新版本</p>
+      <p><a href="绮绘预演台V1.0-使用教程.html">打开完整使用教程</a></p>
+    </header>
+    <section>
+      <h2>1. 安装与打开</h2>
+      <ol>
+        <li>双击 <code>绮绘预演台V1.0-macOS-arm64.zip</code> 解压，找到<strong>绮绘预演台V1.0.app</strong>。</li>
+        <li>将 .app 拖入 Finder 的<strong>“应用程序”</strong>文件夹。请移动整个应用包，保留内部内容。</li>
+        <li>从“应用程序”打开。若出现绮绘画布连接窗口，只在本地制作时选择<strong>“暂不连接，直接进入”</strong>。</li>
+        <li>全新数据目录从空场景开始。添加人物和相机后，点击保存图标或按 <kbd>Cmd</kbd> + <kbd>S</kbd> 保存。</li>
+      </ol>
+      <p class="small">本包提供 .app 与离线教程；Windows 的 .exe 不用于 Mac。Intel Mac 请勿使用这个 arm64 包。</p>
+      <div class="note"><p><strong>首次打开提示：</strong>此版本尚未经 Apple 公证。若系统拦截，请先确认文件来源，尝试打开一次，再到<strong>“系统设置 → 隐私与安全性”</strong>找到此应用的提示，选择<strong>“仍要打开”</strong>并按系统要求确认。若未出现该入口，请保留完整提示供排查。</p></div>
+    </section>
+    <section>
+      <h2>2. 数据和资产放在哪里</h2>
+      <div class="table-wrap"><table><thead><tr><th>内容</th><th>Mac 目录</th></tr></thead><tbody>
+        <tr><td>项目与本地素材库</td><td><code>~/Library/Application Support/YuyantaiDirector/state</code></td></tr>
+        <tr><td>自定义人物、模型、动作和姿势</td><td><code>~/Library/Application Support/YuyantaiDirector/Assets</code></td></tr>
+      </tbody></table></div>
+      <p>在软件<strong>“文件”</strong>菜单选择<strong>“打开数据文件夹”</strong>或<strong>“打开资产文件夹”</strong>即可查看。也可在 Finder 使用<strong>“前往 → 前往文件夹”</strong>，输入上面的路径。</p>
+      <p>资产目录按 <code>characters</code>、<code>models</code>、<code>motions</code>、<code>poses</code> 分类。把兼容文件放入对应目录后刷新资产；不要把自己的模型放入 .app 内部。具体格式和 Mixamo 导入步骤见完整教程第 13 节。</p>
+      <p><strong>备份：</strong>先保存并退出软件，再复制整个 <code>~/Library/Application Support/YuyantaiDirector/</code> 目录。网页旧项目和 Windows 项目不会自动同步到 Mac；跨设备迁移时，还要带上所用外部资产并保持相对路径。</p>
+    </section>
+    <section>
+      <h2>3. Mac 快捷键差异</h2>
+      <div class="table-wrap"><table><thead><tr><th>按键</th><th>操作</th></tr></thead><tbody>
+        <tr><td><kbd>Cmd</kbd> + <kbd>S</kbd></td><td>保存项目</td></tr>
+        <tr><td><kbd>Cmd</kbd> + <kbd>Z</kbd><br><kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd></td><td>撤销 / 重做</td></tr>
+        <tr><td><kbd>Cmd</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td>复制 / 粘贴所选内容</td></tr>
+        <tr><td><kbd>0</kbd> / <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd></td><td>选择 / 移动 / 旋转 / 缩放工具</td></tr>
+        <tr><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd>、<kbd>Q</kbd> / <kbd>E</kbd></td><td>视角移动；Q 向下、E 向上</td></tr>
+        <tr><td><kbd>Space</kbd></td><td>动态预演播放 / 暂停；先点击时间轴或场景空白处</td></tr>
+        <tr><td><kbd>delete</kbd></td><td>删除当前选中内容；镜头块上的删除会删除对应相机及其镜头段</td></tr>
+        <tr><td><kbd>Option</kbd> 或 <kbd>Control</kbd> + 滚轮</td><td>调整视野；这里仍用 Control，不替换成 Command</td></tr>
+        <tr><td><kbd>F1</kbd>，或 <kbd>Fn</kbd> + <kbd>F1</kbd></td><td>打开完整教程；也可使用“帮助 → 使用教程”</td></tr>
+      </tbody></table></div>
+      <p>使用触控板时，通过辅助点按打开右键菜单。菜单、输入框和场景有不同的键盘焦点，快捷键不响应时先完成输入，再点击要操作的区域。</p>
+    </section>
+    <section>
+      <h2>4. 开始制作</h2>
+      <p>先添加一个人物、一段动作和一台相机，做一个 3–5 秒的预演。右上角没有相机时显示“暂无相机”，需要先添加相机才能拍摄或导出。</p>
+      <p><a href="绮绘预演台V1.0-使用教程.html">完整使用教程</a>包含关键帧、骨骼动画、定格接续、多镜头、背景和保存迁移步骤。页面可离线阅读；在浏览器按 <kbd>Cmd</kbd> + <kbd>P</kbd> 可打印或保存为 PDF。</p>
+    </section>
+    <footer>绮绘预演台V1.0 · Mac 安装说明 · 请将本页与完整使用教程保留在同一文件夹。</footer>
+  </main>
+</body>
+</html>

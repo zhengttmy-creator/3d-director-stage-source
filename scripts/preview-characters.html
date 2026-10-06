@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Character Preset Previews</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #131516; color: #e8ebed; font: 14px system-ui, sans-serif; }
+  header { display: flex; align-items: center; gap: 20px; padding: 16px 24px; border-bottom: 1px solid #373b3e; }
+  h1 { font-size: 18px; margin: 0; }
+  button { background: #eceef0; color: #17191b; border: 0; border-radius: 5px; padding: 10px 16px; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: wait; }
+  #cards { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; padding: 20px; }
+  figure { margin: 0; background: #212426; border: 1px solid #373b3e; border-radius: 6px; overflow: hidden; }
+  figure img { display: block; width: 100%; aspect-ratio: 4/3; }
+  figcaption { padding: 12px; }
+  canvas { display: none; }
+  @media (max-width: 800px) { #cards { grid-template-columns: repeat(2,minmax(0,1fr)); } header { flex-wrap: wrap; } }
+</style>
+<header><h1>Character Preset Previews</h1><button id="save" disabled>Save PNG Thumbnails</button><output id="status">Loading</output></header>
+<main id="cards"></main>
+<script type="importmap">{"imports":{"three":"/three/build/three.module.js","three/addons/":"/three/examples/jsm/"}}</script>
+<script type="module" src="/preview.js"></script>
+</html>

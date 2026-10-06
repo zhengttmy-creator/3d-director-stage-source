@@ -1,0 +1,35 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {THREE,repositoryRoot,moduleFactoriesFile,reportsDirectory} from './motion-source-utils.mjs';
+const require=createRequire(import.meta.url);
+const {patchMotionLoader,helperSource}=require('../patches/motion-loader.cjs');
+const factories=JSON.parse(await fs.readFile(moduleFactoriesFile,'utf8'));
+const patched=patchMotionLoader(factories['53401']);
+assert.equal(patchMotionLoader(patched),patched);
+const root=path.join(repositoryRoot,'web');
+const manifest=JSON.parse(await fs.readFile(path.join(root,'assets/motions/manifest.json'),'utf8'));
+const first=JSON.parse(await fs.readFile(path.join(root,manifest.motions[0].mediaUrl),'utf8'));
+const hierarchy=first.bones.map(b=>({name:b.name,...b.parentIndex<0?{}:{parentName:first.bones[b.parentIndex].name}}));
+let fetchCount=0;
+const context=vm.createContext({URL,window:{location:{href:'http://127.0.0.1:4202/',origin:'http://127.0.0.1:4202'}},fetch:async url=>{fetchCount++;const file=path.join(root,new URL(url).pathname);return {ok:true,status:200,json:async()=>JSON.parse(await fs.readFile(file,'utf8'))};},so:{YJl:THREE.Group,$Kf:THREE.Bone,tz3:THREE.AnimationClip},lV:hierarchy,pD:{w:class{loadAsync(){throw Error('Unexpected FBX load');}}}});
+vm.runInContext(helperSource,context);
+const load=vm.runInContext('__localDirectorLoadMotion',context);
+for(const motion of manifest.motions) {
+  const group=await load(motion.mediaUrl);
+  const bones=[];group.traverse(n=>{if(n.isBone)bones.push(n);});
+  assert.equal(bones.length,65);
+  assert.equal(group.animations.length,1);
+  assert(group.animations[0].validate());
+  const again=await load(motion.mediaUrl);
+  assert.notEqual(again,group);
+  assert.notEqual(again.animations[0],group.animations[0]);
+}
+assert.equal(fetchCount,manifest.motions.length);
+await assert.rejects(load('https://example.com/test.motion.json'),/same-origin/);
+const result={status:'passed',clips:manifest.motions.length,bonesPerClip:65,cachedFetches:fetchCount,freshGroupPerLoad:true,sourcePatchParses:true,networkUsed:false};
+await fs.mkdir(reportsDirectory,{recursive:true});
+await fs.writeFile(path.join(reportsDirectory,'motion-loader-validation.json'),JSON.stringify(result,null,2));
+console.log(JSON.stringify(result,null,2));

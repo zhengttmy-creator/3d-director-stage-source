@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>绮绘预演台V1.0 · 使用教程</title>
+  <style>
+    :root { color-scheme: light; font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif; color: #171717; background: #fff; font-synthesis: none; }
+    * { box-sizing: border-box; }
+    html { scroll-padding-top: 24px; }
+    body { margin: 0; font-size: 15px; line-height: 1.85; letter-spacing: 0; }
+    a { color: #164e63; text-underline-offset: 3px; }
+    a:focus-visible { outline: 2px solid #164e63; outline-offset: 4px; }
+    .page { max-width: 1176px; margin: 0 auto; padding: 48px 32px 72px; }
+    header { border-bottom: 1px solid #d4d4d4; padding-bottom: 28px; margin-bottom: 36px; }
+    .edition { font-size: 12px; font-weight: 600; color: #737373; margin: 0 0 8px; }
+    h1 { font-size: 32px; line-height: 1.35; margin: 0 0 12px; font-weight: 650; }
+    .subtitle { margin: 0; color: #525252; font-size: 16px; }
+    .metadata { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 20px; color: #737373; font-size: 12px; }
+    .layout { display: grid; grid-template-columns: 208px minmax(0, 1fr); gap: 48px; align-items: start; }
+    nav { position: sticky; top: 24px; font-size: 13px; padding-right: 20px; border-right: 1px solid #e5e5e5; max-height: calc(100vh - 48px); overflow: auto; }
+    nav strong { display: block; margin-bottom: 10px; color: #171717; }
+    nav a { display: block; padding: 5px 0; text-decoration: none; color: #525252; line-height: 1.55; }
+    nav a:hover { color: #171717; text-decoration: underline; }
+    main { min-width: 0; }
+    section { margin: 0 0 44px; padding-bottom: 28px; border-bottom: 1px solid #e5e5e5; }
+    section:last-child { border: 0; margin-bottom: 0; }
+    h2 { margin: 0 0 16px; font-size: 23px; line-height: 1.45; font-weight: 650; }
+    h2 .number { display: inline-block; margin-right: 12px; font-size: 13px; color: #737373; vertical-align: 3px; font-weight: 500; font-variant-numeric: tabular-nums; }
+    h3 { margin: 24px 0 10px; font-size: 17px; line-height: 1.5; }
+    p { margin: 10px 0; }
+    ol, ul { margin: 12px 0; padding-left: 24px; }
+    li { padding-left: 3px; margin: 7px 0; }
+    strong { font-weight: 650; }
+    .note { border-left: 3px solid #737373; background: #f5f5f5; padding: 12px 16px; margin: 18px 0; font-size: 14px; }
+    .note p { margin: 0; }
+    .table-wrap { overflow-x: auto; margin: 16px 0; border: 1px solid #d4d4d4; border-radius: 6px; }
+    table { border-collapse: collapse; width: 100%; text-align: left; font-size: 13px; line-height: 1.7; }
+    th { background: #f5f5f5; font-weight: 650; color: #262626; }
+    th, td { padding: 11px 12px; vertical-align: top; border-bottom: 1px solid #e5e5e5; overflow-wrap: anywhere; }
+    tr:last-child td { border-bottom: 0; }
+    kbd { display: inline-block; border: 1px solid #d4d4d4; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; margin: 1px 0; background: #fafafa; color: #262626; font-family: "Segoe UI", sans-serif; font-size: 12px; line-height: 1.7; white-space: nowrap; }
+    code { font-family: Consolas, "Microsoft YaHei UI", monospace; font-size: 0.92em; color: #333; overflow-wrap: anywhere; }
+    .small { font-size: 13px; color: #737373; }
+    .workflow { display: flex; flex-wrap: wrap; gap: 5px 12px; padding: 14px 0; margin: 12px 0; border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; font-size: 13px; font-weight: 600; }
+    .workflow span:not(:last-child)::after { content: " →"; color: #737373; padding-left: 12px; }
+    footer { border-top: 1px solid #d4d4d4; margin-top: 36px; padding-top: 16px; color: #737373; font-size: 12px; }
+    @media (max-width: 850px) { .page { padding: 28px 22px 48px; } .layout { display: block; } nav { position: static; max-height: none; border: 0; border-bottom: 1px solid #e5e5e5; padding: 0 0 22px; margin-bottom: 30px; columns: 2; column-gap: 24px; } nav strong { column-span: all; } nav a { break-inside: avoid; } h1 { font-size: 28px; } }
+    @media (max-width: 480px) { body { font-size: 14px; } .page { padding: 24px 18px 40px; } h1 { font-size: 26px; } h2 { font-size: 21px; } .metadata { display: block; } .metadata span { display: block; } nav { font-size: 12px; column-gap: 18px; } th, td { padding: 9px 10px; } }
+    @media print { @page { size: A4; margin: 18mm 16mm; } body { font-size: 10.5pt; line-height: 1.65; } .page { max-width: none; padding: 0; } .layout { display: block; } nav { display: none; } header { margin-bottom: 24px; } h1 { font-size: 24pt; } h2 { font-size: 17pt; break-after: avoid; } h3 { font-size: 12pt; break-after: avoid; } p, li { orphans: 3; widows: 3; } section { margin-bottom: 22px; padding-bottom: 16px; } .table-wrap { overflow: visible; border-radius: 0; } table { font-size: 9pt; } thead { display: table-header-group; } tr, .note { break-inside: avoid; } a { color: inherit; text-decoration: none; } .note, th { print-color-adjust: exact; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <p class="edition">WINDOWS / macOS APPLE SILICON · 离线使用教程</p>
+      <h1>绮绘预演台V1.0</h1>
+      <p class="subtitle">从空场景开始，完成角色走位、姿势衔接和多镜头预演。</p>
+      <div class="metadata"><span>软件版本 1.0.0</span><span>教程更新 2026-09-28</span><span>可离线阅读 · 在浏览器按 Ctrl+P / Cmd+P 打印为 PDF</span></div>
+    </header>
+    <div class="layout">
+      <nav aria-label="教程目录">
+        <strong>目录</strong>
+        <a href="#install">01 安装与首次启动</a>
+        <a href="#first-scene">02 第一个预演：五分钟流程</a>
+        <a href="#workspace">03 认识工作区</a>
+        <a href="#shortcuts">04 快捷键速查</a>
+        <a href="#characters">05 人物、物体与变换</a>
+        <a href="#timeline">06 时间轴与关键帧</a>
+        <a href="#motions">07 动作库与人物位移</a>
+        <a href="#bones">08 自定义姿势与骨骼动画</a>
+        <a href="#continuation">09 定格并接续新动作</a>
+        <a href="#cameras">10 相机与画面构图</a>
+        <a href="#cuts">11 多镜头剪辑</a>
+        <a href="#backgrounds">12 上传、关闭和删除背景</a>
+        <a href="#assets">13 导入 Mixamo 与模型资产</a>
+        <a href="#save">14 保存、备份与迁移</a>
+        <a href="#export-faq">15 导出与常见问题</a>
+      </nav>
+      <main>
+        <section id="install">
+          <h2><span class="number">01</span>安装与首次启动</h2>
+          <p>Windows 提供安装版和便携版；M 系列 Mac 提供 Apple Silicon 原生应用。各版本使用同一套编辑功能，安装方法和数据目录有所不同。</p>
+          <h3>Windows</h3>
+          <p>日常固定使用推荐安装版；临时试用可以直接运行便携版。</p>
+          <div class="table-wrap"><table><thead><tr><th>版本</th><th>启动方法</th></tr></thead><tbody>
+            <tr><td><strong>安装版</strong><br><code>绮绘预演台V1.0-Setup-x64.exe</code></td><td>双击安装包，选择安装位置，完成后从桌面或开始菜单启动。</td></tr>
+            <tr><td><strong>便携版</strong><br><code>绮绘预演台V1.0-x64.exe</code></td><td>放入准备长期保留的文件夹后双击。首次展开程序可能需要稍等，不要连续重复启动。</td></tr>
+          </tbody></table></div>
+          <h3>Mac：Apple Silicon / M 系列</h3>
+          <p>适用于 <strong>macOS 11 或更新版本</strong>的 M 系列 Mac；本包为 arm64 原生版，不是 Intel 版本。</p>
+          <ol>
+            <li>下载并双击 <code>绮绘预演台V1.0-macOS-arm64.zip</code> 解压。压缩包内含应用 <code>.app</code>、Mac 安装说明和离线教程。</li>
+            <li>将<strong>绮绘预演台V1.0.app</strong>拖入 Finder 的<strong>“应用程序”</strong>文件夹，再从应用程序打开。该文件用于 M 系列 Mac，Windows 的 EXE 不能在 Mac 直接运行。</li>
+            <li>本版本尚未经 Apple 公证。如首次打开被系统拦截，在确认文件来源后，打开<strong>“系统设置 → 隐私与安全性”</strong>，找到对应提示并选择<strong>“仍要打开”</strong>，按系统要求确认。需先尝试打开一次，相关入口才可能出现。</li>
+          </ol>
+          <p class="small">Mac 使用 ZIP 内的 .app，不需要运行安装器。请保留整个应用包，勿改动其内部文件；自己的模型、动作和姿势放入第 13 节所述的资产目录。</p>
+          <h3>进入编辑器</h3>
+          <ol>
+            <li>启动时如出现绮绘画布连接窗口，纯本地使用选择<strong>“暂不连接，直接进入”</strong>。内置模型、动作和本地导出不要求登录。</li>
+            <li>全新数据目录从空场景开始，没有预置人物和相机；已有使用记录时会载入最后保存的本地项目。</li>
+            <li>第一次建立场景后，点击左上角保存图标。退出、刷新或升级前先保存。</li>
+            <li>本教程随发行文件提供，也可以从软件的<strong>“帮助 → 使用教程”</strong>或 <kbd>F1</kbd> 打开。Mac 键盘可能需要 <kbd>Fn</kbd> + <kbd>F1</kbd>；也可直接使用帮助菜单。在浏览器中按 Windows <kbd>Ctrl</kbd> + <kbd>P</kbd> 或 Mac <kbd>Cmd</kbd> + <kbd>P</kbd> 可打印或另存为 PDF。</li>
+          </ol>
+          <div class="note"><p><strong>便携版不等于所有数据都在 EXE 旁边。</strong>安装版与便携版在同一 Windows 用户下共用桌面版项目数据；自定义资产目录可能位于程序旁，具体路径以“打开资产文件夹”显示为准。</p></div>
+          <p>Mac 项目和自定义资产保存在当前用户的 <code>~/Library/Application Support/YuyantaiDirector/</code>，更换 .app 不会把这些内容打进应用包。详细备份方法见第 14 节。</p>
+        </section>
+
+        <section id="first-scene">
+          <h2><span class="number">02</span>第一个预演：五分钟流程</h2>
+          <div class="workflow"><span>放人物</span><span>加动作</span><span>设相机</span><span>播放检查</span><span>保存与导出</span></div>
+          <ol>
+            <li>左侧<strong>资产 → 角色</strong>选择“男性 · 标准”或其他体态，点击场景地面放置。</li>
+            <li>顶部切换<strong>“动态预演”</strong>，把播放头放在 <strong>0 秒</strong>，先摆好人物初始位置。</li>
+            <li>在人物时间轴行点击 <strong>“+” → “添加动作到时间轴”</strong>，选择“行走”。确认后，动作会出现在人物的“动作”轨道。</li>
+            <li>左侧切到<strong>机位</strong>，点击“正面中景”，再点击场景中的人物，按界面提示完成机位设置。</li>
+            <li>在预览窗口选择这台相机。点击时间轴播放按钮，检查动作和构图；先单击时间轴空白处再按 <kbd>Space</kbd> 也可播放。</li>
+            <li>点击保存图标。需要成片时，点<strong>“导出视频”</strong>，选择该机位、时长和画幅，导出后点击<strong>“保存到本地”</strong>。</li>
+          </ol>
+          <p class="small">先做一段 3–5 秒的小片段验证流程，再增加角色、灯光、背景和镜头。地面网格是编辑辅助，不是已放入的模型。</p>
+        </section>
+
+        <section id="workspace">
+          <h2><span class="number">03</span>认识工作区</h2>
+          <div class="table-wrap"><table><thead><tr><th>区域</th><th>用途</th></tr></thead><tbody>
+            <tr><td>顶部栏</td><td>保存项目、切换静态/动态预演、拍摄或导出视频。</td></tr>
+            <tr><td>左侧资产栏</td><td>添加人物、物体、背景和机位；标题旁的资产文件夹入口用于查看本地导入目录。</td></tr>
+            <tr><td>中央场景</td><td>放置和选择对象，拖动位置、旋转、缩放控件；这是搭建空间的主工作区。</td></tr>
+            <tr><td>右上角预览</td><td>检查指定机位的画面，或预览镜头剪辑。无相机时显示“暂无相机”。</td></tr>
+            <tr><td>右侧对象与属性</td><td>从列表选中对象，调整精确数值、人物颜色、相机参数或场景环境。</td></tr>
+            <tr><td>底部时间轴</td><td>动态预演时安排动作、对象关键帧和镜头剪辑。展开人物或相机行可查看子轨道。</td></tr>
+          </tbody></table></div>
+          <p><strong>静态预演</strong>适合摆位和固定构图；<strong>动态预演</strong>用于动作、运镜和时间轴。动态模式下先看清当前时间，再修改对象，避免把初始摆放误写到后面的帧。</p>
+        </section>
+
+        <section id="shortcuts">
+          <h2><span class="number">04</span>快捷键速查</h2>
+          <p>快捷键取决于焦点所在区域。编辑数值或文字时先按 <kbd>Enter</kbd> 完成输入，或单击场景/时间轴空白处，再使用编辑快捷键。</p>
+          <p><strong>下表主要按 Windows 键名标注。</strong>Mac 的保存、撤销、重做、复制和粘贴分别使用 <kbd>Cmd</kbd> + <kbd>S</kbd>、<kbd>Cmd</kbd> + <kbd>Z</kbd>、<kbd>Cmd</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd>、<kbd>Cmd</kbd> + <kbd>C</kbd> / <kbd>V</kbd>；空格、数字工具键与字母导航键保持相同。Mac 键盘的 <kbd>delete</kbd> 可用于这里的退格删除。</p>
+          <div class="note"><p><strong>当前版本使用数字键切换工具：</strong><kbd>0</kbd> 选择、<kbd>1</kbd> 移动、<kbd>2</kbd> 旋转、<kbd>3</kbd> 缩放。<kbd>W</kbd>、<kbd>E</kbd> 属于视角移动按键，并非 UE 的 W/E/R 工具映射。</p></div>
+          <div class="table-wrap"><table><thead><tr><th>按键</th><th>功能与生效范围</th></tr></thead><tbody>
+            <tr><td><kbd>0</kbd> / <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd></td><td>场景编辑工具：选择 / 移动 / 旋转 / 缩放。</td></tr>
+            <tr><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd><br><kbd>Q</kbd> / <kbd>E</kbd></td><td>移动当前视角；Q 向下、E 向上，按住 Shift 加速。在机位视角中会改变该机位，在导演视角中只改变观察位置。</td></tr>
+            <tr><td><kbd>I</kbd> <kbd>K</kbd> / <kbd>J</kbd> <kbd>L</kbd></td><td>调整当前视角的俯仰 / 左右朝向。</td></tr>
+            <tr><td><kbd>Space</kbd></td><td>动态时间轴播放 / 暂停。输入框或按钮有焦点时可能被该控件接收，请先点时间轴空白处。</td></tr>
+            <tr><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td><td>删除选中的对象、动作片段或关键帧。选中底部镜头块时会删除该相机及引用它的镜头段，详见第 11 节。</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd><br><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd></td><td>撤销 / 重做场景与时间轴编辑。背景库的素材删除使用面板中的“撤销删除”。</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd><br><kbd>F1</kbd></td><td>桌面版保存项目 / 打开使用教程。</td></tr>
+            <tr><td><kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td>复制 / 粘贴选中的对象或时间轴内容；时间轴中 <kbd>Ctrl</kbd> + <kbd>D</kbd> 可复制所选内容。</td></tr>
+            <tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>时间轴获得焦点时移动播放头 1 帧；按住 <kbd>Shift</kbd> 为 10 帧，按住 <kbd>Alt</kbd> 为 1 秒。</td></tr>
+            <tr><td><kbd>Home</kbd> / <kbd>End</kbd><br><kbd>Ctrl</kbd> + <kbd>←</kbd> / <kbd>→</kbd></td><td>时间轴定位首尾 / 前后编辑点。</td></tr>
+            <tr><td><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd><br><kbd>G</kbd></td><td>场景编辑中微移选中对象 X/Z 位置：默认 0.1 米，Shift 为 1 米，Ctrl 为 0.01 米；G 落到地面。机位预览模式中对象方向键操作不生效。</td></tr>
+            <tr><td><kbd>Esc</kbd></td><td>关闭当前浮层、取消当前操作；可退出机位预览。时间轴中先清除选择，再按可回到场景操作。</td></tr>
+          </tbody></table></div>
+          <h3>鼠标操作</h3>
+          <p>空白处左键拖动旋转观察方向，右键拖动平移，中键拖动推近/拉远；选中对象时抓住轴柄进行变换。按住 <kbd>Alt</kbd> 或 <kbd>Ctrl</kbd> 滚轮调整视野，导演视角也可用 <kbd>−</kbd> / <kbd>+</kbd> 调整视野。</p>
+          <p>Mac 调整视野仍使用 <kbd>Option</kbd> 或 <kbd>Control</kbd> + 滚轮，不能把这里的 Control 一律替换成 Command。使用触控板时可通过辅助点按打开右键菜单；涉及中键拖动的操作，用外接鼠标更方便。</p>
+        </section>
+        <section id="characters">
+          <h2><span class="number">05</span>人物、物体与变换</h2>
+          <h3>添加与选择</h3>
+          <p>内置人物提供男性、女性各 6 种体态：标准、少年、儿童、纤瘦、健壮、丰腴。点击人物卡片后，在地面点击放置；通过右侧对象列表也能选择被遮挡的对象。按住 <kbd>Shift</kbd> 单击可多选。</p>
+          <h3>位置、旋转、缩放</h3>
+          <ol>
+            <li>选择对象，按 <kbd>1</kbd>、<kbd>2</kbd>、<kbd>3</kbd> 切换工具。拖动单轴柄只改变该轴；右侧 X/Y/Z 输入框适合精确输入。</li>
+            <li>位置单位为米；<strong>Y 是上下方向，X/Z 是地面方向</strong>。不要把本软件的轴方向与其他软件的默认坐标系混淆。</li>
+            <li>旋转按 X/Y/Z 分别调整。缩放可改变整体大小或指定轴；改变人物体型时优先选择对应的内置人物。</li>
+          </ol>
+          <p>在人物属性中的<strong>颜色</strong>选择色板或输入 HEX 值；“恢复原色”可以还原。点击场景空白处后，可在环境属性中调整背景颜色、地面、网格和灯光。</p>
+        </section>
+
+        <section id="timeline">
+          <h2><span class="number">06</span>时间轴与关键帧</h2>
+          <p>项目最长 <strong>30 秒</strong>。时间轴上的秒数是项目时间，帧数由项目帧率决定。建议先确定帧率，再细调关键帧和镜头切换。</p>
+          <h3>做一个位置动画</h3>
+          <ol>
+            <li>切到动态预演，暂停播放，把播放头移到 0 秒，摆好人物起点。</li>
+            <li>展开人物行，点击<strong>“位置”右侧的菱形</strong>，手动记录起点。</li>
+            <li>将播放头移到 2 秒，把人物移动到终点。非 0 秒改变位置会自动记录关键帧。</li>
+            <li>回到 0 秒播放，人物在起点和终点之间移动。旋转和缩放使用相同流程。</li>
+          </ol>
+          <div class="note"><p><strong>自动标点规则：</strong>动态模式下，非 0 秒编辑人物、物体、相机或注视点会按对应属性记录关键帧；首次位置动画会补上 0 秒起点。0 秒尚无轨道时用于初始摆放，已有轨道时更新当前帧。自由浏览导演视角不会记录相机运动。</p></div>
+          <h3>手动标点与修改</h3>
+          <p>位置、旋转、缩放，以及相机的位置、注视点、视野、画面倾斜都有手动菱形按钮。空心表示该时刻未记录，实心表示已有关键帧；再次点击会更新数值。暂停播放并解锁对应对象后再编辑。</p>
+          <p>拖动菱形可改变关键帧时间；选中后用 <kbd>Delete</kbd> 或 <kbd>Backspace</kbd> 删除。调整时间轴缩放后再拖短距离，能减少误选和时间跳动。</p>
+          <h3>调整运动节奏</h3>
+          <p>打开轨道的曲线入口，选择需要编辑的相邻关键帧区间，再设置“线性”“缓入”“缓出”“缓入缓出”或“保持”。线性为匀速，保持会在下一关键帧前保持旧值；曲线影响该段插值，不会自动增加新的关键帧。</p>
+        </section>
+
+        <section id="motions">
+          <h2><span class="number">07</span>动作库与人物位移</h2>
+          <ol>
+            <li>选择人物，将播放头放到动作起始时间。</li>
+            <li>点击人物轨道的 <strong>“+” → “添加动作到时间轴”</strong>。</li>
+            <li>在“动作”页搜索名称。卡片显示角色预览，鼠标停留或键盘聚焦时播放动作。</li>
+            <li>选择动作并确认。拖动片段改变开始时间，拖动边缘调整片段范围；片段设置中可调整可用的循环、速度等参数。</li>
+          </ol>
+          <p>内置 16 个动态动作，包括行走、跑步、待机、下蹲、起身、潜行、侧步、跳跃、翻滚、闪避、点头、摇头和舞蹈；行走、跑步另有路径选项。静态姿势在相邻标签中选择。</p>
+          <div class="table-wrap"><table><thead><tr><th>动作类型</th><th>使用方式</th></tr></thead><tbody>
+            <tr><td>原地动作</td><td>四肢运动，根位置基本不变；需要走位时配合人物的位置关键帧。</td></tr>
+            <tr><td>动作自身带位移</td><td>按动作数据移动；开启循环后累计地面方向的位移，避免每轮回到起点，结束后保持最终位置。</td></tr>
+            <tr><td>路径动作</td><td>人物沿位置轨道行进。先摆好路径/位置关键帧，再使用对应的行走或跑步路径选项。</td></tr>
+          </tbody></table></div>
+          <p>动作卡片预览会把人物居中，便于观察四肢；实际行进距离以时间轴播放为准。给已有根位移的动作再叠加位置动画时，请检查是否移动过快。身体上下起伏仍随动作循环，不会每轮累计下沉或升高。</p>
+          <p class="small">当前没有足部 IK 锁定；走位速度与步幅不匹配时可能出现滑步，应调整动作速度、路径距离或片段时长。</p>
+        </section>
+
+        <section id="bones">
+          <h2><span class="number">08</span>自定义姿势与骨骼动画</h2>
+          <h3>固定姿势</h3>
+          <p>打开动作窗口的<strong>“静态姿势”</strong>标签。“常用姿势”提供站立、蹲姿、坐姿和跪姿等；“从动作选帧”可把动态动作中的某一帧取作姿势。坐姿只包含人物，不会自动创建椅子。</p>
+          <ol>
+            <li>点击<strong>“自定义姿势”</strong>，选取场景中的关节控制点，拖动调整；右侧姿势属性可作进一步修改。</li>
+            <li>填写片段名称和时长。点击<strong>“保存片段”</strong>写入当前时间轴。</li>
+            <li>需要下次复用时，另外点击<strong>“保存到本地”</strong>，加入“我的姿势”。这和保存当前项目是两件事。</li>
+            <li>需要分享时点击<strong>“导出 JSON”</strong>；接收方用“从本地读取”导入 <code>.octomotion.json</code> 文件。</li>
+          </ol>
+          <h3>用多个姿势组成骨骼动画</h3>
+          <ol>
+            <li>在人物“动作”轨道点击菱形，或在动作片段设置中选择<strong>“编辑骨骼关键帧”</strong>；姿势编辑器也可以“转为骨骼动画”。</li>
+            <li>设置<strong>“骨骼关键帧时间”</strong>。这里的 0 秒是本片段的起点，不一定是整个项目的 0 秒。</li>
+            <li>调整关节，点击<strong>“添加关键帧”</strong>；该时刻已存在时按钮显示“更新关键帧”。</li>
+            <li>把关键帧时间移到后面，再调整姿势并记录。至少两个不同时间、不同姿势，才会形成姿态变化。</li>
+            <li>播放检查，再点击<strong>“保存片段”或“添加到时间轴”</strong>完成编辑，最后保存项目。</li>
+          </ol>
+          <p>动作轨道的小菱形与编辑器同步。可以直接拖动指定的骨骼关键帧，只改变该帧的时间，不会拖走其他关键帧；不能拖到片段范围外或另一骨骼帧已占据的时间。</p>
+          <p>骨骼帧记录全身姿势，帧与帧之间进行平滑插值；位置、旋转、缩放轨道仍可独立控制整个人物。“保存到本地”与“导出 JSON”可保留完整骨骼动画供后续复用。</p>
+        </section>
+
+        <section id="continuation">
+          <h2><span class="number">09</span>定格并接续新动作</h2>
+          <p>想让人物“走到一半停住，再抬手”，可以截断原动作后半段，从当前完整姿势继续编辑。</p>
+          <ol>
+            <li>播放或拖动播放头，找到原动作中要停住的那一帧，暂停。</li>
+            <li>打开该动作片段设置，点击<strong>“在此帧结束并接续”</strong>。</li>
+            <li>原动作保留到当前时刻，后半段被截去；后面出现“姿势接续”片段，含一个当前全身姿势的关键帧。</li>
+            <li>编辑接续片段，把“骨骼关键帧时间”移到后面，修改手臂等关节，再点击“添加关键帧”。不要只改初始定格帧。</li>
+            <li>保存片段后播放，检查原动作、定格姿势和新姿势的衔接。</li>
+          </ol>
+          <p>起始定格帧用于保留原动作的接点，不能用记录按钮覆盖或删除；仍可单独拖动它调整时间，不会带动其他帧或前一段动作。只有一帧时，人物保持这个姿势；新增后续帧后才产生姿态过渡。时间轴中原有的位置、旋转、缩放关键帧仍然存在，必要时一起调整。</p>
+          <h3>接上另一个预设或 Mixamo 动作</h3>
+          <p>在接续片段设置中调整<strong>“接续片段时长”</strong>和<strong>“衔接过渡”</strong>，点击<strong>“衔接下一个动作”</strong>选择动作。先在后方留出足够空白；过渡最长 24 帧，设为 0 则直接切换。普通后续动作会按接续姿势对齐根位置与水平朝向，路径动作仍由位置轨道控制。</p>
+        </section>
+        <section id="cameras">
+          <h2><span class="number">10</span>相机与画面构图</h2>
+          <h3>添加对准人物的机位</h3>
+          <ol>
+            <li>进入左侧<strong>机位</strong>分类，选择“正面中景”“正面特写”“侧面近景”等预设。</li>
+            <li>按提示在场景或对象列表中选择人物。过肩镜头还需要依次确定前景角色与注视对象/注视点。</li>
+            <li>完成后在右上角预览选择该机位，检查画面是否正确；继续调整相机位置、注视点、视野与画面倾斜。</li>
+          </ol>
+          <p>“当前视角”适合把已经摆好的导演视角保存为相机。没有相机时，可点击预览区域的<strong>“添加相机”</strong>，或者在底部镜头剪辑轨道新建。</p>
+          <h3>区分导演视角和机位画面</h3>
+          <p><strong>导演视角</strong>用于绕场景观察和编辑，移动它不会自动修改拍摄相机。进入指定机位视角后，导航按键调整的是该机位。要返回搭建状态，按 <kbd>Esc</kbd> 退出机位预览，或使用视口底部视角下拉选择<strong>“导演视角”</strong>。</p>
+          <p>需要改人物时明确选择人物并使用变换控件或属性；需要改机位时在对象列表明确选择相机。<strong>WASD 是视角导航，不是人物走位按键</strong>。动态模式非 0 秒编辑机位参数会按相应轨道记录关键帧；只想设初始构图时先回到 0 秒。</p>
+          <p>相机全部删除后，预览显示“暂无相机”，拍摄和视频导出不可用。添加至少一台有效相机后再导出。</p>
+        </section>
+
+        <section id="cuts">
+          <h2><span class="number">11</span>多镜头剪辑</h2>
+          <p>底部<strong>“镜头剪辑”</strong>轨道决定成片在什么时间使用哪台相机。相机自身的位置关键帧决定运镜；镜头块决定切换时段。</p>
+          <ol>
+            <li>在镜头剪辑轨道的空白处右键，或点击行标题旁的 <strong>“+”</strong>。</li>
+            <li>选择已有相机，填写“开始（秒）”“时长（秒）”，点击<strong>“添加相机”</strong>；也可点<strong>“新建相机”</strong>从当前导演视角建立机位并添加镜头块。</li>
+            <li>拖动镜头块移动整段，拖动左右边缘修改开始或结束时间。镜头之间不能重叠，每段至少一帧，总范围不超过 30 秒。</li>
+            <li>双击或右键镜头块，重新设置相机、开始时间、时长和启用状态。</li>
+            <li>点击<strong>“预览镜头剪辑”</strong>后播放。视频导出时选择<strong>“分镜编排”</strong>作为机位来源。</li>
+          </ol>
+          <div class="table-wrap"><table><thead><tr><th>操作</th><th>结果</th></tr></thead><tbody>
+            <tr><td>取消镜头块上的复选框</td><td>暂时禁用该段镜头，保留相机和片段。</td></tr>
+            <tr><td>镜头设置中的“删除镜头”</td><td>仅移除这一段剪辑，保留相机。</td></tr>
+            <tr><td>镜头块垃圾桶 / “删除相机”</td><td>删除对应相机，同时清理引用该相机的镜头段。</td></tr>
+            <tr><td>选中镜头块后按 Delete / Backspace</td><td>与“删除相机”一致；要只移除一个镜头段，请使用镜头设置中的“删除镜头”。</td></tr>
+          </tbody></table></div>
+          <p>空白和禁用时段会使用项目输出相机，不会自动把下一个镜头向前吸附。正式导出前请从头播放，检查所有间隙和切换点。</p>
+        </section>
+
+        <section id="backgrounds">
+          <h2><span class="number">12</span>上传、关闭和删除背景</h2>
+          <ol>
+            <li>左侧切到<strong>背景</strong>，点击<strong>“上传背景”</strong>，选择 PNG、JPG/JPEG 或 WebP 图片。支持一次选择多张，单张不超过 16 MB。</li>
+            <li>上传完成后，图片出现在背景库。点击缩略图，选择<strong>“设为平面背景”</strong>或<strong>“设为 720 全景背景”</strong>。</li>
+            <li>平面背景适合普通照片；全景背景应使用适合全景映射的图片。普通照片强行铺满全景会拉伸，需根据构图选择模式。</li>
+            <li>需要暂时隐藏时，点击<strong>“关闭背景”</strong>。素材保留在库中，之后可以重新应用；场景中的关闭操作可以撤销。</li>
+            <li>需要从素材库移除时，点击图片右上角的<strong>删除图标</strong>；若正在使用这张图，当前背景会同步关闭。</li>
+          </ol>
+          <p>误删后立即点击本面板的<strong>“撤销删除”</strong>恢复最近删除的素材，再按需重新设为背景。上传素材会保存在本地；背景在场景中的选择和关闭状态需要保存项目。不要把“关闭背景”和“删除素材”混为一项操作。</p>
+        </section>
+
+        <section id="assets">
+          <h2><span class="number">13</span>导入 Mixamo 与模型资产</h2>
+          <h3>直接导入动作或姿势</h3>
+          <p>打开动作库的导入入口，选择兼容的 Mixamo <code>.fbx</code> 动作，或本软件导出的 <code>.octomotion.json</code> 备份。预览并确认后加入本地库，再添加到人物时间轴。需要固定坐姿或蹲姿时，可以从导入动作中选取一帧，保存为自己的姿势。</p>
+          <h3>把资产放入文件夹</h3>
+          <ol>
+            <li>点击<strong>“文件 → 打开资产文件夹”</strong>，或资产栏旁的文件夹入口。使用界面显示的实际目录。</li>
+            <li>按下表把文件放入对应子文件夹。模型的贴图和数据文件保持原来的相对路径；推荐每套模型单独一个子文件夹。</li>
+            <li>等待约 5 秒扫描，或点击<strong>“文件 → 刷新资产”</strong> / 资产窗口的“刷新”。导入失败时查看该窗口的错误说明。</li>
+            <li>在对应分类搜索文件名称并添加。若替换了已经使用的文件，重新添加该资产或重新打开项目后再检查。</li>
+          </ol>
+          <div class="table-wrap"><table><thead><tr><th>子目录</th><th>文件</th><th>出现在</th></tr></thead><tbody>
+            <tr><td><code>characters</code></td><td>已绑定兼容 Mixamo 骨架的人物 <code>.fbx</code></td><td>角色资产</td></tr>
+            <tr><td><code>models</code></td><td>静态道具/场景 <code>.fbx</code>、<code>.glb</code>、<code>.gltf</code></td><td>物体资产</td></tr>
+            <tr><td><code>motions</code></td><td>Mixamo 动作 <code>.fbx</code> 或兼容 <code>.motion.json</code></td><td>动作库</td></tr>
+            <tr><td><code>poses</code></td><td>静态 <code>.octomotion.json</code> 或静态 <code>.motion.json</code></td><td>静态姿势</td></tr>
+          </tbody></table></div>
+          <p>与模型同名的 PNG/JPG/WebP 可用作缩略图。目录和文件名支持中文。<strong>普通未绑定骨架的模型不能直接套用人物动作</strong>，任意其他骨架也不保证兼容；导入后先用短片段检查手脚、朝向和身高。</p>
+          <p>已经被项目引用的文件，请保留文件名和位置。分享或迁移时把相应 <code>Assets</code> 文件夹一并提供。</p>
+          <p>Mac 的自定义资产固定保存在 <code>~/Library/Application Support/YuyantaiDirector/Assets</code>。同样通过<strong>“文件 → 打开资产文件夹”</strong>进入，再按分类放入文件；无需把资产放进 .app 内部。</p>
+        </section>
+
+        <section id="save">
+          <h2><span class="number">14</span>保存、备份与迁移</h2>
+          <h3>日常保存</h3>
+          <p>点击顶部保存图标，或 Windows <kbd>Ctrl</kbd> + <kbd>S</kbd>、Mac <kbd>Cmd</kbd> + <kbd>S</kbd>。等待“已保存”再退出。保存动作片段、保存姿势库和保存整个项目分别完成不同工作；片段编辑结束后仍应保存项目。</p>
+          <h3>完整备份桌面版</h3>
+          <ol>
+            <li>保存项目，打开<strong>“文件 → 打开数据文件夹”</strong>，记下位置；另开<strong>“打开资产文件夹”</strong>，确认外部资产所在位置。</li>
+            <li>退出软件，再把完整数据目录和自定义资产目录复制到备份位置。建议按日期命名备份文件夹。</li>
+            <li>Windows 默认数据目录为 <code>%APPDATA%\YuyantaiDirector\state</code>；外部资产可能在程序旁的 <code>Assets</code>，也可能在 <code>%APPDATA%\YuyantaiDirector\Assets</code>。Mac 默认数据目录为 <code>~/Library/Application Support/YuyantaiDirector/state</code>，外部资产为同级 <code>Assets</code> 文件夹。</li>
+            <li>恢复时先退出软件并备份当前目录，再恢复对应数据；自定义资产的结构、文件名和相对位置应保持一致。</li>
+          </ol>
+          <p>在 Mac Finder 中可用<strong>“前往 → 前往文件夹”</strong>，输入 <code>~/Library/Application Support/YuyantaiDirector/</code> 查找上述目录。退出软件后备份整个目录即可同时保留 Mac 的项目与外部资产。</p>
+          <div class="note"><p><strong>浏览器网页、桌面 EXE 和浏览器扩展的数据不是同一份。</strong>此前在 <code>127.0.0.1:4210</code> 网页里做的项目不会自动出现在 EXE 中；安装后显示空场景不代表旧项目被删除。先在旧版保存，并确认旧版服务的实际数据目录，再进行迁移。</p></div>
+          <p>旧网页版的默认目录为其程序内的 <code>web/state</code>，但自定义启动方式可能使用其他目录，不能仅凭端口号判断。确认旧目录后，退出两边程序并备份，将旧数据迁入桌面版数据目录，同时迁移外部资产；不要只复制 EXE。</p>
+          <p>本地保存不会自动同步到 GitHub，也不等于上传到绮绘画布。项目交接应提供项目数据及所用外部资产；仅交付视频时提供导出的成片即可。</p>
+        </section>
+
+        <section id="export-faq">
+          <h2><span class="number">15</span>导出与常见问题</h2>
+          <h3>导出视频</h3>
+          <ol>
+            <li>至少添加一台相机，先播放检查角色、背景、关键帧与镜头切换。</li>
+            <li>点击<strong>“导出视频”</strong>。单机位成片选对应相机，多镜头成片选<strong>“分镜编排”</strong>。</li>
+            <li>设置时长、帧率、画幅与清晰度，再开始导出。导出期间保持软件打开。</li>
+            <li>生成完成后预览视频，点击<strong>“保存到本地”</strong>，选择保存位置。输出不包含编辑工具、控制点和界面。</li>
+          </ol>
+          <p>拍摄静帧可使用顶部拍摄入口；结果进入镜头素材。截图/视频添加到绮绘画布需要另外连接账号，本地编辑和导出可以跳过连接。</p>
+          <h3>快速排查</h3>
+          <div class="table-wrap"><table><thead><tr><th>遇到的问题</th><th>先检查</th></tr></thead><tbody>
+            <tr><td>空格没有播放</td><td>是否处于动态预演？是否仍在输入框或按钮上？完成输入后点击时间轴空白处再按空格，或直接点播放按钮。</td></tr>
+            <tr><td>移动人物没有出现关键帧</td><td>是否暂停、已解锁并处于动态模式？当前是否 0 秒？展开位置轨道，用菱形手动记录，再到后面的时间编辑。</td></tr>
+            <tr><td>W/E/R 没有切换工具</td><td>当前版本使用 0/1/2/3 切换选择、移动、旋转、缩放。WASD、Q/E 用于视角导航。</td></tr>
+            <tr><td>拖动后相机画面没变</td><td>确认正在编辑实际相机，而不是浏览导演视角；检查预览窗口是否选择了正确机位或镜头剪辑。</td></tr>
+            <tr><td>“正面中景”没对准人</td><td>先点击预设，再按提示选择拍摄对象；过肩镜头需完成前景与目标两步。必要时从对象列表选择人物。</td></tr>
+            <tr><td>只有姿势，没有动画</td><td>一个骨骼帧只会保持姿势。到后面的片段时间调整关节，点击“添加关键帧”，保存片段后再播放。</td></tr>
+            <tr><td>人物走得太快、滑步或回原点</td><td>确认动作是原地、带根位移还是路径版本，检查是否叠加了位置轨道；检查循环设置及源文件是否包含期望位移。</td></tr>
+            <tr><td>关键帧拖不动</td><td>先停止播放并解锁对象，放大时间轴，抓住菱形本身。骨骼帧不能越过片段范围，也不能与另一帧重合。</td></tr>
+            <tr><td>镜头删除后预览为空</td><td>可能删除了最后一台相机；点击“添加相机”恢复。只想临时关闭某段镜头时使用复选框。</td></tr>
+            <tr><td>模型或动作不在库中</td><td>确认实际资产目录、分类和文件格式，再刷新资产；模型贴图/数据缺失时恢复原相对路径，不兼容骨架需先作适配。</td></tr>
+            <tr><td>背景上传失败</td><td>使用有效 PNG/JPG/WebP，单张不超过 16 MB；检查图片本身能否打开。错误提示保持在背景面板，可更换图片重试。</td></tr>
+            <tr><td>导出失败或速度很慢</td><td>先尝试短时长、标准清晰度，确认资产已加载完毕，并减少复杂模型。长时高分辨率导出消耗更多显存和内存。</td></tr>
+            <tr><td>启动 EXE 后看不到网页旧项目</td><td>两者使用不同数据目录。参照第 14 节先备份和迁移，不要反复保存空场景覆盖未知目录。</td></tr>
+          </tbody></table></div>
+          <p class="small">本教程对应当前 Windows 与 Apple Silicon Mac 本地版本。任意外部模型、非 Mixamo 骨架及所有设备上的长时高分辨率导出不保证兼容；遇到新资产时先用一个人物、一台相机和短时间轴验证。</p>
+        </section>
+      </main>
+    </div>
+    <footer>绮绘预演台V1.0 · 本地使用教程 · 2026-09-28</footer>
+  </div>
+</body>
+</html>

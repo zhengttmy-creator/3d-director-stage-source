@@ -1,0 +1,410 @@
+/* Display-only theme. Scene colors, axis colors and editor geometry stay authored. */
+:root, [data-dreamina-theme="dark"], .octo-director-stage-shell,
+body:has(.octo-director-stage-shell) {
+  color-scheme: dark;
+  --qh-black: #000000;
+  --qh-base: #0a0a0a;
+  --qh-surface: #111111;
+  --qh-hover: #1b1b1b;
+  --qh-text: #f5f5f5;
+  --qh-muted: #a3a3a3;
+  --qh-border: #242424;
+  --qh-ease: cubic-bezier(.2, .8, .2, 1);
+  --qh-font-ui: "Noto Sans SC", "PingFang SC", "Microsoft YaHei UI", "Microsoft YaHei", "Segoe UI", sans-serif;
+  --qh-font-number: "Segoe UI", "Noto Sans SC", "Microsoft YaHei UI", sans-serif;
+  --dreamina-font-family-cn: var(--qh-font-ui);
+  --dreamina-font-family-cn-special: var(--qh-font-ui);
+  --dreamina-font-family-accent: var(--qh-font-ui);
+  --dreamina-font-family-number: var(--qh-font-number);
+  --octo-font-family-brand: var(--qh-font-ui);
+  --octo-font-family-number: var(--qh-font-number);
+  --octo-search-tab-label-font-family: var(--qh-font-ui);
+  --ds-app: 0 0 0;
+  --ds-surface: 10 10 10;
+  --ds-surface-subtle: 0 0 0;
+  --ds-surface-raised: 17 17 17;
+  --ds-surface-hover: 27 27 27;
+  --ds-stroke: 36 36 36;
+  --ds-stroke-strong: 65 65 65;
+  --ds-content: 245 245 245;
+  --ds-content-secondary: 205 205 205;
+  --ds-content-muted: 163 163 163;
+  --ds-content-faint: 125 125 125;
+  --ds-accent: 245 245 245;
+  --ds-link: 205 205 205;
+  --ds-action-solid: 245 245 245;
+  --ds-action-solid-hover: 255 255 255;
+  --ds-on-action-solid: 0 0 0;
+  --ds-danger: 229 145 145;
+  --ds-danger-soft: 35 20 20;
+  --ds-success: 205 205 205;
+  --ds-success-soft: 17 17 17;
+  --ds-success-border: 65 65 65;
+  --ds-warning: 213 195 159;
+  --ds-warning-soft: 28 25 20;
+  --ds-warning-border: 74 65 46;
+  --ds-scroll-thumb: 65 65 65;
+  --ds-director-track-camera: 205 205 205;
+  --ds-director-track-object: 205 205 205;
+  --ds-director-track-light: 205 205 205;
+  --ds-director-timeline-grid: 36 36 36;
+  --ds-overlay: rgb(0 0 0 / .64);
+  --ds-shadow: rgb(0 0 0 / .2);
+  --ds-director-floating-shadow: 0 4px 16px rgb(0 0 0 / .2);
+  --ds-director-inline-shadow: none;
+  --dreamina-color-bg-body: var(--qh-black);
+  --dreamina-color-bg-surface: var(--qh-base);
+  --dreamina-color-bg-dropdown-menu: var(--qh-surface);
+  --dreamina-color-bg-float: var(--qh-surface);
+  --dreamina-color-text-primary: var(--qh-text);
+  --dreamina-color-text-secondary: #cdcdcd;
+  --dreamina-color-text-tertiary: var(--qh-muted);
+  --dreamina-color-text-placeholder: #858585;
+  --dreamina-color-text-disabled: #626262;
+  --dreamina-color-text-link: var(--qh-text);
+  --dreamina-color-stroke-primary: var(--qh-border);
+  --dreamina-color-stroke-secondary: var(--qh-border);
+  --dreamina-color-stroke-tertiary: #1b1b1b;
+  --dreamina-color-block-primary-default: var(--qh-surface);
+  --dreamina-color-block-primary-hover: var(--qh-hover);
+  --dreamina-color-block-primary-pressed: #242424;
+  --dreamina-color-block-secondary-default: var(--qh-surface);
+  --dreamina-color-block-secondary-hover: var(--qh-hover);
+  --dreamina-color-block-secondary-pressed: #242424;
+  --dreamina-color-button-primary-bg-default: var(--qh-text);
+  --dreamina-color-button-primary-bg-hover: #ffffff;
+  --dreamina-color-button-primary-bg-pressed: #dedede;
+  --dreamina-color-button-primary-text: var(--qh-black);
+  --dreamina-color-button-primary-bg-disabled: #1b1b1b;
+  --dreamina-color-button-primary-text-disabled: #626262;
+  --dreamina-color-button-secondary-bg-default: transparent;
+  --dreamina-color-button-secondary-bg-hover: var(--qh-hover);
+  --dreamina-color-button-secondary-bg-pressed: #242424;
+  --dreamina-color-button-secondary-bg-disabled: transparent;
+  --dreamina-color-button-secondary-text: var(--qh-text);
+  --dreamina-color-button-secondary-text-disabled: #626262;
+  --dreamina-color-component-input-bg: var(--qh-surface);
+  --dreamina-color-component-tooltip-bg: var(--qh-surface);
+  --dreamina-color-component-float-bg-default: var(--qh-surface);
+  --dreamina-color-component-dialog-text-primary: var(--qh-text);
+  --dreamina-color-component-dialog-text-secondary: var(--qh-muted);
+  --dreamina-color-on-media-text-primary: var(--qh-text);
+  --dreamina-color-on-media-text-secondary: #cdcdcd;
+  --dreamina-color-on-media-text-tertiary: var(--qh-muted);
+  --dreamina-color-on-media-panel-bg: var(--qh-surface);
+  --dreamina-color-brand-main-default: var(--qh-text);
+  --dreamina-color-brand-main-hover: #ffffff;
+  --dreamina-color-brand-main-pressed: #dedede;
+  --dreamina-color-functional-error: #e59191;
+  --dreamina-color-functional-success: #cdcdcd;
+  --dreamina-shadow-dropdown-menu: 0 4px 16px rgb(0 0 0 / .2);
+  --dreamina-shadow-toast: 0 4px 16px rgb(0 0 0 / .2);
+}
+
+body { background: var(--qh-black); color: var(--qh-text); }
+/* Explicitly replace the shell's macOS-only font without changing control metrics. */
+body, [data-testid="director-stage-shell"], [data-director-stage-portal-layer],
+.local-assets-dialog, .startup-canvas-gate, .local-reopen {
+  font-family: var(--qh-font-ui);
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+[data-testid="director-stage-shell"] > header > div:first-child > span:first-child,
+:is([data-testid="director-stage-asset-panel"], [data-testid="director-stage-content-panel"], [data-testid="director-stage-properties-panel"]) h2,
+[data-director-stage-portal-layer] :is(h2, h3), .local-assets-dialog h2 {
+  font-weight: 600;
+}
+[data-testid="director-stage-shell"] [role="tab"],
+[data-director-stage-portal-layer] [role="tab"],
+[data-testid="director-stage-character-assets"] button[data-asset-id] > span:nth-child(2),
+button[data-testid^="director-stage-motion-picker-card-"] > span:nth-child(2) {
+  font-weight: 500;
+}
+[data-testid="director-stage-timeline-toolbar"] .font-mono,
+[data-testid="director-stage-timeline-ruler"] .font-mono,
+[data-testid="director-stage-timeline-zoom"] .font-mono,
+[data-testid="director-stage-scrubbable-number-field"] input,
+[data-testid="director-stage-free-view-fov"] {
+  font-family: var(--qh-font-number);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+:where(.octo-director-stage-shell, [data-director-stage-portal-layer], .startup-canvas-gate, .local-assets-dialog) :where(*) {
+  letter-spacing: 0;
+}
+[data-testid="director-stage-shell"] { animation: none !important; }
+[data-testid="director-stage-shell"] > header,
+[data-testid="director-stage-timeline-toolbar"],
+[data-testid="director-stage-timeline-sticky-label-header"] { background-color: var(--qh-base); }
+[data-testid="director-stage-asset-panel"],
+[data-testid="director-stage-content-panel"],
+[data-testid="director-stage-properties-panel"] { background-color: var(--qh-base); }
+[data-testid="director-stage-timeline"] { background-color: var(--qh-black); }
+[data-testid="director-stage-storyboard-track"] { background-color: var(--qh-base) !important; border-color: var(--qh-border) !important; }
+[data-testid^="director-stage-storyboard-clip-"] { background-color: #1b1b1b !important; }
+[data-testid="director-stage-shot-menu"] { background: var(--qh-surface) !important; border-color: var(--qh-border) !important; color: var(--qh-text) !important; box-shadow: 0 4px 16px rgb(0 0 0 / .2) !important; }
+[data-testid="director-stage-shot-menu"] :is(input, select, button) { background: var(--qh-base) !important; border-color: var(--qh-border) !important; color: var(--qh-text) !important; }
+
+/* Rounded controls retain their original size and hit area. */
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) :is(.rounded-xl, .rounded-2xl, .rounded-3xl) { border-radius: 8px; }
+[data-testid="director-stage-shell"] > nav[aria-label="对象"],
+[data-testid="director-stage-camera-view-controls"],
+[data-testid="director-stage-custom-pose-editor"] {
+  background: var(--qh-surface);
+  border-color: var(--qh-border);
+  border-radius: 8px;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+[data-testid="director-stage-camera-monitor"] {
+  border-color: var(--qh-border);
+  border-radius: 8px;
+  box-shadow: none;
+}
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) [class*="backdrop-blur"] { backdrop-filter: none !important; }
+body:has(.octo-director-stage-shell) .bg-overlay[class*="backdrop-blur"],
+[data-director-stage-portal-layer][class*="backdrop-blur"],
+[data-popover-content-motion][class*="backdrop-blur"] { backdrop-filter: none !important; }
+[data-director-stage-portal-layer][role="dialog"]:not([data-director-stage-root]),
+[data-director-stage-portal-layer][role="menu"],
+[data-director-stage-portal-layer][role="listbox"],
+[data-director-stage-portal-layer][role="tooltip"],
+[data-popover-content-motion] {
+  background-color: var(--qh-surface);
+  border-color: var(--qh-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgb(0 0 0 / .2);
+}
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) :is(input, textarea, select) {
+  caret-color: var(--qh-text);
+  accent-color: var(--qh-text);
+}
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) :is(input, textarea)::placeholder { color: #858585; }
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) :is(input, textarea)[aria-invalid="true"] { outline: 1px solid #e59191; outline-offset: -1px; }
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) :is(button, input, textarea, select, [role="slider"]) {
+  transition-property: background-color, border-color, color, opacity, box-shadow;
+  transition-duration: 170ms;
+  transition-timing-function: var(--qh-ease);
+}
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) button:disabled,
+:is(.octo-director-stage-shell, [data-director-stage-portal-layer]) [aria-disabled="true"] {
+  cursor: not-allowed;
+}
+/* Inset focus stays visible in clipped toolbar and timeline containers. */
+.octo-director-stage-shell :is(button, input, textarea, select, a, [role="slider"], [role="menuitem"], [tabindex]):focus-visible,
+body:has(.octo-director-stage-shell) [data-director-stage-portal-layer] :is(button, input, textarea, select, a, [role="slider"], [role="menuitem"], [tabindex]):focus-visible {
+  outline: 1px solid #f5f5f5 !important;
+  outline-offset: -2px;
+  box-shadow: none !important;
+}
+.octo-director-stage-shell [data-testid="director-stage-shell"]:focus-visible { outline: none !important; }
+[data-writeback-action="export-video"]:not(:disabled):not([aria-disabled="true"]) {
+  background-color: var(--qh-text);
+  color: var(--qh-black);
+  box-shadow: inset 0 0 0 1px var(--qh-text);
+}
+[data-writeback-action="export-video"]:focus-visible { outline-color: #000 !important; }
+
+[data-testid="director-stage-character-assets"] button[data-asset-id],
+button[data-testid^="director-stage-motion-picker-card-"] {
+  border-radius: 8px;
+  background-color: var(--qh-surface);
+  border-color: var(--qh-border);
+}
+[data-testid="director-stage-character-assets"] button[data-asset-id] > span:first-child,
+button[data-testid^="director-stage-motion-picker-card-"] > span:first-child { border-radius: 4px; }
+button[data-testid^="director-stage-motion-picker-card-"][aria-pressed="true"] {
+  background-color: #1b1b1b;
+  border-color: #a3a3a3;
+}
+button[data-testid^="director-stage-motion-picker-card-"] span:has(> svg[aria-label="加载预览"]) {
+  background: #111111 !important;
+}
+button[data-testid^="director-stage-motion-picker-card-"] span:has(> svg[aria-label="加载预览"])::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: 4px;
+  background: #242424;
+  opacity: .55;
+  pointer-events: none;
+}
+button[data-testid^="director-stage-motion-picker-card-"] svg[aria-label="加载预览"] { animation: none !important; opacity: 0; }
+[data-testid="director-stage-character-assets"] button[data-asset-id] > span:first-child :is(img, canvas),
+button[data-testid^="director-stage-motion-picker-card-"] > span:first-child :is(img, canvas) {
+  transform: none;
+  transition: transform 350ms var(--qh-ease), filter 180ms var(--qh-ease);
+}
+
+/* A one-pixel sliding underline is visual only; existing tabs own selection. */
+[data-qh-tabs]:not(.local-panel-tabs) { position: relative; }
+[data-qh-tabs]::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 1px;
+  height: 1px;
+  background: var(--qh-text);
+  transform-origin: left center;
+  transform: translateX(var(--qh-tab-x, 0px)) scaleX(var(--qh-tab-width, 0));
+  opacity: var(--qh-tab-opacity, 0);
+  pointer-events: none;
+  transition: transform 220ms var(--qh-ease), opacity 180ms ease;
+}
+[data-qh-tabs] > [role="tab"],
+.local-panel-tabs[data-qh-tabs] > button { border-bottom-color: transparent; }
+[data-qh-tabs] > button > span.absolute.inset-x-0.bottom-0 { opacity: 0; }
+[data-testid="director-stage-shell"] > header [role="tablist"] { border-radius: 6px; }
+[data-testid="director-stage-shell"] > header [data-qh-tabs]::after { bottom: 2px; }
+
+.local-reopen button { border-color: var(--qh-border); background: var(--qh-surface); color: var(--qh-text); }
+.local-assets-trigger, .local-assets-icon { color: var(--qh-muted); }
+.local-assets-dialog {
+  background: var(--qh-surface);
+  color: var(--qh-text);
+  border-color: var(--qh-border);
+  box-shadow: 0 4px 16px rgb(0 0 0 / .2);
+}
+.local-assets-dialog::backdrop { background: rgb(0 0 0 / .64); }
+.local-assets-dialog header, .local-assets-dialog footer, .local-assets-row { border-color: var(--qh-border); }
+.local-assets-path { background: var(--qh-base); border-color: var(--qh-border); }
+.local-assets-path input { color: var(--qh-text); }
+.local-assets-content > label, .local-assets-row code, .local-assets-format, .local-assets-status { color: var(--qh-muted); }
+.local-assets-count { color: var(--qh-text); }
+.local-assets-issues { color: #d5c39f; }
+.local-assets-dialog footer button { border-color: var(--qh-border); background: transparent; }
+.local-assets-dialog footer .local-assets-primary { background: var(--qh-text); border-color: var(--qh-text); color: var(--qh-black); }
+.local-assets-dialog button:focus-visible { outline-color: var(--qh-text); }
+.startup-canvas-gate { background: var(--qh-black); color: var(--qh-text); }
+.startup-canvas-card { background: var(--qh-base); border-color: var(--qh-border); border-radius: 8px; box-shadow: none; }
+.startup-canvas-mark { background: var(--qh-surface); border-radius: 8px; }
+.startup-canvas-mark span { border-color: var(--qh-text); border-radius: 4px; box-shadow: none; }
+.startup-canvas-copy h1 { font-size: 32px; letter-spacing: 0; }
+.startup-canvas-copy p, .startup-canvas-form label { color: var(--qh-muted); }
+.startup-canvas-form input { background: var(--qh-surface); color: var(--qh-text); border-color: var(--qh-border); border-radius: 6px; }
+.startup-canvas-form input::placeholder { color: #858585; }
+.startup-canvas-form input:focus-visible { border-color: var(--qh-text); box-shadow: none; }
+.startup-canvas-error { border-radius: 6px; background: #231414; color: #e59191; }
+.startup-canvas-actions button { border-radius: 6px; }
+.startup-canvas-actions button:focus-visible { outline: 1px solid var(--qh-text); outline-offset: 3px; }
+.startup-secondary { border-color: var(--qh-border); background: transparent; color: var(--qh-text); }
+.startup-primary { border-color: var(--qh-text); background: var(--qh-text); color: var(--qh-black); }
+.local-panel-tabs { background: var(--qh-base); border-color: var(--qh-border); }
+.local-panel-tabs button[aria-pressed="true"] { color: var(--qh-text); border-color: transparent; background: var(--qh-surface); }
+:is(.startup-canvas-gate, .local-assets-dialog, .local-reopen) button {
+  transition: background-color 170ms var(--qh-ease), border-color 170ms var(--qh-ease), scale 170ms var(--qh-ease);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-writeback-action="export-video"]:not(:disabled):not([aria-disabled="true"]):hover { background-color: #fff; }
+  .startup-secondary:hover, .local-assets-dialog footer button:not(.local-assets-primary):hover,
+  .local-assets-icon:hover, .local-assets-trigger:hover, .local-reopen button:hover { background: var(--qh-hover); border-color: #414141; color: var(--qh-text); }
+  .startup-primary:hover, .local-assets-dialog footer .local-assets-primary:hover { background: #fff; color: #000; }
+  [data-testid="director-stage-character-assets"] button[data-asset-id]:hover,
+  button[data-testid^="director-stage-motion-picker-card-"]:hover { background-color: var(--qh-hover); border-color: #414141; }
+  button[data-testid^="director-stage-motion-picker-card-"][aria-pressed="true"]:hover { border-color: #f5f5f5; }
+  [data-testid="director-stage-character-assets"] button[data-asset-id]:hover > span:first-child :is(img, canvas),
+  button[data-testid^="director-stage-motion-picker-card-"]:hover > span:first-child :is(img, canvas) {
+    transform: scale(1.02);
+    filter: brightness(1.04);
+  }
+}
+@media (hover: none), (pointer: coarse) {
+  [data-testid^="director-stage-shot-camera-focus-"],
+  [data-testid^="director-stage-shot-camera-lock-"],
+  [data-testid="director-stage-object-panel-scroll"] .opacity-0 { opacity: 1; }
+}
+
+.local-background-upload { margin-bottom: 16px; min-width: 0; }
+.local-background-upload-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.local-background-upload-heading > span { color: var(--qh-muted); font-size: 12px; white-space: nowrap; }
+.local-background-upload-button {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  min-height: 32px; padding: 6px 10px; border: 1px solid var(--qh-text); border-radius: 6px;
+  background: var(--qh-text); color: var(--qh-black); font-family: var(--qh-font-ui);
+  font-size: 12px; font-weight: 500; line-height: 18px; white-space: nowrap;
+  transition: background-color 170ms var(--qh-ease), border-color 170ms var(--qh-ease), transform 170ms var(--qh-ease);
+}
+.local-background-upload-button svg { width: 14px; height: 14px; flex: none; }
+.local-background-close-button {
+  display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; min-height: 32px; margin-top: 12px;
+  border: 1px solid var(--qh-border); border-radius: 6px; background: transparent; color: var(--qh-text);
+  font-family: var(--qh-font-ui); font-size: 12px; font-weight: 500; line-height: 18px;
+  transition: background-color 170ms var(--qh-ease), border-color 170ms var(--qh-ease), transform 170ms var(--qh-ease);
+}
+.local-background-close-button svg { width: 14px; height: 14px; flex: none; }
+.local-background-upload-button:disabled, .local-background-close-button:disabled { opacity: .45; cursor: not-allowed; }
+.local-background-upload-button:focus-visible, .local-background-close-button:focus-visible, .local-background-upload-retry:focus-visible { outline: 1px solid var(--qh-text); outline-offset: 3px; }
+.local-background-upload-empty .local-background-upload-heading { min-height: 170px; flex-direction: column; justify-content: center; gap: 16px; }
+.local-background-upload-empty .local-background-upload-button { min-height: 36px; padding-inline: 18px; }
+.local-background-upload-status, .local-background-upload-error { margin-top: 12px; font-size: 11px; line-height: 18px; overflow-wrap: anywhere; }
+.local-background-upload-status { color: var(--qh-muted); }
+.local-background-upload-error { color: #e59191; white-space: pre-line; }
+.local-background-upload-retry { display: block; margin-top: 8px; padding: 3px 9px; border: 1px solid var(--qh-border); border-radius: 4px; background: transparent; color: var(--qh-text); }
+.local-background-upload-retry:disabled { opacity: .45; }
+.local-background-image { position: relative; min-width: 0; }
+.local-background-image > button:first-child { width: 100%; }
+.local-background-delete-button {
+  position: absolute; top: 6px; right: 6px; display: grid; place-items: center; width: 28px; height: 28px;
+  border: 1px solid #414141; border-radius: 4px; background: var(--qh-surface); color: var(--qh-text);
+  transition: background-color 170ms var(--qh-ease), border-color 170ms var(--qh-ease);
+}
+.local-background-delete-button svg { width: 14px; height: 14px; }
+.local-background-delete-button:disabled { opacity: .45; cursor: not-allowed; }
+.local-background-delete-button:focus-visible, .local-background-upload-undo:focus-visible { outline: 1px solid var(--qh-text); outline-offset: 2px; }
+.local-background-upload-undo { margin-left: 8px; color: var(--qh-text); text-decoration: underline; text-underline-offset: 3px; }
+.local-background-upload-undo:disabled { opacity: .45; }
+@media (hover: hover) and (pointer: fine) {
+  .local-background-upload-button:not(:disabled):hover { background: #fff; border-color: #fff; }
+  .local-background-close-button:not(:disabled):hover { background: var(--qh-hover); border-color: #414141; }
+  .local-background-upload-retry:not(:disabled):hover { background: var(--qh-hover); border-color: #414141; }
+  .local-background-delete-button:not(:disabled):hover { background: #303030; border-color: #666; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .local-background-upload-button:not(:disabled):active, .local-background-close-button:not(:disabled):active { transform: scale(.98); }
+}
+
+@keyframes qh-enter { from { opacity: 0; translate: 0 8px; } to { opacity: 1; translate: 0 0; } }
+@keyframes qh-overlay-in { from { opacity: 0; translate: 0 6px; } to { opacity: 1; translate: 0 0; } }
+@keyframes qh-overlay-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes qh-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes qh-skeleton { 0%, 100% { opacity: .45; } 50% { opacity: .7; } }
+@media (prefers-reduced-motion: no-preference) {
+  .startup-canvas-card { animation: qh-enter 460ms var(--qh-ease) both; }
+  [data-testid="director-stage-shell"] > header { animation: qh-enter 420ms var(--qh-ease) both; }
+  [data-testid="director-stage-asset-panel"] { animation: qh-enter 420ms 60ms var(--qh-ease) both; }
+  [data-testid="director-stage-inspector-dock"] { animation: qh-enter 420ms 120ms var(--qh-ease) both; }
+  [data-director-stage-portal-layer][role="dialog"]:not([data-director-stage-root])[data-state="open"],
+  [data-popover-content-motion][data-state="open"],
+  .local-assets-dialog[open] { animation: qh-overlay-in 200ms var(--qh-ease) both; }
+  [data-director-stage-portal-layer][data-state="closed"] { animation: qh-overlay-out 110ms ease both; }
+  .local-assets-dialog::backdrop { animation: qh-fade-in 180ms ease both; }
+  body:has(.octo-director-stage-shell) .bg-overlay[data-state="open"] { animation: qh-fade-in 180ms ease both; }
+  body:has(.octo-director-stage-shell) .bg-overlay[data-state="closed"] { animation: qh-overlay-out 110ms ease both; }
+  [data-testid="director-stage-tooltip"][data-state="instant-open"],
+  [data-testid="director-stage-tooltip"][data-state="delayed-open"] { animation: qh-fade-in 150ms ease both; }
+  :is(.octo-director-stage-shell, [data-director-stage-portal-layer]) .animate-pulse { animation: qh-skeleton 1800ms ease-in-out infinite; }
+  button[data-testid^="director-stage-motion-picker-card-"] span:has(> svg[aria-label="加载预览"])::after { animation: qh-skeleton 1800ms ease-in-out infinite; }
+  /* Press feedback excludes timeline editing, scrub fields and floating hitboxes. */
+  [data-testid="director-stage-shell"] > header button,
+  [data-testid="director-stage-shell"] > nav[aria-label="对象"] button,
+  [data-director-stage-portal-layer][aria-modal="true"]:not([data-director-stage-root]) button { transition: background-color 170ms var(--qh-ease), border-color 170ms var(--qh-ease), color 170ms var(--qh-ease), scale 170ms var(--qh-ease); }
+  [data-testid="director-stage-shell"] > header button,
+  [data-testid="director-stage-shell"] > nav[aria-label="对象"] button,
+  [data-director-stage-portal-layer][aria-modal="true"]:not([data-director-stage-root]) button { --tw-scale-x: 1 !important; --tw-scale-y: 1 !important; }
+  [data-testid="director-stage-shell"] > header button:not(:disabled):active,
+  [data-testid="director-stage-shell"] > nav[aria-label="对象"] button:not(:disabled):active,
+  [data-director-stage-portal-layer][aria-modal="true"]:not([data-director-stage-root]) button:not(:disabled):active,
+  :is(.startup-canvas-gate, .local-assets-dialog, .local-reopen) button:not(:disabled):active { scale: .98; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+  [data-testid="director-stage-character-assets"] button[data-asset-id] > span:first-child :is(img, canvas),
+  button[data-testid^="director-stage-motion-picker-card-"] > span:first-child :is(img, canvas) { transform: none !important; }
+  :is(.octo-director-stage-shell, [data-director-stage-portal-layer]) button { --tw-scale-x: 1 !important; --tw-scale-y: 1 !important; scale: 1 !important; }
+}
+@media (max-width: 800px) {
+  .startup-canvas-card { border-radius: 8px; }
+  .startup-canvas-copy h1 { font-size: 24px; }
+}

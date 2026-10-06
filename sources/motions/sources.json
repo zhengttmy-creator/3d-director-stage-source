@@ -1,0 +1,110 @@
+[
+  {
+    "name": "samba.fbx",
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/fbx/Samba%20Dancing.fbx",
+    "bytes": 3681360,
+    "sha256": "b9003ee562c87bf03051c3a502411b0808d3513f1d74a2011f7530d9f067069f"
+  },
+  {
+    "name": "soldier.glb",
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/gltf/Soldier.glb",
+    "bytes": 2160468,
+    "sha256": "dfb230fc1f942f259dd00281a1186953ad602fc5d69067ce63e24b2aa439736b"
+  },
+  {
+    "name": "mixamo.fbx",
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/fbx/mixamo.fbx",
+    "bytes": 3080384,
+    "sha256": "062bfc75d03a68b8a4aaa4cae6d50c6624bef45684df8aca5302ab1023e27d6c"
+  },
+  {
+    "name": "xbot.glb",
+    "url": "https://raw.githubusercontent.com/mrdoob/three.js/1a1c86699f9c38d4bef1cf51652e5f0e0680d745/examples/models/gltf/Xbot.glb",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/mrdoob/three.js@1a1c86699f9c38d4bef1cf51652e5f0e0680d745/examples/models/gltf/Xbot.glb",
+    "repository": "mrdoob/three.js",
+    "commit": "1a1c86699f9c38d4bef1cf51652e5f0e0680d745",
+    "bytes": 2930032,
+    "sha256": "002f8d269de68e5dce3d25195caf390d1aa359bbfaae3fcf4c8dc78ec36c3ba5"
+  },
+  {
+    "name": "jump.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Jump.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Jump.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 188288,
+    "sha256": "e8f0216888c161bd699c6a91de54eefa64068a802b314d79f689850646b711f2"
+  },
+  {
+    "name": "roll.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Roll.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Roll.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 239360,
+    "sha256": "61241a34f41f40ab1d0a6dbf635ea227dc97452087571f701ec3d3814cc3d22a"
+  },
+  {
+    "name": "dodge-back.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Dodging%20Back.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Dodging%20Back.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 320512,
+    "sha256": "ef00baefa62e555110e95291e713563e97b738962a65b535ccb6ac1c5717cc5c"
+  },
+  {
+    "name": "crouch-down.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Standing%20To%20Crouched.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Standing%20To%20Crouched.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 222512,
+    "sha256": "67b7e9b06bb44a75de99aaeef403b150db5a7d595dd5d2ea2dab5176c00225f8"
+  },
+  {
+    "name": "stand-up.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Crouched%20To%20Standing.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Crouched%20To%20Standing.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 217552,
+    "sha256": "f26e580385925ba596a1acb17ad26b32f13cd68cdcff39eea5f3ca7e54483ee2"
+  },
+  {
+    "name": "sneak.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Sneaking%20Forward.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Sneaking%20Forward.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 297104,
+    "sha256": "7c6d9ccefbdd48c4e99cb39ec69f4fc4db15592806b40594c5b3b8c9692d583d"
+  },
+  {
+    "name": "strafe-left.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Left%20Strafe%20Walking.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Left%20Strafe%20Walking.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 193616,
+    "sha256": "d3546640b63ef62b6a65587811ad92c8ac5a6bd8bc9c58b01d644cce93e3cad9"
+  },
+  {
+    "name": "strafe-right.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Right%20Strafe%20Walking.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Right%20Strafe%20Walking.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 193616,
+    "sha256": "c8f0bb229e33988017e12204e503e3a8b9a00c8e6d7ef59c15a049571b85eb4f"
+  },
+  {
+    "name": "falling-idle.fbx",
+    "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Falling%20Idle.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/aaronsnoswell/3DCharacter@1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Falling%20Idle.fbx",
+    "repository": "aaronsnoswell/3DCharacter",
+    "commit": "1902fb9674350f2b68b5a26b8eccd64570ac8dd4",
+    "bytes": 208192,
+    "sha256": "60c127a095b9d39b95b52743626f8d6ae7af7d101a9463fd486a982de8de2966"
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "name": "sitting-idle.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/SittingIdle.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/SittingIdle.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 527024,
+    "sha256": "1643c88aca3cf47cd1105e2e8f9e54252427932b8b3e4d1e3f6b16f51a2ea686"
+  },
+  {
+    "name": "female-sitting.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/FemaleSittingPose.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/FemaleSittingPose.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 268144,
+    "sha256": "45bb447e369e44088028b9f34912d88e0c373987b8fb88a507b93dd7c490cfb5"
+  },
+  {
+    "name": "male-sitting.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/Male_Sitting_Pose_1.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/Male_Sitting_Pose_1.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 268144,
+    "sha256": "d551537cfc1329d3487fac765d50dd669a9566ed2bfde7ce943e9ae719210546"
+  },
+  {
+    "name": "kneeling-pointing.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/KneelingPointing.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/KneelingPointing.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 662560,
+    "sha256": "ef4b03935ac12da800abad46c7801e45987276fe10c3b1b6eba126cfb6721060"
+  },
+  {
+    "name": "kneeling-idle.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/animation-sources/kneeling%20idle.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/animation-sources/kneeling%20idle.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 904513,
+    "sha256": "e2ca7d82c9d1713e2901890d5c7830938b614accd28d94a2fd90fcc380cf5612"
+  },
+  {
+    "name": "sitting-clap.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/animation-sources/Sitting%20Clap.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/animation-sources/Sitting%20Clap.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 762064,
+    "sha256": "fe97f4286aac0ba807e33b50bf64721418101a260247a22a7a9a045090aad07d"
+  },
+  {
+    "name": "sitting-down.fbx",
+    "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/sprite-atlas-assets/animations/Sitting.fbx",
+    "downloadUrl": "https://cdn.jsdelivr.net/gh/nirholas/three.ws@8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/sprite-atlas-assets/animations/Sitting.fbx",
+    "repository": "nirholas/three.ws",
+    "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+    "bytes": 356912,
+    "sha256": "14fb42f155c6985fa3326ff76226fd4ca8ac2821a04d2fa34b76e31a806f204d"
+  }
+]
