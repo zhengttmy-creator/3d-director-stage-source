@@ -13,3 +13,20 @@
 *.wasm
 *.zip
 *.exe
+
+# Local dependencies, user data and build artifacts.
+node_modules/
+dist/
+reports/
+.npm-cache/
+.env
+.env.*
+*.log
+*.pending
+web/state/
+web/assets/captures/
+seed/*
+/Assets/
+!seed/.gitkeep
+.DS_Store
+Thumbs.db

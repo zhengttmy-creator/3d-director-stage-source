@@ -22,11 +22,12 @@ require('@babel/traverse').default(ast, {
   ObjectProperty(path) {
     const node = path.node, code = extract(node.value);
     if (node.key.name === 'onExportVideo' && code.includes('il.cameras.length')) keep('openExport', node.value);
-    if (node.key.name === 'onStart' && code.includes('if(il.cameras.length)sF()')) keep('startExport', node.value);
+    if (node.key.name === 'onStart' && code.includes('oL.exportReady')) keep('startExport', node.value);
     if (node.key.name === 'exportDisabled' && code.includes('il.cameras.length')) keep('exportDisabled', node.value);
     if (node.key.name === 'open' && code.includes('sA&&il.cameras.length')) keep('exportOpen', node.value);
     if (node.key.name === 'onAddCamera' && code.includes('cI(')) keep('addCamera', node.value);
     if (node.key.name === 'disabled' && code.includes('__localNoCamera')) keep('captureDisabled', node.value);
+    if (node.key.name === 'onPreviewStoryboard' && code.includes('cP()')) keep('previewTrack', node.value);
     if (node.key.name === 'onDeleteStoryboardCamera' && node.value.type === 'ArrowFunctionExpression') keep('deleteCamera', node.value);
     if (node.key.name === 'onKeyDown' && code.includes('setMenu(') && code.includes('__localEditShot(')) keep('shotKeyDown', node.value);
   },
@@ -37,7 +38,7 @@ require('@babel/traverse').default(ast, {
   },
 });
 for (const key of ['emptyViewEffect', 'capture', 'openExport', 'startExport', 'exportDisabled', 'exportOpen',
-  'addCamera', 'captureDisabled', 'deleteCamera', 'shotKeyDown', 'monitorVisible', 'cameraModelVisible']) assert.ok(found[key], key);
+  'addCamera', 'captureDisabled', 'deleteCamera', 'shotKeyDown', 'monitorVisible', 'cameraModelVisible', 'previewTrack']) assert.ok(found[key], key);
 const evaluate = (key, bindings) => vm.runInNewContext('(' + found[key] + ')', bindings);
 const plain = value => JSON.parse(JSON.stringify(value));
 const document = count => ({cameras: Array.from({length: count}, (_, index) => ({id: 'camera-' + index}))});
@@ -80,11 +81,11 @@ function openExport(count) {
   return events;
 }
 assert.deepEqual(openExport(0), []);
-assert.deepEqual(openExport(1), ['event', {kind: 'camera', cameraId: 'camera-0'}, 30, 1280, 'open']);
+assert.deepEqual(openExport(1), ['event', {kind: 'storyboard'}, 30, 1280, 'open']);
 let started = 0;
 evaluate('startExport', {il: document(0), sF: () => started++})();
 assert.equal(started, 0, 'An existing export dialog cannot start after all cameras disappear');
-evaluate('startExport', {il: document(1), sF: () => started++})();
+evaluate('startExport', {il: document(1), oL: {exportReady: true}, sF: () => started++})();
 assert.equal(started, 1);
 assert.equal(evaluate('exportOpen', {sA: true, il: document(0)}), false);
 assert.equal(evaluate('exportOpen', {sA: true, il: document(1)}), true);
@@ -110,6 +111,16 @@ for (const editable of [false, true]) {
     currentTarget: {getBoundingClientRect: () => ({left: 20, top: 40})},
   });
   assert.equal(opened.length, editable ? 1 : 0, 'Keyboard access cannot open an editable shot menu in a read-only timeline');
+}
+
+for (const [count, alreadyInCameraView] of [[0, false], [1, false], [2, true]]) {
+  const events = [];
+  evaluate('previewTrack', {il: document(count), am: alreadyInCameraView,
+    cP: () => events.push('enter-camera-view'), rr: source => events.push(['preview', plain(source)]),
+    re: source => events.push(['export', plain(source)])})();
+  assert.deepEqual(events, count === 0 ? [] : [
+    ...alreadyInCameraView ? [] : ['enter-camera-view'], ['preview', {kind: 'storyboard'}], ['export', {kind: 'storyboard'}],
+  ], 'Track preview enters the main camera view and then follows the track');
 }
 
 const monitorContext = {f: {visible: true, collapsed: false, empty: true}, t: {sceneCameraPreview: false, interactionMode: 'edit'},

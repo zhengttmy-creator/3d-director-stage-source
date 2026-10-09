@@ -83,30 +83,97 @@ function __localInsertShotInState(state, request, currentView) {
     durationSec: Math.max(state.timeline.durationSec, rU(track) / fps), cameraCutTrack: track}}};
 }
 
+function __localNextShotGap(track, preferredFrame, maximumFrame) {
+  let startFrame = Math.max(0, Math.round(Number(preferredFrame) || 0));
+  for (const clip of rO(track).clips) {
+    if (startFrame >= maximumFrame) return null;
+    if (clip.endFrame <= startFrame) continue;
+    if (clip.startFrame > startFrame) return {startFrame, endFrame: Math.min(clip.startFrame, maximumFrame)};
+    startFrame = clip.endFrame;
+  }
+  return startFrame < maximumFrame ? {startFrame, endFrame: maximumFrame} : null;
+}
+
+function __localShotTiming(track, clipId, startValue, durationValue, fps, maximumFrame) {
+  if (String(startValue).trim() === '' || String(durationValue).trim() === '')
+    return {ok: false, reason: '请输入开始时间和拍摄时长'};
+  const startSeconds = Number(startValue), durationSeconds = Number(durationValue);
+  if (!Number.isFinite(startSeconds) || !Number.isFinite(durationSeconds) || startSeconds < 0 || durationSeconds <= 0)
+    return {ok: false, reason: '开始时间不可为负数，拍摄时长需大于 0'};
+  const startFrame = Math.round(startSeconds * fps);
+  const durationFrames = Math.round(durationSeconds * fps);
+  if (!Number.isFinite(startFrame) || !Number.isFinite(durationFrames) || startFrame < 0 ||
+      durationFrames < 1 || startFrame + durationFrames > maximumFrame)
+    return {ok: false, reason: '拍摄范围需在 0 至 30 秒内，至少保留一帧'};
+  const remaining = rO(track).clips.filter(clip => clip.id !== clipId);
+  if (remaining.some(clip => startFrame < clip.endFrame && startFrame + durationFrames > clip.startFrame))
+    return {ok: false, reason: '该拍摄时段与其他镜头重叠，请缩短时长或调整开始时间'};
+  return {ok: true, startFrame, endFrame: startFrame + durationFrames, durationFrames};
+}
+
+function __LocalShotTimingEditor({clip, track, cameras, fps, maximumFrame, editable, onChange, onAppend, onClose}) {
+  const seconds = value => String(Math.round(value / fps * 1000000) / 1000000);
+  const [start, setStart] = n.useState(seconds(clip.startFrame));
+  const [duration, setDuration] = n.useState(seconds(clip.endFrame - clip.startFrame));
+  const [error, setError] = n.useState('');
+  n.useEffect(() => {setStart(seconds(clip.startFrame)); setDuration(seconds(clip.endFrame - clip.startFrame)); setError('');},
+    [clip.id, clip.startFrame, clip.endFrame, fps]);
+  const camera = cameras.find(value => value.id === clip.cameraId);
+  const apply = () => {
+    if (!editable) return;
+    const timing = __localShotTiming(track, clip.id, start, duration, fps, maximumFrame);
+    if (!timing.ok) {setError(timing.reason); return;}
+    onChange(rO({clips: track.clips.map(value => value.id === clip.id ?
+      {...value, startFrame: timing.startFrame, endFrame: timing.endFrame} : value)}));
+    setStart(seconds(timing.startFrame)); setDuration(seconds(timing.durationFrames)); setError('');
+  };
+  const input = {width: 76, minWidth: 0, padding: '4px 6px', border: '1px solid #343434', borderRadius: 4, background: '#0a0a0a', color: '#f5f5f5'};
+  const button = {padding: '4px 8px', border: '1px solid #343434', borderRadius: 4, color: '#f5f5f5', background: 'transparent', cursor: 'pointer'};
+  return i.jsxs('div', {'data-testid': 'director-stage-shot-timing-editor',
+    onPointerDown: event => event.stopPropagation(), onKeyDown: event => {
+      event.stopPropagation();
+      if (event.key === 'Enter' && event.target.tagName === 'INPUT') {event.preventDefault(); apply();}
+    }, style: {gridColumn: '1 / -1', borderTop: '1px solid #242424', padding: '6px 10px', minWidth: 0, fontSize: 11, color: '#a3a3a3', overflowX: 'auto'},
+    children: [i.jsxs('div', {style: {display: 'flex', alignItems: 'center', gap: 10, whiteSpace: 'nowrap'}, children: [
+      i.jsx('strong', {style: {color: '#f5f5f5', maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis'}, children: camera ? nC(camera) : '相机'}),
+      i.jsxs('label', {children: ['开始 ', i.jsx('input', {type: 'number', min: 0, max: 30, step: 1 / fps, value: start,
+        'aria-label': '片段开始时间', disabled: !editable, style: input, onChange: event => {setStart(event.target.value); setError('');}}), ' 秒']}),
+      i.jsxs('label', {children: ['拍摄时长 ', i.jsx('input', {type: 'number', min: 1 / fps, max: 30, step: 1 / fps, value: duration,
+        'aria-label': '片段拍摄时长', disabled: !editable, style: input, onChange: event => {setDuration(event.target.value); setError('');}}), ' 秒']}),
+      i.jsx('button', {type: 'button', disabled: !editable, onClick: apply, style: {...button, background: '#f5f5f5', color: '#000'}, children: '应用'}),
+      i.jsx('span', {children: '结束 ' + seconds(clip.endFrame) + ' 秒'}),
+      i.jsx('button', {type: 'button', disabled: !editable, onClick: onAppend, style: button, children: '追加镜头'}),
+      i.jsx('button', {type: 'button', onClick: onClose, 'aria-label': '收起拍摄时长设置', style: {...button, marginLeft: 'auto'}, children: '收起'}),
+    ]}), i.jsx('div', {role: error ? 'alert' : undefined, style: {marginTop: 5, color: error ? '#e59191' : '#a3a3a3'},
+      children: error || '拖动片段两端可调整拍摄时长；导出视频按镜头轨道依次切换相机。'})]});
+}
+
 function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onChange, onInsert, onDeleteCamera}) {
   const clip = menu.clipId ? track.clips.find(value => value.id === menu.clipId) : null;
-  const [cameraId, setCameraId] = n.useState(clip?.cameraId ?? cameras[0]?.id ?? '');
+  const [cameraId, setCameraId] = n.useState(clip?.cameraId ?? menu.cameraId ?? cameras[0]?.id ?? '');
   const [start, setStart] = n.useState(String((clip?.startFrame ?? menu.frame) / fps));
-  const [duration, setDuration] = n.useState(String(clip ? (clip.endFrame - clip.startFrame) / fps : 2));
+  const [duration, setDuration] = n.useState(String(clip ? (clip.endFrame - clip.startFrame) / fps : (menu.durationFrames ?? 2 * fps) / fps));
   const [enabled, setEnabled] = n.useState(clip?.enabled !== false);
   const [error, setError] = n.useState('');
   const ref = n.useRef(null);
   n.useEffect(() => {
+    const previousFocus = document.activeElement;
+    ref.current?.querySelector('select:not([disabled]), input:not([disabled])')?.focus({preventScroll: true});
     const outside = event => {if (!ref.current?.contains(event.target)) onClose();};
-    const escape = event => {if (event.key === 'Escape') {event.stopPropagation(); onClose();}};
+    const escape = event => {if (event.key === 'Escape') {event.preventDefault(); event.stopPropagation(); onClose();}};
     window.addEventListener('pointerdown', outside, true);
     window.addEventListener('keydown', escape, true);
-    return () => {window.removeEventListener('pointerdown', outside, true); window.removeEventListener('keydown', escape, true);};
+    return () => {
+      window.removeEventListener('pointerdown', outside, true); window.removeEventListener('keydown', escape, true);
+      if (previousFocus?.isConnected) previousFocus.focus({preventScroll: true});
+    };
   }, [onClose]);
   const submit = newCamera => {
-    const startFrame = Math.round(Number(start) * fps);
-    const durationFrames = Math.round(Number(duration) * fps);
-    if (!Number.isFinite(startFrame) || !Number.isFinite(durationFrames) || startFrame < 0 || durationFrames < 1 || startFrame + durationFrames > maximumFrame) {
-      setError('镜头范围需在 0 至 30 秒内，至少保留一帧'); return;
-    }
+    const timing = __localShotTiming(track, clip?.id, start, duration, fps, maximumFrame);
+    if (!timing.ok) {setError(timing.reason); return;}
+    const {startFrame, durationFrames} = timing;
+    if ((!newCamera || clip) && !cameras.some(camera => camera.id === cameraId)) {setError('请选择一台相机'); return;}
     if (clip) {
-      const bounds = __localShotBounds(track, clip.id, maximumFrame);
-      if (startFrame < bounds.minimum || startFrame + durationFrames > bounds.maximum) {setError('镜头不能与相邻片段重叠'); return;}
       onChange(rO({clips: track.clips.map(value => value.id === clip.id ? {...value, cameraId, startFrame,
         endFrame: startFrame + durationFrames, enabled} : value)}));
       onClose();
@@ -122,9 +189,17 @@ function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onCh
     border: '1px solid #494d50', background: '#34383b', color: '#eee', borderRadius: 4, cursor: 'pointer', fontSize: 12};
   return i.jsxs('div', {ref, role: 'dialog', 'aria-label': clip ? '镜头设置' : '添加镜头',
     'data-testid': 'director-stage-shot-menu', 'data-ui-menu-overlay': 'true',
-    onPointerDown: event => event.stopPropagation(), onKeyDown: event => event.stopPropagation(),
-    style: {position: 'fixed', zIndex: 1000, left: Math.max(8, Math.min(menu.x, window.innerWidth - 284)),
-      top: Math.max(8, Math.min(menu.y - 275, window.innerHeight - 300)), width: 270, maxWidth: 'calc(100vw - 16px)',
+    onPointerDown: event => event.stopPropagation(), onKeyDown: event => {
+      event.stopPropagation();
+      if (event.key !== 'Tab') return;
+      const controls = Array.from(ref.current?.querySelectorAll('input:not([disabled]), select:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])') ?? []);
+      if (!controls.length) return;
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && (document.activeElement === first || !ref.current.contains(document.activeElement))) {event.preventDefault(); last.focus();}
+      else if (!event.shiftKey && (document.activeElement === last || !ref.current.contains(document.activeElement))) {event.preventDefault(); first.focus();}
+    },
+    style: {position: 'fixed', zIndex: 1000, left: Math.max(8, Math.min(menu.x, window.innerWidth - 316)),
+      top: Math.max(8, Math.min(menu.y - 325, window.innerHeight - 350)), maxHeight: 'calc(100vh - 16px)', overflowY: 'auto', width: 300, maxWidth: 'calc(100vw - 16px)',
       boxSizing: 'border-box', background: '#232527', color: '#eee', border: '1px solid #4b4d50',
       borderRadius: 6, padding: 12, boxShadow: '0 10px 36px #0008', fontSize: 12},
     children: [i.jsxs('div', {style: {display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12},
@@ -138,15 +213,16 @@ function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onCh
         i.jsxs('label', {style: {display: 'grid', gap: 5}, children: ['开始（秒）', i.jsx('input', {
           type: 'number', min: 0, max: 30, step: 1 / fps, value: start, 'aria-label': '镜头开始时间',
           onChange: event => {setStart(event.target.value); setError('');}, style: field})]}),
-        i.jsxs('label', {style: {display: 'grid', gap: 5}, children: ['时长（秒）', i.jsx('input', {
+        i.jsxs('label', {style: {display: 'grid', gap: 5}, children: ['拍摄时长（秒）', i.jsx('input', {
           type: 'number', min: 1 / fps, max: 30, step: 1 / fps, value: duration, 'aria-label': '镜头时长',
           onChange: event => {setDuration(event.target.value); setError('');}, style: field})]})]}),
       clip && i.jsxs('label', {style: {display: 'flex', alignItems: 'center', gap: 7, marginTop: 10}, children: [
         i.jsx('input', {type: 'checkbox', checked: enabled, onChange: event => setEnabled(event.target.checked)}), '启用镜头']}),
+      i.jsx('p', {style: {color: '#a3a3a3', marginTop: 10, lineHeight: 1.6}, children: '一个片段对应一台相机的拍摄时段，导出时按轨道顺序切换。'}),
       error && i.jsx('div', {role: 'alert', style: {color: '#ff9991', marginTop: 8}, children: error}),
       i.jsxs('div', {style: {display: 'flex', gap: 7, marginTop: 12}, children: [
         i.jsxs('button', {type: 'button', disabled: !cameraId, onClick: () => submit(false), style: {...button, flex: 1},
-          children: [i.jsx(clip ? cj.A : mS.A, {size: 14}), clip ? '应用' : '添加相机']}),
+          children: [i.jsx(clip ? cj.A : mS.A, {size: 14}), clip ? '应用' : '添加拍摄片段']}),
         clip ? i.jsx('button', {type: 'button', title: '删除镜头', 'aria-label': '删除镜头',
           onClick: () => {onChange(rG(track, clip.id)); onClose();}, style: button, children: i.jsx(mI.A, {size: 14})}) :
           i.jsxs('button', {type: 'button', onClick: () => submit(true), style: {...button, flex: 1},
@@ -172,6 +248,7 @@ function __LocalShotTrack(props) {
   scroll.current = scrollLeftPx;
   const time = n.useSyncExternalStore(clock.subscribe, clock.getSnapshot, clock.getSnapshot);
   const shown = draft ?? normalized;
+  const selectedClip = shown.clips.find(clip => clip.id === selected);
   const fps = scale.displayFps;
   const maximumFrame = Math.round(30 * fps);
   const frame = Math.floor(time * fps + 1e-7);
@@ -181,11 +258,22 @@ function __LocalShotTrack(props) {
   n.useEffect(() => () => cancelGesture.current?.(), []);
   const atPointer = event => Math.max(0, Math.min(maximumFrame - 1,
     Math.round((event.clientX - surface.current.getBoundingClientRect().left + scroll.current - scale.edgeGutterPx) / scale.pixelsPerFrame)));
+  const insertMenu = (event, preferredFrame) => {
+    if (!editable) return;
+    const gap = __localNextShotGap(normalized, preferredFrame, maximumFrame);
+    const cameraId = cameras.find(camera => !normalized.clips.some(clip => clip.cameraId === camera.id))?.id ?? cameras[0]?.id;
+    const rect = event.currentTarget.getBoundingClientRect();
+    setMenu({x: rect.left, y: rect.top, cameraId, frame: gap?.startFrame ?? maximumFrame,
+      durationFrames: gap ? Math.min(2 * fps, gap.endFrame - gap.startFrame) : fps});
+  };
   const openMenu = (event, clip) => {
     if (!editable) return;
     event.preventDefault(); event.stopPropagation();
     setSelected(clip?.id ?? null);
-    setMenu({x: event.clientX, y: event.clientY, frame: clip?.startFrame ?? atPointer(event), clipId: clip?.id});
+    const startFrame = clip?.startFrame ?? atPointer(event);
+    const gap = clip ? null : __localNextShotGap(normalized, startFrame, maximumFrame);
+    setMenu({x: event.clientX, y: event.clientY, frame: startFrame, clipId: clip?.id,
+      durationFrames: gap ? Math.min(2 * fps, gap.endFrame - startFrame) : fps});
   };
   const begin = (event, clip, mode) => {
     if (!editable || event.button !== 0 || !event.isPrimary) return;
@@ -236,27 +324,31 @@ function __LocalShotTrack(props) {
     onKeyDown: event => {
       if (g_(event) && !event.isComposing && !gZ(event.target)) {event.preventDefault(); event.stopPropagation();}
     }, style: {display: 'grid',
-    gridTemplateColumns: '180px minmax(0, 1fr)', height: 52, flexShrink: 0, borderTop: '1px solid #393b3f', background: '#1b1d20'},
+    gridTemplateColumns: '180px minmax(0, 1fr)', gridTemplateRows: selectedClip ? '52px 64px' : '52px', height: selectedClip ? 116 : 52, flexShrink: 0, borderTop: '1px solid #393b3f', background: '#1b1d20'},
     children: [i.jsxs('div', {style: {display: 'flex', alignItems: 'center', gap: 4, padding: '0 10px', borderRight: '1px solid #393b3f'},
       children: [i.jsx('span', {style: {flex: 1, fontSize: 12, whiteSpace: 'nowrap', color: '#d9dde2'}, children: '镜头剪辑'}),
-        i.jsx('button', {type: 'button', disabled: !cameras.length, title: '预览镜头剪辑', 'aria-label': '预览镜头剪辑', style: iconButton,
-          onClick: () => onPreview?.(), children: i.jsx(pR.A, {size: 15})}),
+        i.jsx('button', {type: 'button', disabled: !shown.clips.some(clip => clip.enabled !== false), title: '按镜头轨道预览相机切换', 'aria-label': '预览镜头剪辑', style: {...iconButton, display: 'flex', gap: 3, width: 'auto', padding: '0 4px', fontSize: 11},
+          onClick: () => onPreview?.(), children: [i.jsx(pR.A, {size: 15}), '预览']}),
         i.jsx('button', {type: 'button', disabled: !editable, title: '添加镜头', 'aria-label': '添加镜头',
           'data-testid': 'director-stage-storyboard-add', style: iconButton,
-          onClick: event => {const rect = event.currentTarget.getBoundingClientRect(); setMenu({x: rect.left, y: rect.top,
-            frame: Math.min(maximumFrame - 1, Math.max(0, Math.round(clock.getSnapshot() * fps)))});},
+          onClick: event => insertMenu(event, Math.round(clock.getSnapshot() * fps)),
           children: i.jsx(mS.A, {size: 16})})]}),
       i.jsx('div', {ref: surface, onContextMenu: event => openMenu(event),
         style: {position: 'relative', overflow: 'hidden', minWidth: 0}, children: i.jsxs('div', {
           'data-testid': 'director-stage-storyboard-surface', style: {position: 'relative', height: '100%',
             minWidth: '100%', width: scale.contentWidthPx, transform: 'translateX(' + (-scrollLeftPx) + 'px)'},
-          children: [shown.clips.map(clip => {
+          children: [!shown.clips.length && i.jsx('button', {type: 'button', disabled: !editable,
+            'data-testid': 'director-stage-shot-empty-add', onClick: event => insertMenu(event, frame),
+            style: {position: 'absolute', left: scrollLeftPx + 12, top: 8, height: 34, maxWidth: 'calc(100% - 24px)', padding: '0 12px',
+              border: '1px dashed #444', borderRadius: 4, background: 'transparent', color: '#a3a3a3', fontSize: 12, cursor: 'pointer', whiteSpace: 'nowrap'},
+            children: cameras.length ? '+ 添加相机拍摄片段 · 设置开始和时长' : '+ 新建相机并安排拍摄时段'}), shown.clips.map(clip => {
             const camera = cameras.find(value => value.id === clip.cameraId);
             if (!camera) return null;
             const position = fy(scale, clip.startFrame, clip.endFrame);
             const active = clip.enabled !== false && frame >= clip.startFrame && frame < clip.endFrame;
             return i.jsxs('div', {role: 'button', tabIndex: 0, 'aria-label': nC(camera) + ' · ' + ((clip.endFrame - clip.startFrame) / fps).toFixed(2) + 's',
               'aria-keyshortcuts': 'Backspace Delete',
+              title: nC(camera) + ' · ' + (clip.startFrame / fps).toFixed(2) + '–' + (clip.endFrame / fps).toFixed(2) + ' 秒；拖动两端调整时长，双击设置',
               'aria-current': active ? 'true' : undefined, 'aria-selected': selected === clip.id,
               'data-testid': 'director-stage-storyboard-clip-' + clip.id, 'data-camera-id': camera.id,
               'data-start-frame': clip.startFrame, 'data-end-frame': clip.endFrame, 'data-enabled': clip.enabled !== false,
@@ -302,6 +394,8 @@ function __LocalShotTrack(props) {
                     width: Math.min(7, position.width / 3), padding: 0, border: 0, background: '#ffffff12', cursor: 'ew-resize'}}, edge))]}, clip.id);
           }), i.jsx('div', {'aria-hidden': true, style: {position: 'absolute', top: 0, bottom: 0,
             left: fb(scale, frame), width: 1, background: '#fff', pointerEvents: 'none', zIndex: 2}})]})}),
+      selectedClip && i.jsx(__LocalShotTimingEditor, {key: selectedClip.id, clip: selectedClip, track: normalized, cameras, fps, maximumFrame, editable, onChange,
+        onAppend: event => insertMenu(event, selectedClip.endFrame), onClose: () => setSelected(null)}),
       menu && i.jsx(__LocalShotMenu, {key: (menu.clipId ?? 'new') + ':' + menu.frame + ':' + menu.x,
         menu, track: normalized, cameras, fps, maximumFrame, onClose: closeMenu, onChange, onDeleteCamera,
         onInsert: request => onInsert?.(request)})]});

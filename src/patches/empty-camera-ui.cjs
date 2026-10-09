@@ -11,7 +11,7 @@ module.exports = function patchEmptyCameraUi(factories) {
   replace('shot delete prop', 'onPreview:__localPreviewStoryboard,onChange:B,onSelectCamera:G,',
     'onPreview:__localPreviewStoryboard,onDeleteCamera:__localDeleteStoryboardCamera,onChange:B,onSelectCamera:G,');
   replace('workspace delete callback', 'onPreviewStoryboard:()=>{rr({kind:"storyboard"});re({kind:"storyboard"})},',
-    'onDeleteStoryboardCamera:cameraId=>{if(!C||rC||cO)return false;dN();return c4(cameraId)},onPreviewStoryboard:()=>{if(!il.cameras.length)return;rr({kind:"storyboard"});re({kind:"storyboard"})},');
+    'onDeleteStoryboardCamera:cameraId=>{if(!C||rC||cO)return false;dN();return c4(cameraId)},onPreviewStoryboard:()=>{if(!il.cameras.length)return;if(!am)cP();rr({kind:"storyboard"});re({kind:"storyboard"})},');
   replace('shot owns deletion shortcuts', 'if(g_(e)&&e.target?.closest?.("[data-bone-key-id]"))return;',
     'if(g_(e)&&e.target?.closest?.("[data-bone-key-id]"))return;if(!P&&g_(e)&&!gZ(e.target)&&e.target?.closest?.("[data-director-shot-keyboard]"))return;');
   replace('exit deleted camera views', 'ib(value=>value?co(value,document.cameras.map(camera=>camera.id)):value);',

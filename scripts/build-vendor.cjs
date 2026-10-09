@@ -29,6 +29,7 @@ require(path.join(patches, 'empty-cameras.cjs'))(factories);
 require(path.join(patches, 'empty-scene-startup.cjs'))(factories);
 require(path.join(patches, 'empty-camera-ui.cjs'))(factories);
 require(path.join(patches, 'background-upload.cjs'))(factories);
+require(path.join(patches, 'camera-track-export.cjs'))(factories);
 const source = 'window.directorFactories={' + Object.entries(factories).map(([id, body]) => JSON.stringify(id) + ':' + body).join(',\n') + '};\n';
 new vm.Script(source);
 fs.writeFileSync(path.join(web, 'vendor/modules.js'), source);
