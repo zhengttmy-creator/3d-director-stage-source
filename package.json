@@ -27,7 +27,7 @@
     "test:curve-easing": "node tests/curve-easing.test.mjs",
     "test:bones": "node tests/skeletal-keyframes.test.mjs && node tests/skeletal-editor-sync.test.mjs && node tests/skeletal-editor-drag.test.mjs && node tests/skeletal-playback.test.mjs",
     "test:continuation": "node tests/pose-continuation-alignment.test.mjs && node tests/pose-continuation-editing.test.mjs",
-    "test:camera-cuts": "node tests/camera-cut-sequencer.test.mjs && node tests/shot-delete-shortcuts.test.mjs && node tests/shot-timing-ui.test.mjs && node tests/camera-track-export.test.mjs",
+    "test:camera-cuts": "node tests/camera-cut-sequencer.test.mjs && node tests/shot-delete-shortcuts.test.mjs && node tests/shot-timing-ui.test.mjs && node tests/camera-track-export.test.mjs && node tests/camera-row-sequencer.test.mjs && node tests/camera-layer-priority.test.mjs",
     "test:empty-cameras": "node tests/empty-cameras.test.mjs && node tests/empty-scene-startup.test.mjs && node tests/empty-camera-ui.test.mjs",
     "build:extension": "node scripts/build-extension.mjs",
     "dist:extension": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-extension.ps1",

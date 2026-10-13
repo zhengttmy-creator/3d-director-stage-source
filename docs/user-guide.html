@@ -145,11 +145,11 @@
             <tr><td><kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd><br><kbd>Q</kbd> / <kbd>E</kbd></td><td>移动当前视角；Q 向下、E 向上，按住 Shift 加速。在机位视角中会改变该机位，在导演视角中只改变观察位置。</td></tr>
             <tr><td><kbd>I</kbd> <kbd>K</kbd> / <kbd>J</kbd> <kbd>L</kbd></td><td>调整当前视角的俯仰 / 左右朝向。</td></tr>
             <tr><td><kbd>Space</kbd></td><td>动态时间轴播放 / 暂停。输入框或按钮有焦点时可能被该控件接收，请先点时间轴空白处。</td></tr>
-            <tr><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td><td>删除选中的对象、动作片段或关键帧。选中底部镜头块时会删除该相机及引用它的镜头段，详见第 11 节。</td></tr>
+            <tr><td><kbd>Delete</kbd> / <kbd>Backspace</kbd></td><td>删除选中的对象、动作片段或关键帧。选中相机行中的镜头块时会删除该相机及引用它的镜头段，详见第 11 节。</td></tr>
             <tr><td><kbd>Ctrl</kbd> + <kbd>Z</kbd><br><kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Z</kbd></td><td>撤销 / 重做场景与时间轴编辑。背景库的素材删除使用面板中的“撤销删除”。</td></tr>
             <tr><td><kbd>Ctrl</kbd> + <kbd>S</kbd><br><kbd>F1</kbd></td><td>桌面版保存项目 / 打开使用教程。</td></tr>
             <tr><td><kbd>Ctrl</kbd> + <kbd>C</kbd> / <kbd>V</kbd></td><td>复制 / 粘贴选中的对象或时间轴内容；时间轴中 <kbd>Ctrl</kbd> + <kbd>D</kbd> 可复制所选内容。</td></tr>
-            <tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>时间轴获得焦点时移动播放头 1 帧；按住 <kbd>Shift</kbd> 为 10 帧，按住 <kbd>Alt</kbd> 为 1 秒。</td></tr>
+            <tr><td><kbd>←</kbd> / <kbd>→</kbd></td><td>时间轴获得焦点时移动播放头 1 帧；按住 <kbd>Shift</kbd> 为 10 帧，按住 <kbd>Alt</kbd> 为 1 秒。焦点在相机镜头块上时，左右键微调该片段 1 帧，Shift 为 10 帧。</td></tr>
             <tr><td><kbd>Home</kbd> / <kbd>End</kbd><br><kbd>Ctrl</kbd> + <kbd>←</kbd> / <kbd>→</kbd></td><td>时间轴定位首尾 / 前后编辑点。</td></tr>
             <tr><td><kbd>↑</kbd> <kbd>↓</kbd> <kbd>←</kbd> <kbd>→</kbd><br><kbd>G</kbd></td><td>场景编辑中微移选中对象 X/Z 位置：默认 0.1 米，Shift 为 1 米，Ctrl 为 0.01 米；G 落到地面。机位预览模式中对象方向键操作不生效。</td></tr>
             <tr><td><kbd>Esc</kbd></td><td>关闭当前浮层、取消当前操作；可退出机位预览。时间轴中先清除选择，再按可回到场景操作。</td></tr>
@@ -260,15 +260,16 @@
 
         <section id="cuts">
           <h2><span class="number">11</span>多镜头剪辑</h2>
-          <p>底部<strong>“镜头剪辑”</strong>轨道决定成片在什么时间使用哪台相机。相机自身的位置关键帧决定运镜；镜头块决定切换时段。</p>
+          <p>时间轴中<strong>每台相机各占一行</strong>，拍摄片段直接显示在对应的相机根行。不同相机片段可以重叠，按<strong>上方轨道优先</strong>的规则播放：上面的启用片段覆盖下面的；上方片段结束或停用后，继续播放下方仍有效的镜头。下层使用当前全局时间，不会从头重播。展开相机行后，可编辑位置、注视点、视野等运镜关键帧。名称旁的时长是该机位启用片段的安排时长合计，包含被上层覆盖的部分；停用片段不计入，未添加片段时显示 0.00s。</p>
           <ol>
-            <li>在镜头剪辑轨道的空白处右键，或点击行标题旁的 <strong>“+”</strong>。</li>
-            <li>选择已有相机，填写“开始（秒）”“拍摄时长（秒）”，点击<strong>“添加拍摄片段”</strong>；也可点<strong>“新建相机”</strong>从当前导演视角建立机位并添加镜头块。连续点“+”会从播放头向后寻找空闲时段。</li>
-            <li>拖动镜头块移动整段，拖动左右边缘修改开始或结束时间。镜头之间不能重叠，每段至少一帧，总范围不超过 30 秒。</li>
-            <li>单击镜头块，在轨道下方直接修改<strong>“开始”“拍摄时长”</strong>，点击<strong>“应用”</strong>。点击<strong>“追加镜头”</strong>继续安排下一段；双击或右键镜头块可更换相机或调整启用状态。</li>
-            <li>点击行标题旁<strong>“预览”</strong>，主画面进入镜头轨道视角，再按空格或播放按钮检查切镜头；底部视角菜单也可选择<strong>“镜头轨道”</strong>。</li>
+            <li>在对应相机行点击<strong>“+ 添加拍摄片段”</strong>，或在行标题“+”菜单选择<strong>“添加拍摄片段”</strong>。也可右键该行空白处，以点击的时间为开始位置。</li>
+            <li>确认相机，填写“开始（秒）”“拍摄时长（秒）”，点击<strong>“添加拍摄片段”</strong>。底部“镜头剪辑”工具栏可添加其他机位的片段，或点<strong>“新建相机”</strong>从当前导演视角建立机位；“添加片段”从播放头向后寻找该相机行内的空闲时段，不会被其他相机行占用。</li>
+            <li>拖动镜头块移动整段，拖动左右边缘修改开始或结束时间。不同相机行之间允许重叠，同一相机行内不可重叠；每段至少一帧，总范围不超过 30 秒。</li>
+            <li>单击某台相机行中的片段，在底部设置栏修改<strong>“开始”“拍摄时长”</strong>，有效数值即时生效；无效范围会显示提示并保留原片段。点击<strong>“追加镜头”</strong>继续安排下一段；双击或右键片段可更换相机或调整启用状态。更换相机后，片段会移到相应行。</li>
+            <li>点击底部“镜头剪辑”工具栏的<strong>“预览”</strong>，主画面进入镜头轨道视角，再按空格或播放按钮检查切镜头；底部视角菜单也可选择<strong>“镜头轨道”</strong>。</li>
           </ol>
           <div class="table-wrap"><table><thead><tr><th>操作</th><th>结果</th></tr></thead><tbody>
+            <tr><td>聚焦镜头块后按 <kbd>←</kbd> / <kbd>→</kbd></td><td>移动该片段 1 帧；按住 <kbd>Shift</kbd> 移动 10 帧，播放头保持不变。</td></tr>
             <tr><td>取消镜头块上的复选框</td><td>暂时禁用该段镜头，保留相机和片段。</td></tr>
             <tr><td>镜头设置中的“删除镜头”</td><td>仅移除这一段剪辑，保留相机。</td></tr>
             <tr><td>镜头块垃圾桶 / “删除相机”</td><td>删除对应相机，同时清理引用该相机的镜头段。</td></tr>
@@ -358,7 +359,7 @@
         </section>
       </main>
     </div>
-    <footer>绮绘预演台V1.0 · 本地使用教程 · 2026-10-09</footer>
+    <footer>绮绘预演台V1.0 · 本地使用教程 · 2026-10-10</footer>
   </div>
 </body>
 </html>

@@ -100,6 +100,29 @@ assert.equal(disabledTail.durationSec, 5);
 assert.equal(disabledTail.shotCount, 2);
 assert.deepEqual(plain(disabledTail.cameraCutTrack.clips.map(clip => clip.id)), ['first', 'second']);
 
+// Different camera rows may overlap. A short upper layer does not shorten or
+// split the authored lower clip, and export duration follows the latest end.
+const layeredClips = [shot('lower-bed', second.id, 0, 180), shot('upper-cut', first.id, 30, 60),
+  shot('lowest-cut', third.id, 90, 120)];
+const layered = plan(layeredClips);
+assert.equal(layered.exportReady, true, 'Nested coverage is continuous even after a shorter clip ends');
+assert.equal(layered.durationSec, 6);
+assert.equal(layered.endFrame, 180, 'The last chronological start need not have the latest end');
+assert.equal(layered.cameraId, second.id, 'Initial render camera is the active layer at frame zero');
+assert.deepEqual(plain(layered.cameraCutTrack.clips.map(clip => [clip.id, clip.startFrame, clip.endFrame])),
+  layeredClips.map(clip => [clip.id, clip.startFrame, clip.endFrame]), 'Planning preserves all overlapping source clips');
+const fullyCovered = plan([shot('underneath', second.id, 0, 60), shot('cover', first.id, 0, 120)]);
+assert.equal(fullyCovered.exportReady, true);
+assert.equal(fullyCovered.cameraId, first.id, 'Same-time cuts use document row order, not clip input order');
+assert.equal(fullyCovered.shotCount, 2, 'Covered clips remain authored and become available when upper layers change');
+const reversedRows = {...clone(document), cameras: [clone(second), clone(first), clone(third)]};
+const lowerNowAbove = plan(layeredClips, {document: reversedRows});
+assert.equal(lowerNowAbove.exportReady, true);
+assert.equal(lowerNowAbove.durationSec, 6);
+const disabledUpper = plan([shot('disabled-upper', first.id, 0, 300, false), shot('enabled-lower', second.id, 0, 90)]);
+assert.equal(disabledUpper.cameraId, second.id);
+assert.equal(disabledUpper.durationSec, 3, 'A disabled highest row neither wins nor extends export');
+
 const empty = plan([]);
 assert.equal(empty.exportReady, false);
 assert.equal(empty.durationSec, 0);
@@ -119,6 +142,11 @@ assert.match(middleGap.exportError, /1–2 秒/);
 const disabledMiddle = plan([shot('a', first.id, 0, 30), shot('off', second.id, 30, 60, false), shot('b', first.id, 60, 90)]);
 assert.equal(disabledMiddle.exportReady, false, 'Disabled clips do not cover a render gap');
 assert.deepEqual(plain(disabledMiddle.gap), {startFrame: 30, endFrame: 60});
+const nestedGap = plan([shot('lower-cover', second.id, 0, 120), shot('nested', first.id, 30, 60),
+  shot('after-gap', third.id, 150, 180)]);
+assert.equal(nestedGap.exportReady, false);
+assert.deepEqual(plain(nestedGap.gap), {startFrame: 120, endFrame: 150},
+  'Union coverage reports the real gap, not the covered region after a nested cut');
 assert.deepEqual(clips.map(clip => [clip.startFrame, clip.endFrame]), [[0, 60], [60, 150]], 'Planning never changes authored timing');
 
 const timeline = {keyframeModelVersion: 3, displayFps: 30, durationSec: 20, loop: true,
@@ -141,6 +169,33 @@ for (const activeId of [first.id, second.id, third.id]) {
       'Export changes at exact shot boundaries and never falls back at the exclusive end');
   }
 }
+for (const activeId of [first.id, second.id, third.id]) {
+  const evaluator = createEvaluator(activeId, layered);
+  for (const [frame, id] of [[0, second.id], [29, second.id], [30, first.id], [59, first.id],
+    [60, second.id], [90, second.id], [120, second.id], [179, second.id]]) {
+    assert.equal(context.__localSampleCameraTrackExportFrame(evaluator, layered, frame / 30).activeCameraId, id,
+      'Export uses the highest active camera row and resumes the lower row at the upper end');
+  }
+}
+const reorderedEvaluator = context.lB({sceneCamera: lowerNowAbove.sceneCamera, sceneObjects: [], timeline,
+  savedMotions: [], catalogMotions: [], multiCamera: reversedRows,
+  cameraCutTrack: lowerNowAbove.cameraCutTrack, activeCameraId: third.id});
+assert.equal(context.__localSampleCameraTrackExportFrame(reorderedEvaluator, lowerNowAbove, 1.5).activeCameraId, second.id,
+  'Camera document order, rather than clip start order, controls visible export layers');
+const animatedDocument = clone(document);
+animatedDocument.cameras[1].tracks['position.x'] = [
+  {id: 'moving-start', frame: 0, value: 0, interpolation: 'linear', createdAt: '2026-10-13'},
+  {id: 'moving-end', frame: 180, value: 180, interpolation: 'linear', createdAt: '2026-10-13'},
+];
+const animatedPlan = plan(layeredClips, {document: animatedDocument});
+const animatedEvaluator = context.lB({sceneCamera: animatedPlan.sceneCamera, sceneObjects: [], timeline,
+  savedMotions: [], catalogMotions: [], multiCamera: animatedDocument,
+  cameraCutTrack: animatedPlan.cameraCutTrack, activeCameraId: third.id});
+const resumed = context.__localSampleCameraTrackExportFrame(animatedEvaluator, animatedPlan, 2);
+assert.equal(resumed.activeCameraId, second.id);
+assert.equal(resumed.sceneCamera.position.x, 60, 'Resumed lower camera samples global frame 60 instead of restarting its motion');
+const disabledUpperEvaluator = createEvaluator(first.id, disabledUpper);
+assert.equal(context.__localSampleCameraTrackExportFrame(disabledUpperEvaluator, disabledUpper, 1).activeCameraId, second.id);
 assert.throws(() => context.__localSampleCameraTrackExportFrame(createEvaluator(third.id), middleGap, 1.5), /1–2 秒/);
 assert.throws(() => context.__localSampleCameraTrackExportFrame(createEvaluator(third.id), empty, 0), /添加并启用/);
 const decodedTimeline = context.iE(JSON.parse(JSON.stringify(timeline)), [], camera);
@@ -240,4 +295,4 @@ chooseTrack.props.onSelect();
 assert.deepEqual(chosen, ['storyboard']);
 assert.match(source, /\(my,\{open:ab,mode:av,cameras:oJ,selectedCameraId:oK,/,
   'The main viewport uses the resolved preview source instead of an unrelated selected camera');
-console.log('Camera track export passed: exact authored duration, strict gap/empty/disabled validation, multiple-camera boundaries, manual-view independence, persistence, real render callback and fixed track source UI.');
+console.log('Camera track export passed: layered row priority, nested/covered clips, maximum authored end, union coverage, disabled layers, global-time resumption, manual-view independence, persistence, real render callback and fixed track source UI.');

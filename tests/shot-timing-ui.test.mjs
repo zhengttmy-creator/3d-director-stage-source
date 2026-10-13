@@ -111,32 +111,113 @@ assert.ok(elements(clicked.ui.tree).some(node => node.type === context.__LocalSh
 const endTrim = gesture('end', 30);
 assert.equal(endTrim.changes.length, 1);
 assert.deepEqual(endTrim.changes[0].clips.map(clip => [clip.startFrame, clip.endFrame]), [[0, 90], [120, 180]]);
-assert.equal(gesture('end', 200).changes[0].clips[0].endFrame, 120, 'End stops at the next shot');
+assert.equal(gesture('end', 200).changes[0].clips[0].endFrame, 260, 'End can overlap shots on other camera rows');
 assert.equal(gesture('start', 80).changes[0].clips[0].startFrame, 59, 'A trim retains one frame');
 assert.deepEqual(gesture('move', 30).changes[0].clips.map(clip => [clip.startFrame, clip.endFrame]), [[30, 90], [120, 180]]);
 for (const cancel of ['blur', 'pointercancel', 'keydown']) assert.equal(gesture('end', 30, cancel).changes.length, 0);
 
-// Numeric edits operate on the selected shot alone, with actual input/button handlers.
-const changes = [];
-const editor = component('__LocalShotTimingEditor', {clip: clips[0], track: {clips}, cameras, fps: 30, maximumFrame: 900,
-  editable: true, onChange: value => changes.push(plain(value)), onAppend() {}, onClose() {}});
-editor.input('片段开始时间', '0.5'); editor.input('片段拍摄时长', '2.5');
-button(editor.tree, '应用').props.onClick(); editor.render();
-assert.deepEqual(changes[0].clips.map(clip => [clip.startFrame, clip.endFrame]), [[15, 90], [120, 180]]);
-assert.deepEqual(changes[0].clips[1], clips[1]);
-for (const [start, duration, label] of [['', '1', 'empty'], ['-0.0001', '1', 'small negative'], ['NaN', '1', 'not numeric'],
-  ['0', '0', 'zero'], ['0', '-1', 'negative duration'], ['29', '2', 'past 30s'], ['0', '5', 'overlap']]) {
-  editor.input('片段开始时间', start); editor.input('片段拍摄时长', duration);
-  button(editor.tree, '应用').props.onClick(); editor.render();
-  assert.equal(changes.length, 1, label + ' cannot commit');
-  assert.ok(find(editor.tree, 'role', 'alert'), label + ' explains the rejected range');
+// Numeric edits commit immediately. Feed committed props back through real hook
+// effects so typing drafts are checked across the parent/child update boundary.
+function liveEditorFixture() {
+  const slots = [], changes = [];
+  let tree, version = 0;
+  const props = {clip: clips[0], track: {clips}, cameras, fps: 30, maximumFrame: 900,
+    editable: true, onAppend() {}, onClose() {}, onChange(value) {
+      const next = plain(value); changes.push(next);
+      props.track = next; props.clip = next.clips.find(clip => clip.id === props.clip.id);
+    }};
+  const equalDeps = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((value, index) => Object.is(value, b[index]));
+  const render = updates => {
+    Object.assign(props, updates);
+    for (let pass = 0; pass < 8; pass++) {
+      let cursor = 0;
+      const effects = [];
+      const effect = (callback, deps) => {
+        const index = cursor++;
+        if (!slots[index] || !equalDeps(slots[index].deps, deps)) effects.push(() => {
+          slots[index]?.cleanup?.(); slots[index] = {deps, cleanup: callback()};
+        });
+      };
+      context.n = {useEffect: effect, useLayoutEffect: effect,
+        useState(initial) {
+          const index = cursor++;
+          if (!slots[index]) slots[index] = {value: typeof initial === 'function' ? initial() : initial};
+          return [slots[index].value, update => {
+            const next = typeof update === 'function' ? update(slots[index].value) : update;
+            if (!Object.is(next, slots[index].value)) {slots[index].value = next; version++;}
+          }];
+        },
+        useRef(initial) {
+          const index = cursor++;
+          return slots[index] ?? (slots[index] = {current: initial});
+        }};
+      tree = context.__LocalShotTimingEditor(props);
+      const before = version; effects.forEach(callback => callback());
+      if (version === before) return tree;
+    }
+    assert.fail('Live timing editor did not settle');
+  };
+  render();
+  return {props, changes, render, get tree() {return tree;},
+    input(label, value) {find(tree, 'aria-label', label).props.onChange({target: {value}}); return render();},
+    blur(label) {find(tree, 'aria-label', label).props.onBlur(event()); return render();}};
 }
-editor.input('片段开始时间', '0.033333'); editor.input('片段拍摄时长', '1.016');
-editor.tree.props.onKeyDown(event({key: 'Enter', target: {tagName: 'INPUT'}})); editor.render();
-assert.equal(changes[1].clips[0].startFrame, 1); assert.equal(changes[1].clips[0].endFrame, 31);
+const editor = liveEditorFixture();
+assert.equal(button(editor.tree, '应用'), undefined, 'The bottom timing bar has no Apply button');
+editor.input('片段开始时间', '0.5');
+assert.deepEqual(editor.changes[0].clips.map(clip => [clip.startFrame, clip.endFrame]), [[15, 75], [120, 180]], 'A valid start edit is visible without another action');
+editor.input('片段拍摄时长', '2.5');
+assert.equal(editor.changes.length, 2);
+assert.deepEqual(editor.changes.at(-1).clips.map(clip => [clip.startFrame, clip.endFrame]), [[15, 90], [120, 180]]);
+assert.deepEqual(editor.changes.at(-1).clips[1], clips[1]);
+for (const [field, value, label] of [['片段开始时间', '', 'empty'], ['片段开始时间', '-0.0001', 'small negative'],
+  ['片段开始时间', 'NaN', 'not numeric'], ['片段拍摄时长', '0', 'zero'], ['片段拍摄时长', '-1', 'negative duration'],
+  ['片段开始时间', '29', 'past 30s']]) {
+  const invalid = liveEditorFixture();
+  invalid.input(field, value);
+  assert.equal(invalid.changes.length, 0, label + ' cannot commit');
+  assert.deepEqual(invalid.props.track.clips, clips, label + ' preserves the last valid timeline');
+  assert.ok(find(invalid.tree, 'role', 'alert'), label + ' explains the rejected range');
+  invalid.blur(field);
+  assert.equal(invalid.changes.length, 0, label + ' cannot commit on blur either');
+}
+const decimal = liveEditorFixture();
+for (const raw of ['0.', '0.6', '0.66', '0.666']) {
+  decimal.input('片段开始时间', raw);
+  assert.equal(find(decimal.tree, 'aria-label', '片段开始时间').props.value, raw,
+    'Own-commit prop synchronization preserves the decimal draft ' + raw);
+}
+assert.equal(decimal.props.clip.startFrame, 20);
+assert.equal(decimal.changes.length, 2, 'Unchanged frame-rounded values do not create duplicate commits');
+decimal.blur('片段开始时间');
+assert.equal(find(decimal.tree, 'aria-label', '片段开始时间').props.value, '0.666667', 'Blur formats to the authored frame');
+assert.equal(decimal.changes.length, 2);
+decimal.input('片段拍摄时长', '1.016');
+assert.equal(find(decimal.tree, 'aria-label', '片段拍摄时长').props.value, '1.016');
+assert.equal(decimal.props.clip.endFrame, 50);
+decimal.tree.props.onKeyDown(event({key: 'Enter', target: {tagName: 'INPUT'}})); decimal.render();
+assert.equal(find(decimal.tree, 'aria-label', '片段拍摄时长').props.value, '1', 'Enter formats a valid draft');
+assert.equal(decimal.changes.length, 3, 'Formatting does not commit unchanged timing again');
+decimal.input('片段拍摄时长', '40');
+assert.equal(decimal.changes.length, 3);
+assert.ok(find(decimal.tree, 'role', 'alert'));
+const externalTrack = {clips: [shot('a', 'camera-a', 90, 120), clips[1]]};
+decimal.render({track: externalTrack, clip: externalTrack.clips[0]});
+assert.equal(find(decimal.tree, 'aria-label', '片段开始时间').props.value, '3');
+assert.equal(find(decimal.tree, 'aria-label', '片段拍摄时长').props.value, '1');
+assert.equal(find(decimal.tree, 'role', 'alert'), undefined, 'External drag or history updates reset a stale invalid draft');
 editor.render({editable: false});
 assert.equal(find(editor.tree, 'aria-label', '片段拍摄时长').props.disabled, true);
-button(editor.tree, '应用').props.onClick(); assert.equal(changes.length, 2);
+editor.input('片段拍摄时长', '1'); editor.blur('片段拍摄时长');
+assert.equal(editor.changes.length, 2, 'Read-only handler calls cannot change timing');
+editor.render({editable: true});
+editor.input('片段开始时间', '0'); editor.input('片段拍摄时长', '5');
+assert.equal(editor.changes.at(-1).clips[0].endFrame, 150, 'Numeric editing allows another camera row to cover the same interval');
+assert.deepEqual(editor.changes.at(-1).clips[1], clips[1], 'Cross-row overlap keeps the lower shot unchanged');
+assert.equal(context.__localShotTiming({clips: [...clips, shot('same-camera', 'camera-a', 100, 200)]}, 'a', '0', '5', 30, 900).ok, false,
+  'Two clips on the same row still cannot overlap');
+assert.equal(context.__localShotTiming({clips}, 'a', '0', '5', 30, 900, 'camera-b').ok, false,
+  'Changing a clip camera checks conflicts on its destination row');
 
 // The add/edit menu preserves camera identity, exact timing and enabled metadata.
 const inserted = [], changed = [], closed = [];
@@ -150,6 +231,35 @@ const editMenu = component('__LocalShotMenu', {menu: {clipId: 'a', frame: 0, x: 
   fps: 30, maximumFrame: 900, onInsert() {}, onChange: value => changed.push(plain(value)), onClose() {}});
 editMenu.input('镜头时长', '3'); button(editMenu.tree, '应用').props.onClick();
 assert.equal(changed[0].clips[0].endFrame, 90); assert.deepEqual(changed[0].clips[1], clips[1]);
+
+// Empty-camera creation explains the next action and retains frame precision in compact seconds.
+const emptyRequests = [], emptyClosed = [];
+let insertionResult = {ok: false, reason: '请先完成或取消骨骼／姿势编辑，再添加镜头'};
+const emptyMenu = component('__LocalShotMenu', {menu: {frame: 20, x: 300, y: 700},
+  track: {clips: []}, cameras: [], fps: 30, maximumFrame: 900,
+  onInsert: request => {emptyRequests.push(plain(request)); return insertionResult;},
+  onClose: () => emptyClosed.push(true)});
+assert.equal(find(emptyMenu.tree, 'aria-label', '镜头开始时间').props.value, '0.666667');
+const emptySelect = find(emptyMenu.tree, 'aria-label', '镜头相机');
+assert.equal(emptySelect.props.disabled, true);
+assert.match(text(emptySelect), /暂无相机.*新建相机/);
+assert.equal(button(emptyMenu.tree, '添加拍摄片段').props.disabled, true);
+button(emptyMenu.tree, '新建相机').props.onClick(); emptyMenu.render();
+assert.deepEqual(emptyRequests[0], {cameraId: '', startFrame: 20, durationFrames: 60, newCamera: true});
+assert.equal(text(find(emptyMenu.tree, 'role', 'alert')), insertionResult.reason, 'Workspace failure is shown persistently inside the menu');
+assert.equal(emptyClosed.length, 0, 'Rejected insertion keeps the timing fields available');
+insertionResult = true;
+button(emptyMenu.tree, '新建相机').props.onClick();
+assert.equal(emptyClosed.length, 1, 'Successful retry closes the menu');
+for (const fps of [24, 25, 30, 60, 120]) {
+  const requests = [];
+  const lastFrameMenu = component('__LocalShotMenu', {menu: {frame: fps * 30 - 1, durationFrames: 1, x: 0, y: 700},
+    track: {clips: []}, cameras: [], fps, maximumFrame: fps * 30, onClose() {},
+    onInsert: request => requests.push(plain(request))});
+  button(lastFrameMenu.tree, '新建相机').props.onClick();
+  assert.equal(requests[0].startFrame, fps * 30 - 1, 'Compact seconds preserve the final frame at ' + fps + ' FPS');
+  assert.equal(requests[0].durationFrames, 1);
+}
 // Keyboard entry lands inside the menu, tabs cycle and closing restores its trigger.
 const focusEvents = [];
 const trigger = {isConnected: true, focus: () => {context.document.activeElement = trigger; focusEvents.push('trigger');}};

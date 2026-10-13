@@ -1,7 +1,7 @@
 function __localNormalizeShots(clips, cameraIds) {
   const allowed = cameraIds ? new Set(cameraIds) : null;
   const seen = new Set();
-  let end = 0;
+  const ends = new Map();
   const normalized = [];
   const valid = (Array.isArray(clips) ? clips : []).filter(clip => clip &&
     typeof clip.id === 'string' && clip.id && typeof clip.cameraId === 'string' && clip.cameraId &&
@@ -10,17 +10,28 @@ function __localNormalizeShots(clips, cameraIds) {
   for (const clip of valid.sort(rK)) {
     if (seen.has(clip.id) || (allowed && !allowed.has(clip.cameraId))) continue;
     seen.add(clip.id);
-    const startFrame = Math.max(end, clip.startFrame);
+    const startFrame = Math.max(ends.get(clip.cameraId) ?? 0, clip.startFrame);
     if (clip.endFrame <= startFrame) continue;
     const value = {...rW(clip), startFrame};
     normalized.push(value);
-    end = value.endFrame;
+    ends.set(clip.cameraId, value.endFrame);
   }
   return {version: 1, clips: normalized};
 }
 
+function __localActiveLayerShot(track, cameraIds, frame) {
+  for (const cameraId of cameraIds) {
+    const clip = track.clips.find(value => value.cameraId === cameraId && value.enabled !== false &&
+      frame >= value.startFrame && frame < value.endFrame);
+    if (clip) return clip;
+  }
+  return null;
+}
+
 function __localShotBounds(track, clipId, maximumFrame) {
-  const clips = rO(track).clips;
+  const normalized = rO(track).clips;
+  const cameraId = normalized.find(clip => clip.id === clipId)?.cameraId;
+  const clips = normalized.filter(clip => clip.cameraId === cameraId);
   const index = clips.findIndex(clip => clip.id === clipId);
   if (index < 0) return null;
   return {clip: clips[index], minimum: clips[index - 1]?.endFrame ?? 0,
@@ -51,10 +62,11 @@ function __localEditShot(track, clipId, change, maximumFrame = 3600) {
 
 function __localInsertShot(track, request, maximumFrame) {
   const normalized = rO(track);
+  const rowClips = normalized.clips.filter(clip => clip.cameraId === request.cameraId);
   const startFrame = Math.max(0, Math.round(request.startFrame));
   if (!Number.isFinite(startFrame) || startFrame >= maximumFrame ||
-      normalized.clips.some(clip => startFrame >= clip.startFrame && startFrame < clip.endFrame)) return null;
-  const nextFrame = normalized.clips.find(clip => clip.startFrame > startFrame)?.startFrame ?? maximumFrame;
+      rowClips.some(clip => startFrame >= clip.startFrame && startFrame < clip.endFrame)) return null;
+  const nextFrame = rowClips.find(clip => clip.startFrame > startFrame)?.startFrame ?? maximumFrame;
   const endFrame = Math.min(maximumFrame, nextFrame, startFrame + Math.max(1, Math.round(request.durationFrames)));
   if (!request.cameraId || !request.id || !request.createdAt || !Number.isFinite(endFrame) || endFrame <= startFrame) return null;
   return rO({clips: [...normalized.clips, {id: request.id, cameraId: request.cameraId,
@@ -67,7 +79,7 @@ function __localInsertShotInState(state, request, currentView) {
   const cameraId = request.newCamera ? request.newCameraId : request.cameraId;
   const track = __localInsertShot(state.timeline.cameraCutTrack,
     {...request, cameraId, durationFrames: request.durationFrames ?? 2 * fps}, 30 * fps);
-  if (!track) return {ok: false, reason: '该时间已被镜头占用，或已到达 30 秒上限'};
+  if (!track) return {ok: false, reason: '该相机的此时段已被占用，或已到达 30 秒上限'};
   if (request.newCamera) {
     const names = new Set(document.cameras.map(camera => camera.name));
     let number = document.cameras.length + 1;
@@ -83,18 +95,18 @@ function __localInsertShotInState(state, request, currentView) {
     durationSec: Math.max(state.timeline.durationSec, rU(track) / fps), cameraCutTrack: track}}};
 }
 
-function __localNextShotGap(track, preferredFrame, maximumFrame) {
+function __localNextShotGap(track, preferredFrame, maximumFrame, cameraId) {
   let startFrame = Math.max(0, Math.round(Number(preferredFrame) || 0));
-  for (const clip of rO(track).clips) {
+  for (const clip of rO(track).clips.filter(clip => cameraId === undefined || clip.cameraId === cameraId)) {
     if (startFrame >= maximumFrame) return null;
     if (clip.endFrame <= startFrame) continue;
     if (clip.startFrame > startFrame) return {startFrame, endFrame: Math.min(clip.startFrame, maximumFrame)};
-    startFrame = clip.endFrame;
+    startFrame = Math.max(startFrame, clip.endFrame);
   }
   return startFrame < maximumFrame ? {startFrame, endFrame: maximumFrame} : null;
 }
 
-function __localShotTiming(track, clipId, startValue, durationValue, fps, maximumFrame) {
+function __localShotTiming(track, clipId, startValue, durationValue, fps, maximumFrame, cameraId) {
   if (String(startValue).trim() === '' || String(durationValue).trim() === '')
     return {ok: false, reason: '请输入开始时间和拍摄时长'};
   const startSeconds = Number(startValue), durationSeconds = Number(durationValue);
@@ -105,9 +117,11 @@ function __localShotTiming(track, clipId, startValue, durationValue, fps, maximu
   if (!Number.isFinite(startFrame) || !Number.isFinite(durationFrames) || startFrame < 0 ||
       durationFrames < 1 || startFrame + durationFrames > maximumFrame)
     return {ok: false, reason: '拍摄范围需在 0 至 30 秒内，至少保留一帧'};
-  const remaining = rO(track).clips.filter(clip => clip.id !== clipId);
+  const clips = rO(track).clips;
+  const rowCameraId = cameraId ?? clips.find(clip => clip.id === clipId)?.cameraId;
+  const remaining = clips.filter(clip => clip.id !== clipId && clip.cameraId === rowCameraId);
   if (remaining.some(clip => startFrame < clip.endFrame && startFrame + durationFrames > clip.startFrame))
-    return {ok: false, reason: '该拍摄时段与其他镜头重叠，请缩短时长或调整开始时间'};
+    return {ok: false, reason: '该拍摄时段与同一相机的其他片段重叠，请调整开始时间或时长'};
   return {ok: true, startFrame, endFrame: startFrame + durationFrames, durationFrames};
 }
 
@@ -116,43 +130,58 @@ function __LocalShotTimingEditor({clip, track, cameras, fps, maximumFrame, edita
   const [start, setStart] = n.useState(seconds(clip.startFrame));
   const [duration, setDuration] = n.useState(seconds(clip.endFrame - clip.startFrame));
   const [error, setError] = n.useState('');
-  n.useEffect(() => {setStart(seconds(clip.startFrame)); setDuration(seconds(clip.endFrame - clip.startFrame)); setError('');},
+  const pendingCommit = n.useRef(null);
+  const timingKey = (startFrame, endFrame) => [clip.id, fps, startFrame, endFrame].join(':');
+  n.useEffect(() => {
+    const ownEdit = pendingCommit.current === timingKey(clip.startFrame, clip.endFrame);
+    pendingCommit.current = null;
+    if (ownEdit) return;
+    setStart(seconds(clip.startFrame)); setDuration(seconds(clip.endFrame - clip.startFrame)); setError('');
+  },
     [clip.id, clip.startFrame, clip.endFrame, fps]);
   const camera = cameras.find(value => value.id === clip.cameraId);
-  const apply = () => {
+  const apply = (nextStart = start, nextDuration = duration, format = false) => {
     if (!editable) return;
-    const timing = __localShotTiming(track, clip.id, start, duration, fps, maximumFrame);
+    const timing = __localShotTiming(track, clip.id, nextStart, nextDuration, fps, maximumFrame);
     if (!timing.ok) {setError(timing.reason); return;}
-    onChange(rO({clips: track.clips.map(value => value.id === clip.id ?
-      {...value, startFrame: timing.startFrame, endFrame: timing.endFrame} : value)}));
-    setStart(seconds(timing.startFrame)); setDuration(seconds(timing.durationFrames)); setError('');
+    if (timing.startFrame !== clip.startFrame || timing.endFrame !== clip.endFrame) {
+      pendingCommit.current = timingKey(timing.startFrame, timing.endFrame);
+      onChange(rO({clips: track.clips.map(value => value.id === clip.id ?
+        {...value, startFrame: timing.startFrame, endFrame: timing.endFrame} : value)}));
+    }
+    if (format) {setStart(seconds(timing.startFrame)); setDuration(seconds(timing.durationFrames));}
+    setError('');
   };
   const input = {width: 76, minWidth: 0, padding: '4px 6px', border: '1px solid #343434', borderRadius: 4, background: '#0a0a0a', color: '#f5f5f5'};
   const button = {padding: '4px 8px', border: '1px solid #343434', borderRadius: 4, color: '#f5f5f5', background: 'transparent', cursor: 'pointer'};
   return i.jsxs('div', {'data-testid': 'director-stage-shot-timing-editor',
     onPointerDown: event => event.stopPropagation(), onKeyDown: event => {
       event.stopPropagation();
-      if (event.key === 'Enter' && event.target.tagName === 'INPUT') {event.preventDefault(); apply();}
+      if (event.key === 'Enter' && event.target.tagName === 'INPUT') {event.preventDefault(); apply(start, duration, true);}
     }, style: {gridColumn: '1 / -1', borderTop: '1px solid #242424', padding: '6px 10px', minWidth: 0, fontSize: 11, color: '#a3a3a3', overflowX: 'auto'},
     children: [i.jsxs('div', {style: {display: 'flex', alignItems: 'center', gap: 10, whiteSpace: 'nowrap'}, children: [
       i.jsx('strong', {style: {color: '#f5f5f5', maxWidth: 150, overflow: 'hidden', textOverflow: 'ellipsis'}, children: camera ? nC(camera) : '相机'}),
       i.jsxs('label', {children: ['开始 ', i.jsx('input', {type: 'number', min: 0, max: 30, step: 1 / fps, value: start,
-        'aria-label': '片段开始时间', disabled: !editable, style: input, onChange: event => {setStart(event.target.value); setError('');}}), ' 秒']}),
+        'aria-label': '片段开始时间', disabled: !editable, style: input,
+        onChange: event => {setStart(event.target.value); apply(event.target.value, duration);},
+        onBlur: () => apply(start, duration, true)}), ' 秒']}),
       i.jsxs('label', {children: ['拍摄时长 ', i.jsx('input', {type: 'number', min: 1 / fps, max: 30, step: 1 / fps, value: duration,
-        'aria-label': '片段拍摄时长', disabled: !editable, style: input, onChange: event => {setDuration(event.target.value); setError('');}}), ' 秒']}),
-      i.jsx('button', {type: 'button', disabled: !editable, onClick: apply, style: {...button, background: '#f5f5f5', color: '#000'}, children: '应用'}),
+        'aria-label': '片段拍摄时长', disabled: !editable, style: input,
+        onChange: event => {setDuration(event.target.value); apply(start, event.target.value);},
+        onBlur: () => apply(start, duration, true)}), ' 秒']}),
       i.jsx('span', {children: '结束 ' + seconds(clip.endFrame) + ' 秒'}),
       i.jsx('button', {type: 'button', disabled: !editable, onClick: onAppend, style: button, children: '追加镜头'}),
       i.jsx('button', {type: 'button', onClick: onClose, 'aria-label': '收起拍摄时长设置', style: {...button, marginLeft: 'auto'}, children: '收起'}),
     ]}), i.jsx('div', {role: error ? 'alert' : undefined, style: {marginTop: 5, color: error ? '#e59191' : '#a3a3a3'},
-      children: error || '拖动片段两端可调整拍摄时长；导出视频按镜头轨道依次切换相机。'})]});
+      children: error || '修改即时生效。不同相机可重叠；上方轨道优先，上方结束后继续下方镜头，预览与导出一致。'})]});
 }
 
 function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onChange, onInsert, onDeleteCamera}) {
   const clip = menu.clipId ? track.clips.find(value => value.id === menu.clipId) : null;
+  const seconds = value => String(Math.round(value / fps * 1000000) / 1000000);
   const [cameraId, setCameraId] = n.useState(clip?.cameraId ?? menu.cameraId ?? cameras[0]?.id ?? '');
-  const [start, setStart] = n.useState(String((clip?.startFrame ?? menu.frame) / fps));
-  const [duration, setDuration] = n.useState(String(clip ? (clip.endFrame - clip.startFrame) / fps : (menu.durationFrames ?? 2 * fps) / fps));
+  const [start, setStart] = n.useState(seconds(clip?.startFrame ?? menu.frame));
+  const [duration, setDuration] = n.useState(seconds(clip ? clip.endFrame - clip.startFrame : menu.durationFrames ?? 2 * fps));
   const [enabled, setEnabled] = n.useState(clip?.enabled !== false);
   const [error, setError] = n.useState('');
   const ref = n.useRef(null);
@@ -169,7 +198,7 @@ function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onCh
     };
   }, [onClose]);
   const submit = newCamera => {
-    const timing = __localShotTiming(track, clip?.id, start, duration, fps, maximumFrame);
+    const timing = __localShotTiming(track, clip?.id, start, duration, fps, maximumFrame, newCamera && !clip ? '' : cameraId);
     if (!timing.ok) {setError(timing.reason); return;}
     const {startFrame, durationFrames} = timing;
     if ((!newCamera || clip) && !cameras.some(camera => camera.id === cameraId)) {setError('请选择一台相机'); return;}
@@ -179,7 +208,9 @@ function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onCh
       onClose();
     } else {
       const result = onInsert?.({cameraId, startFrame, durationFrames, newCamera});
-      if (result === false) {setError('当前时间无法添加镜头'); return;}
+      if (!onInsert || result === false || result?.ok === false) {
+        setError(result?.reason || '暂时无法添加镜头，请关闭此窗口后重试'); return;
+      }
       onClose();
     }
   };
@@ -207,8 +238,10 @@ function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onCh
         i.jsx('button', {type: 'button', title: '关闭', 'aria-label': '关闭镜头设置', onClick: onClose,
           style: {...button, padding: 3}, children: i.jsx(oy.A, {size: 14})})]}),
       i.jsxs('label', {style: {display: 'grid', gap: 5}, children: ['相机', i.jsx('select', {
-        'aria-label': '镜头相机', value: cameraId, onChange: event => setCameraId(event.target.value), style: field,
-        children: cameras.map(camera => i.jsx('option', {value: camera.id, children: nC(camera)}, camera.id))})]}),
+        'aria-label': '镜头相机', value: cameraId, disabled: !cameras.length,
+        onChange: event => {setCameraId(event.target.value); setError('');}, style: field,
+        children: cameras.length ? cameras.map(camera => i.jsx('option', {value: camera.id, children: nC(camera)}, camera.id)) :
+          i.jsx('option', {value: '', children: '暂无相机，请点击下方「新建相机」'})})]}),
       i.jsxs('div', {style: {display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, marginTop: 10}, children: [
         i.jsxs('label', {style: {display: 'grid', gap: 5}, children: ['开始（秒）', i.jsx('input', {
           type: 'number', min: 0, max: 30, step: 1 / fps, value: start, 'aria-label': '镜头开始时间',
@@ -218,7 +251,7 @@ function __LocalShotMenu({menu, track, cameras, fps, maximumFrame, onClose, onCh
           onChange: event => {setDuration(event.target.value); setError('');}, style: field})]})]}),
       clip && i.jsxs('label', {style: {display: 'flex', alignItems: 'center', gap: 7, marginTop: 10}, children: [
         i.jsx('input', {type: 'checkbox', checked: enabled, onChange: event => setEnabled(event.target.checked)}), '启用镜头']}),
-      i.jsx('p', {style: {color: '#a3a3a3', marginTop: 10, lineHeight: 1.6}, children: '一个片段对应一台相机的拍摄时段，导出时按轨道顺序切换。'}),
+      i.jsx('p', {style: {color: '#a3a3a3', marginTop: 10, lineHeight: 1.6}, children: '不同相机的片段可以重叠，上方相机轨道优先；上方片段结束后，继续播放下方仍有效的镜头。'}),
       error && i.jsx('div', {role: 'alert', style: {color: '#ff9991', marginTop: 8}, children: error}),
       i.jsxs('div', {style: {display: 'flex', gap: 7, marginTop: 12}, children: [
         i.jsxs('button', {type: 'button', disabled: !cameraId, onClick: () => submit(false), style: {...button, flex: 1},

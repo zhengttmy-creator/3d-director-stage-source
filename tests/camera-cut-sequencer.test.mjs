@@ -10,6 +10,13 @@ require('../src/patches/camera-cut-sequencer.cjs')(factories);
 const source = factories['53401'];
 new vm.Script('(' + source + ')');
 const ast = require('@babel/parser').parse('(' + source + ')');
+let workspaceInsertSource;
+require('@babel/traverse').default(ast, {ObjectProperty(path) {
+  if (path.node.key.name !== 'onInsertStoryboardClip' || path.node.value.type !== 'ArrowFunctionExpression') return;
+  assert.equal(workspaceInsertSource, undefined, 'The production workspace has one shot insertion callback');
+  workspaceInsertSource = source.slice(path.node.value.start - 1, path.node.value.end - 1);
+}});
+assert.ok(workspaceInsertSource, 'The production workspace shot insertion callback is present');
 const axes = ['x', 'y', 'z'];
 const positions = axes.map(axis => 'position.' + axis);
 const targets = axes.map(axis => 'target.' + axis);
@@ -36,10 +43,12 @@ assert.deepEqual(plain(context.rO(raw, ['scene-camera']).clips.map(clip => clip.
 const edited = context.__localEditShot(track, 'b', {moveFrame: 110}, 900);
 assert.equal(edited.clips[1].startFrame, 110);
 assert.equal(edited.clips[1].endFrame, 170);
-assert.equal(context.__localEditShot(track, 'b', {moveFrame: 0}, 900).clips[1].startFrame, 90, 'Moves stop at preceding cut');
-assert.equal(context.__localEditShot(track, 'b', {moveFrame: 890}, 900).clips[1].endFrame, 270, 'Moves stop at next cut');
-assert.equal(context.__localEditShot(track, 'b', {endFrame: 400}, 900).clips[1].endFrame, 270, 'End trim cannot overlap next cut');
-assert.equal(context.__localEditShot(track, 'b', {startFrame: 0}, 900).clips[1].startFrame, 90, 'Start trim cannot overlap previous cut');
+const byId = (value, id) => value.clips.find(clip => clip.id === id);
+assert.equal(byId(context.__localEditShot(track, 'b', {moveFrame: 0}, 900), 'b').startFrame, 0, 'Moves can overlap other camera layers');
+assert.equal(byId(context.__localEditShot(track, 'b', {moveFrame: 890}, 900), 'b').endFrame, 900, 'Moves stop at the timeline limit');
+assert.equal(byId(context.__localEditShot(track, 'b', {endFrame: 400}, 900), 'b').endFrame, 400, 'End trim can cover another camera layer');
+assert.equal(byId(context.__localEditShot(track, 'b', {startFrame: 0}, 900), 'b').startFrame, 0, 'Start trim can overlap another camera layer');
+assert.equal(byId(context.__localEditShot(track, 'a', {endFrame: 400}, 900), 'a').endFrame, 270, 'Same-camera clips still constrain trimming');
 assert.equal(context.__localEditShot(track, 'b', {endFrame: 100}, 900).clips[1].endFrame, 151, 'At least one frame survives a trim');
 const disabled = context.__localEditShot(track, 'b', {enabled: false}, 900);
 assert.equal(disabled.clips[1].enabled, false);
@@ -49,7 +58,8 @@ const insertion = {id: 'new', cameraId: 'second', startFrame: 100, durationFrame
 const inserted = context.__localInsertShot(track, insertion, 900);
 assert.deepEqual(plain(inserted.clips.find(clip => clip.id === 'new')),
   {id: 'new', cameraId: 'second', startFrame: 100, endFrame: 150, createdAt}, 'Insertion trims into the available empty interval');
-assert.equal(context.__localInsertShot(track, {...insertion, startFrame: 30}, 900), null, 'Occupied intervals reject insertion');
+assert.equal(byId(context.__localInsertShot(track, {...insertion, startFrame: 30}, 900), 'new').startFrame, 30, 'Other camera layers do not block insertion');
+assert.equal(context.__localInsertShot(track, {...insertion, startFrame: 160}, 900), null, 'Same-camera occupied intervals reject insertion');
 assert.equal(context.__localInsertShot(track, {...insertion, startFrame: 900}, 900), null, 'Insertion respects the maximum duration');
 assert.equal(context.__localInsertShot(track, {...insertion, startFrame: 899}, 900).clips.at(-1).endFrame, 900);
 
@@ -97,7 +107,83 @@ assert.equal(created.ok, true);
 assert.equal(created.state.multiCamera.cameras.length, 3, 'New camera and cut are committed together');
 assert.equal(created.state.timeline.cameraCutTrack.clips.find(clip => clip.id === 'new').cameraId, 'new-camera');
 assert.equal(created.state.multiCamera.outputCameraId, state.multiCamera.outputCameraId, 'Creating a cut preserves the fallback output camera');
-assert.equal(context.__localInsertShotInState(state, {...insertion, newCamera: true, newCameraId: 'bad', startFrame: 30}, camera).ok, false);
+assert.equal(context.__localInsertShotInState(state, {...insertion, newCamera: true, newCameraId: 'bad', startFrame: 900}, camera).ok, false);
 assert.equal(state.multiCamera.cameras.length, 2, 'Rejected insertion does not leak a camera into the document');
 
-console.log('Camera cut sequencer: gaps, trimming, enabled state, import, FPS conversion, playback and atomic camera insertion passed.');
+// Exercise the actual UI callback, rather than only its pure insertion helper: the
+// target-picker guard previously rejected a valid "new camera" request here.
+vm.runInContext(`this.createWorkspaceInsert = function(bindings) {
+  const {C, rC, cO, ii, a2, iK, cQ, dN, sQ, nP, rr, re, iT} = bindings;
+  const __localInsertShotInState = bindings.insertShot;
+  return ${workspaceInsertSource};
+};`, context);
+function workspaceInsertion(overrides = {}) {
+  const events = [], notices = [], commits = [], views = [];
+  let currentState = structuredClone(state);
+  const callback = context.createWorkspaceInsert({
+    C: true, rC: null, cO: true,
+    ii: {x: 3.5, y: 3, z: 5, yaw: -35, pitch: -18, fov: 50}, a2: '16:9',
+    iK: currentState,
+    insertShot(input, request, view) {
+      events.push('validate'); views.push(plain(view));
+      return context.__localInsertShotInState(input, request, view);
+    },
+    cQ() {events.push('cancel-picker');},
+    dN() {events.push('stop');},
+    sQ(update, reason) {
+      events.push('commit'); currentState = update(currentState); commits.push(reason);
+    },
+    nP(time) {events.push(['seek', time]);},
+    rr(value) {events.push(['preview', plain(value)]);},
+    re(value) {events.push(['render-source', plain(value)]);},
+    iT(value) {notices.push(value);},
+    ...overrides,
+  });
+  return {callback, events, notices, commits, views, get state() {return currentState;}};
+}
+const newShotRequest = {newCamera: true, startFrame: 20, durationFrames: 60};
+const fromPicker = workspaceInsertion();
+assert.notEqual(fromPicker.callback(newShotRequest), false, 'New-camera intent succeeds while a target preset is awaiting selection');
+assert.equal(fromPicker.commits.length, 1, 'Camera and cut share one project history entry');
+assert.deepEqual(fromPicker.events.slice(0, 5), ['validate', 'cancel-picker', 'stop', 'commit', 'validate'],
+  'A valid new-camera request cancels the old picker only after validation, before committing');
+assert.equal(fromPicker.events.filter(value => value === 'cancel-picker').length, 1);
+const addedCamera = fromPicker.state.multiCamera.cameras.find(value => !state.multiCamera.cameras.some(old => old.id === value.id));
+assert.ok(addedCamera);
+const addedShot = fromPicker.state.timeline.cameraCutTrack.clips.find(value => value.cameraId === addedCamera.id);
+assert.deepEqual([addedShot.startFrame, addedShot.endFrame], [20, 80], 'The requested nonzero start and duration survive the UI callback');
+assert.deepEqual(plain(addedCamera.transform.position), {x: 3.5, y: 3, z: 5});
+assert.ok(Object.values(fromPicker.views[0].target).every(Number.isFinite), 'Director yaw/pitch is converted to a finite camera target');
+assert.deepEqual(fromPicker.events.find(value => Array.isArray(value) && value[0] === 'seek'), ['seek', 20 / 30]);
+
+const invalidFromPicker = workspaceInsertion();
+const invalidResult = invalidFromPicker.callback({...newShotRequest, startFrame: 900});
+assert.equal(invalidResult.ok, false);
+assert.match(invalidResult.reason, /30|上限|时段/);
+assert.deepEqual(invalidFromPicker.events, ['validate'], 'Failed validation retains the picker, playback and current project');
+assert.deepEqual(invalidFromPicker.state, state);
+
+for (const [name, overrides, reason] of [
+  ['read-only workspace', {C: false}, /不可编辑|只读/],
+  ['skeletal or pose editing', {rC: {kind: 'pose'}}, /骨骼|姿势/],
+]) {
+  const blocked = workspaceInsertion(overrides);
+  const result = blocked.callback(newShotRequest);
+  assert.equal(result.ok, false, name + ' supplies an explicit rejection');
+  assert.match(result.reason, reason);
+  assert.deepEqual(blocked.events, [], name + ' cannot cancel a picker, stop playback or write project state');
+  assert.deepEqual(blocked.state, state);
+}
+const existingFromPicker = workspaceInsertion();
+const existingFailure = existingFromPicker.callback({cameraId: 'second', startFrame: 20, durationFrames: 60});
+assert.equal(existingFailure.ok, false);
+assert.match(existingFailure.reason, /目标选择|相机.*选择/);
+assert.deepEqual(existingFromPicker.events, [], 'Adding an existing-camera shot does not silently abandon target selection');
+
+const withoutPicker = workspaceInsertion({cO: false});
+assert.notEqual(withoutPicker.callback({cameraId: 'second', startFrame: 20, durationFrames: 60}), false);
+assert.equal(withoutPicker.commits.length, 1);
+assert.equal(withoutPicker.events.includes('cancel-picker'), false, 'Ordinary existing-camera insertion does not invoke picker cancellation');
+assert.equal(withoutPicker.state.multiCamera.cameras.length, state.multiCamera.cameras.length);
+
+console.log('Camera cut sequencer: gaps, trimming, enabled state, import, FPS conversion, playback, atomic camera insertion and workspace target-picker transitions passed.');

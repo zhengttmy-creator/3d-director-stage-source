@@ -3,8 +3,10 @@ function __localCameraTrackExportPlan(options) {
   const cameras = Array.isArray(options.document?.cameras) ? options.document.cameras : [];
   const cameraIds = new Set(cameras.map(camera => camera.id));
   const clips = rO(options.storyboard).clips.filter(clip => clip.enabled !== false);
-  const firstCamera = cameras.find(camera => camera.id === clips[0]?.cameraId) ?? cameras[0];
-  const endFrame = clips.at(-1)?.endFrame ?? 0;
+  // Camera order is layer order: the first enabled camera covering a frame wins.
+  const firstCamera = cameras.find(camera => clips.some(clip => clip.cameraId === camera.id && clip.startFrame === 0))
+    ?? cameras.find(camera => clips.some(clip => clip.cameraId === camera.id)) ?? cameras[0];
+  const endFrame = clips.reduce((latest, clip) => Math.max(latest, clip.endFrame), 0);
   const plan = {
     source: {kind: 'storyboard'}, cameraId: firstCamera?.id ?? '',
     sceneCamera: firstCamera ? t0(firstCamera) : tF(),
@@ -20,14 +22,16 @@ function __localCameraTrackExportPlan(options) {
   if (missing) return {...plan, exportErrorCode: 'missing-camera',
     exportError: '镜头轨道中有片段对应的相机已不存在，请重新选择相机或删除该片段。'};
   let coveredThrough = 0;
-  for (const clip of clips) {
+  // Validate the union, not individual cuts: a short upper layer must not shrink
+  // coverage supplied by a longer lower layer, and row order need not be chronological.
+  for (const clip of [...clips].sort((a, b) => a.startFrame - b.startFrame || b.endFrame - a.endFrame)) {
     if (clip.startFrame > coveredThrough) {
       const from = Number((coveredThrough / fps).toFixed(3));
       const to = Number((clip.startFrame / fps).toFixed(3));
       return {...plan, exportErrorCode: 'gap', gap: {startFrame: coveredThrough, endFrame: clip.startFrame},
         exportError: `镜头轨道在 ${from}–${to} 秒没有启用的拍摄片段，请补齐该段后再导出。`};
     }
-    coveredThrough = clip.endFrame;
+    coveredThrough = Math.max(coveredThrough, clip.endFrame);
   }
   return {...plan, exportReady: true};
 }

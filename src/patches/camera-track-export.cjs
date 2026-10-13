@@ -54,10 +54,10 @@ module.exports = function patchCameraTrackExport(factories) {
     '(0,i.jsxs)("div",{className:"mt-2 flex min-h-9 w-full items-center justify-between gap-3 rounded-lg border border-stroke bg-surface-raised px-3 py-2 text-[12px] text-content-secondary","data-testid":"director-stage-video-export-source","aria-label":"导出来源：镜头轨道",children:[(0,i.jsx)("span",{className:"font-medium text-content",children:"镜头轨道"}),(0,i.jsx)("span",{className:"text-content-muted",children:`${__localTrackShotCount??0} 个启用片段`})]})');
   replace('fixed track export explanation',
     'children:"storyboard"===d.kind?y("directorStage.videoExport.sourceStoryboardHint"):y("directorStage.videoExport.sourceCameraHint",{camera:t??""})',
-    'children:"按时间轴「镜头剪辑」中启用的片段切换相机，渲染至最后一个启用片段结束；手动切换视角不影响导出。"');
+    'children:"按相机轨道从上到下选择当前启用的镜头；上层结束后继续播放下层覆盖该时刻的镜头，渲染至所有启用片段的最晚结束时间。"');
   replace('track export description',
     'children:F("directorStage.videoExport.description")',
-    'children:"按镜头轨道中设置的拍摄时段渲染，自动切换相机。"');
+    'children:"按镜头轨道的上下层级和拍摄时段渲染，自动切换相机。"');
   replace('preview track name',
     'oJ=(0,n.useMemo)(()=>[{id:ct,name:Q.timelineStoryboard,disabled:!oD.storyboardAvailable}',
     'oJ=(0,n.useMemo)(()=>[{id:ct,name:"镜头轨道",disabled:!oN.clips.some(clip=>clip.enabled!==false)}');
