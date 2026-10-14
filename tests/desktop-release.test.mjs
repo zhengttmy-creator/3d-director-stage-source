@@ -16,11 +16,11 @@ for (const entry of manifest.files) {
 }
 const packaged = JSON.parse(await fs.readFile(path.join(payloadRoot, 'package.json'), 'utf8'));
 assert.equal(packaged.productName, manifest.product);
-assert.equal(packaged.version, '1.0.0');
+assert.equal(packaged.version, '1.5.0');
 assert.equal(hash(await fs.readFile(path.join(payloadRoot, 'web', 'vendor', 'modules.js'))), hash(await fs.readFile(path.join(repoRoot, 'web', 'vendor', 'modules.js'))));
 await fs.access(path.join(extractedRoot, manifest.product + '.exe'));
 const guide = await fs.readFile(path.join(payloadRoot, 'docs', 'user-guide.html'), 'utf8');
-assert.match(guide, /绮绘预演台V1\.0/);
+assert.match(guide, /绮绘预演台V1\.5/);
 assert.match(guide, /快捷键/);
 assert(!/<(?:script|link)[^>]+(?:src|href)=["']https?:/i.test(guide), 'The tutorial must be available offline');
 assert.match(await fs.readFile(path.join(payloadRoot, 'desktop', 'main.cjs'), 'utf8'), /user-guide\.html/);

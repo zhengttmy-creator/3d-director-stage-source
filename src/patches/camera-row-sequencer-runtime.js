@@ -39,7 +39,7 @@ function __localUseCameraShotController(props) {
       durationFrames: gap ? Math.min(2 * fps, gap.endFrame - gap.startFrame) : fps});
   };
   const selectClip = clip => {
-    setSelected(clip.id); onSelectCamera(clip.cameraId); onSeek(clip.startFrame / fps); onPreview?.();
+    setSelected(clip.id); onSelectCamera(clip.cameraId); onSeek(clip.startFrame / fps); onPreview?.(clip.cameraId);
   };
   const begin = (event, clip, mode) => {
     event.stopPropagation();
@@ -128,7 +128,7 @@ function __LocalCameraShotDuration({controller: model, cameraId}) {
     children: seconds + 's'});
 }
 
-function __LocalCameraShotLane({controller: model, cameraId}) {
+function __LocalCameraShotLane({controller: model, cameraId, keyframeBand = false}) {
   const time = n.useSyncExternalStore(model.clock.subscribe, model.clock.getSnapshot, model.clock.getSnapshot);
   const currentFrame = Math.floor(time * model.fps + 1e-7);
   const camera = model.cameras.find(value => value.id === cameraId);
@@ -140,7 +140,7 @@ function __LocalCameraShotLane({controller: model, cameraId}) {
     onKeyDown: event => {if (g_(event) && !event.isComposing && !gZ(event.target)) {event.preventDefault(); event.stopPropagation();}},
     onContextMenu: event => model.openMenu(event, cameraId),
     onDoubleClick: event => {if (!event.target.closest('[data-camera-shot]')) model.openMenu(event, cameraId);},
-    style: {position: 'absolute', inset: 0, zIndex: 10, minWidth: 0}, children: [
+    style: {position: 'absolute', inset: 0, bottom: keyframeBand ? 24 : 0, zIndex: 10, minWidth: 0}, children: [
       !clips.length && i.jsx('button', {type: 'button', disabled: !model.editable,
         'data-testid': 'director-stage-camera-shot-add-' + cameraId, 'aria-label': '添加拍摄片段 ' + nC(camera),
         title: '为这台相机添加拍摄时段，也可右键空白处指定时间',

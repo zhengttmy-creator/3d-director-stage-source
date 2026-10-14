@@ -1,6 +1,6 @@
 (async () => {
   Object.assign(window.directorLocale, {
-    octo_director_stage_workspace_title: '绮绘预演台V1.0',
+    octo_director_stage_workspace_title: '绮绘预演台V1.5',
     octo_director_stage_assets_background_search: '搜索背景图片',
     octo_director_stage_save_close_description: '当前修改尚未保存，保存后关闭可保留这些修改。',
     octo_director_stage_save_discard_changes: '不保存并关闭',

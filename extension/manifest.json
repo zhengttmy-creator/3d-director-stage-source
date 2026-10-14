@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
-  "name": "绮绘预演台V1.0",
-  "version": "1.0.0",
+  "name": "绮绘预演台V1.5",
+  "version": "1.5.0",
   "description": "离线三维预演、人物动作、骨骼关键帧与多镜头剪辑。",
   "minimum_chrome_version": "116",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqI1NLJMzwCdNmtN9oojFO41AcMN88vznOWKxOaZ7k4fqCJvCzKIErImwKphj6BYwsAkjT+Qf/ByozpbT5m4Wk2NCEMdePi7KcCwXzRznYTYqjP/yQ68WQVXaXNQPx9bSBA/EhNvnS6aB35uJbGA5gM+HrUYvmz1+OLO7QGsNgkTl5jjG4bdcL4ege0rOSDA1Bv9jJdzFB3oSRE5SqPKOcos9MEs8O3SMx+3X8mRQzXmgatPdCl5Gh9Npa4WNiZIkc/FoVGmnQO6PrJOq26EH0T4k8zi95CDKg1OGKK9xDkLcGx+reJjNCLbkR7pGahq98ecmjZAMb8xKz9z0cGKHlQIDAQAB",

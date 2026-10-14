@@ -18,16 +18,31 @@ const source = factories['53401'];
 new vm.Script('(' + source + ')');
 const ast = require('@babel/parser').parse('(' + source + ')');
 const extract = node => source.slice(node.start - 1, node.end - 1);
-let timelineFunction, keyboardCaptureSource;
+let timelineFunction, keyboardCaptureSource, previewRouteSource, cameraRowsSource, rootMarkerSource;
 require('@babel/traverse').default(ast, {FunctionDeclaration(path) {
   if (path.node.id.name === 'hL') timelineFunction = path.node;
+}, FunctionExpression(path) {
+  const callback = extract(path.node);
+  if (callback.length < 12000 && callback.includes('expandedRows') && callback.includes('aggregateKeyframes:fh(n,d)'))
+    cameraRowsSource = callback;
 }, ArrowFunctionExpression(path) {
   const callback = extract(path.node);
+  if (path.parent.type === 'CallExpression' && path.parent.callee.type === 'MemberExpression' &&
+      path.parent.callee.object.name === 'v' && path.parent.callee.property.name === 'map' &&
+      callback.includes('kind:"aggregate"') && callback.includes('t7(a,e.shiftKey)')) rootMarkerSource = callback;
   if (callback.includes('if(!P&&g_(e)&&!gZ(e.target)&&e.target?.closest?.("[data-director-shot-keyboard]"))return;') &&
       (!keyboardCaptureSource || callback.length < keyboardCaptureSource.length)) keyboardCaptureSource = callback;
+}, ObjectProperty(path) {
+  if (path.node.key.name === 'onPreviewStoryboard' && path.node.value.type === 'ArrowFunctionExpression') {
+    assert.equal(previewRouteSource, undefined);
+    previewRouteSource = extract(path.node.value);
+  }
 }});
+assert.ok(previewRouteSource, 'Exercise the actual camera-click and storyboard preview routing');
 assert.ok(keyboardCaptureSource, 'Exercise the real window capture handler before bubbling into camera clips');
 assert.ok(timelineFunction);
+assert.ok(cameraRowsSource, 'Exercise the production multi-camera row builder');
+assert.ok(rootMarkerSource, 'Exercise the production camera summary marker interaction');
 const timelineSource = extract(timelineFunction);
 assert.equal((timelineSource.match(/__localUseCameraShotController\(/g) ?? []).length, 1,
   'All camera rows must share exactly one controller in the timeline, not create independent state');
@@ -142,7 +157,7 @@ function fixture(trackClips = clips, extra = {}) {
     clock: {subscribe: () => () => {}, getSnapshot: () => 0}, scrollRef, surfaceRef,
     frameAtClientX: x => (x - surfaceRef.current.getBoundingClientRect().left - 8) / 5,
     onChange: value => changes.push(plain(value)), onSeek: value => seeks.push(value),
-    onSelectCamera: value => selections.push(value), onPreview: () => previews.push(true),
+    onSelectCamera: value => selections.push(value), onPreview: cameraId => previews.push(cameraId),
     onDeleteCamera: id => {deleted.push(id); return true;},
     onScrollLeftChange: value => {scrollRef.current.scrollLeft = value; return value;},
     onGestureCancelChange: value => gestures.push(value), ...extra};
@@ -177,6 +192,56 @@ const keyboardTarget = (kind = 'clip', owner = null) => {
     selector === '[data-director-shot-keyboard]' ? owner : selector === context.gQ ? node : null;
   return node;
 };
+
+// Collapsed cameras still show their own keyframes, in a separate strip below
+// the cut. The same row.height drives headers, tracks and virtualized offsets.
+const channels = ['position.x', 'position.y', 'position.z', 'target.x', 'target.y', 'target.z', 'lens.fov', 'lens.roll'];
+context.l7 = channels.slice(0, 3); context.l6 = channels.slice(3, 6); context.rb = ['x', 'y', 'z'];
+const originalPresetGroups = context.sP;
+context.sP = () => [];
+const rowBuilder = vm.runInContext('(' + cameraRowsSource + ')', context);
+const keyedCameras = cameras.map((camera, index) => ({...camera,
+  tracks: Object.fromEntries(channels.map(channel => [channel, index < 2 && channel === 'position.x'
+    ? [{id: 'key-' + camera.id, frame: 15 + index * 30, value: index}] : []]))}));
+const rowProps = {shotCameras: keyedCameras, expandedRows: {}, activeCameraId: 'camera-a', selectedCameraId: 'camera-a',
+  labels: {camera: {position: '机位位置', target: '注视点', lens: '镜头', fov: '视野', roll: '画面倾斜'},
+    transform: {position: '位置', rotation: '旋转', scale: '缩放'}}, objects: [], objectTracks: {}, clips: []};
+const collapsedRows = rowBuilder(rowProps);
+assert.deepEqual(plain(collapsedRows.map(row => [row.cameraId, row.height, row.aggregateKeyframes.map(key => key.frame)])),
+  [['camera-a', 58, [15]], ['camera-b', 58, [45]], ['camera-c', 34, []]]);
+for (const row of collapsedRows) for (const key of row.aggregateKeyframes)
+  assert.ok(key.refs.every(ref => ref.cameraId === row.cameraId), 'Root summaries must never borrow the active camera tracks');
+const expandedRows = rowBuilder({...rowProps, expandedRows: {'camera:camera-b:root': true}});
+assert.equal(expandedRows.find(row => row.id === 'camera:camera-b:position').aggregateKeyframes[0].frame, 45);
+assert.equal(expandedRows.find(row => row.id === 'camera:camera-b:position').height, 28, 'Child channel geometry stays unchanged');
+context.sP = originalPresetGroups;
+assert.doesNotMatch(timelineSource, /v=e.kind!=="camera-root"&&e.aggregateKeyframes/,
+  'Shot integration must not suppress collapsed-camera keyframes');
+const selectionCalls = [], dragCalls = [];
+context.e = collapsedRows[1]; context.tn = new Set(); context.eG = null;
+context.p = {timelineKeyframeCount: count => count + ' 个关键帧'};
+context.g = {displayFps: 30}; context.th = {pixelsPerFrame: 5, edgeGutterPx: 8, durationFrames: 900};
+context.ok = (...parts) => parts.filter(Boolean).join(' ');
+context.t7 = refs => {selectionCalls.push(plain(refs)); return {nextSelection: refs, primary: refs[0], preserveClip: false};};
+context.t8 = (event, primary, selection, preserveClip) => dragCalls.push({primary: plain(primary), selection: plain(selection), preserveClip});
+const renderMarker = vm.runInContext('(' + rootMarkerSource + ')', context);
+const markerCall = renderMarker(collapsedRows[1].aggregateKeyframes[0]);
+const marker = context.hu(markerCall.props);
+assert.equal(marker.props['data-camera-id'], 'camera-b');
+assert.equal(marker.props.style.left, '233px');
+assert.equal(marker.props.style.top, 46, 'Summary keys sit in the bottom 24px strip');
+marker.props.onPointerDown(event());
+assert.equal(selectionCalls[0][0].cameraId, 'camera-b');
+assert.equal(dragCalls[0].primary.cameraId, 'camera-b');
+assert.equal(dragCalls[0].preserveClip, false, 'Keyframe drags retain the existing selection/drag route, never the camera clip route');
+const stripFixture = fixture();
+const stripLane = context.__LocalCameraShotLane({controller: stripFixture.model, cameraId: 'camera-b', keyframeBand: true});
+assert.equal(stripLane.props.style.bottom, 24);
+const stripClip = find(stripLane, 'data-testid', 'director-stage-storyboard-clip-b');
+assert.equal(stripClip.props.style.top, 3); assert.equal(stripClip.props.style.bottom, 3);
+assert.ok(58 - stripLane.props.style.bottom - stripClip.props.style.bottom < marker.props.style.top - 12,
+  'Cut resize handles and summary-key hitboxes must not overlap vertically');
+stripFixture.unmount();
 
 // Every existing camera row owns only its cuts. Native scroll is applied by the parent once.
 for (const scrollLeftPx of [0, 125, 400]) {
@@ -233,13 +298,52 @@ const clicked = fixture();
 clipElement(clicked, 'b', 'camera-b').props.onPointerDown(event({clientX: 500}));
 dispatch('pointerup', {clientX: 500}); clicked.render();
 assert.deepEqual(clicked.selections, ['camera-b']); assert.deepEqual(clicked.seeks, [1]);
-assert.equal(clicked.previews.length, 1); assert.equal(clicked.changes.length, 0);
+assert.deepEqual(clicked.previews, ['camera-b'], 'A clip click previews that camera explicitly, not the winning camera layer'); assert.equal(clicked.changes.length, 0);
 assert.equal(footerEditor(clicked).props.clip.id, 'b');
 clipElement(clicked, 'c', 'camera-c').props.onKeyDown(event({key: 'Enter', target: keyboardTarget()})); clicked.render();
 assert.deepEqual(clicked.selections, ['camera-b', 'camera-c']);
-assert.deepEqual(clicked.seeks, [1, 2]); assert.equal(clicked.previews.length, 2);
+assert.deepEqual(clicked.seeks, [1, 2]); assert.deepEqual(clicked.previews, ['camera-b', 'camera-c']);
 assert.equal(footerEditor(clicked).props.clip.id, 'c');
 assert.equal(listeners.size, 0); clicked.unmount();
+
+// Opening a clicked camera enters camera control even when preview was already
+// open; the separate preview toolbar still uses the authored camera-cut layers.
+const createPreviewRoute = vm.runInContext(`(function(bindings) {
+  const {C,rC,cO,il,dt,cP,rr,re,am}=bindings;
+  return ${previewRouteSource};
+})`, context);
+function previewRoute(overrides = {}) {
+  const calls = [];
+  const callback = createPreviewRoute({C: true, rC: null, cO: false, il: {cameras}, am: true,
+    dt(id, part) {calls.push(['select', id, part]); return true;},
+    cP() {calls.push(['enter-camera-control']);},
+    rr(value) {calls.push(['preview-source', plain(value)]);},
+    re(value) {calls.push(['export-source', plain(value)]);}, ...overrides});
+  return {calls, callback};
+}
+const explicitPreview = previewRoute();
+assert.equal(explicitPreview.callback('camera-b'), true);
+assert.deepEqual(explicitPreview.calls.slice(0, 3), [
+  ['select', 'camera-b', 'camera'], ['enter-camera-control'], ['preview-source', {kind: 'camera', cameraId: 'camera-b'}],
+]);
+assert.equal(explicitPreview.calls.some(value => value[0] === 'export-source'), false, 'Selecting a camera does not replace the camera-track export route');
+for (const [label, overrides, id] of [
+  ['readonly', {C: false}, 'camera-b'], ['pose edit', {rC: {}}, 'camera-b'],
+  ['target picker', {cO: true}, 'camera-b'], ['deleted camera', {}, 'missing-camera'],
+  ['no cameras', {il: {cameras: []}}, 'camera-b'],
+]) {
+  const denied = previewRoute(overrides);
+  assert.equal(denied.callback(id), false, label + ' cannot enter camera control');
+  assert.deepEqual(denied.calls, []);
+}
+const selectionFailure = previewRoute({dt: () => false});
+assert.equal(selectionFailure.callback('camera-b'), false);
+assert.deepEqual(selectionFailure.calls, []);
+const layeredPreview = previewRoute({am: false});
+layeredPreview.callback();
+assert.ok(layeredPreview.calls.some(value => value[0] === 'enter-camera-control'));
+assert.deepEqual(layeredPreview.calls.find(value => value[0] === 'preview-source'), ['preview-source', {kind: 'storyboard'}]);
+assert.deepEqual(layeredPreview.calls.find(value => value[0] === 'export-source'), ['export-source', {kind: 'storyboard'}]);
 
 // Empty-row actions retain the clicked camera and can start over another camera's shot.
 const emptyRow = fixture([clips[0]]);

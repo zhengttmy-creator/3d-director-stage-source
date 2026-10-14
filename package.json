@@ -1,7 +1,7 @@
 {
   "name": "3d-director-stage",
-  "productName": "绮绘预演台V1.0",
-  "version": "1.0.0",
+  "productName": "绮绘预演台V1.5",
+  "version": "1.5.0",
   "private": true,
   "description": "绮绘预演台：本地三维预演、动作、机位和时间轴",
   "main": "desktop/main.cjs",
@@ -23,6 +23,10 @@
     "test:drafts": "node tests/draft-recovery.test.mjs",
     "test:camera-targets": "node tests/camera-target-selection.test.mjs",
     "test:camera-position": "node tests/camera-position-autokey.test.mjs",
+    "test:camera-navigation": "node tests/camera-navigation-sync.test.mjs",
+    "test:manual-camera": "node tests/manual-camera-authoring.test.mjs",
+    "test:new-camera": "node tests/new-camera-selection.test.mjs",
+    "test:camera-transform": "node tests/camera-transform-model.test.mjs && node tests/camera-transform-authoring.test.mjs && node tests/camera-transform-ui.test.mjs",
     "test:manual-keyframes": "node tests/manual-timeline-keyframes.test.mjs",
     "test:curve-easing": "node tests/curve-easing.test.mjs",
     "test:bones": "node tests/skeletal-keyframes.test.mjs && node tests/skeletal-editor-sync.test.mjs && node tests/skeletal-editor-drag.test.mjs && node tests/skeletal-playback.test.mjs",
@@ -52,7 +56,7 @@
   },
   "build": {
     "appId": "cn.yuyantai.director",
-    "productName": "绮绘预演台V1.0",
+    "productName": "绮绘预演台V1.5",
     "asar": false,
     "directories": {
       "output": "dist"

@@ -121,7 +121,7 @@ assert.equal(packaged.productName, manifest.product);
 assert.equal(packaged.version, manifest.version);
 assert(getEntry(`${sourcePrefix}${relativePath(packaged.main)}`));
 const guide = getEntry(`${sourcePrefix}docs/user-guide.html`).content.toString('utf8');
-assert.match(guide, /绮绘预演台V1\.0/);
+assert.match(guide, /绮绘预演台V1\.5/);
 assert.match(guide, /快捷键/);
 assert(!/<(?:script|link)[^>]+(?:src|href)=["']https?:/i.test(guide), 'The tutorial must work offline');
 assert.match(getEntry(`${sourcePrefix}desktop/main.cjs`).content.toString('utf8'), /user-guide\.html/);
