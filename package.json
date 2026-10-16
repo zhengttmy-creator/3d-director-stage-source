@@ -11,6 +11,8 @@
   "scripts": {
     "start": "electron .",
     "start:web": "node web/server.mjs",
+    "start:local": "node scripts/start-local.mjs",
+    "dist:project": "npm run build && node scripts/package-project.mjs",
     "build": "node scripts/build-vendor.cjs",
     "build:motions": "node src/motions/build-local-motions.mjs",
     "build:poses": "node src/motions/build-local-poses.mjs",

@@ -1,1 +1,1 @@
-本目录是源码公开仓库的占位说明。完整运行时需要本地提供有权使用的 `web/vendor` 与 `web/assets` 内容；这些内容不会提交到 Git。
+本目录是源码公开仓库的占位说明。完整运行时需要本地提供 `web/vendor` 与 `web/assets` 内容；这些内容不提交到本源码树。若要直接运行，请下载 [V1.5 发布页](https://github.com/zhengttmy-creator/3d-director-stage-source/releases/tag/v1.5.0) 的 `Qihui-Previz-V1.5-Full-Project.zip`，不要选择自动生成的 Source code ZIP。第三方内容保留各自来源和适用条款。
