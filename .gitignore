@@ -1,32 +1,21 @@
-# Source-only checkout: runtime/vendor and third-party assets stay local.
-/src/vendor/*
-!/src/vendor/README.md
-/web/vendor/*
-!/web/vendor/README.md
-/web/assets/*
-!/web/assets/README.md
-/sources/motions/**/*.fbx
-/sources/motions/**/*.glb
-/sources/motions/**/*.bin
-*.fbx
-*.glb
-*.wasm
-*.zip
-*.exe
-
-# Local dependencies, user data and build artifacts.
+# Source, compiled runtime and bundled resources are included.
+# Local dependencies, user data, caches and release archives are excluded.
 node_modules/
 dist/
 reports/
+/work/
 .npm-cache/
 .env
 .env.*
 *.log
 *.pending
+*.zip
+*.exe
 web/state/
 web/assets/captures/
+web/assets/videos/
 seed/*
-/Assets/
 !seed/.gitkeep
+/Assets/
 .DS_Store
 Thumbs.db

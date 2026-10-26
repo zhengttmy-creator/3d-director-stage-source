@@ -1,6 +1,6 @@
 # 绮绘预演台 V1.5 · 完整项目启动说明
 
-本包包含可编辑代码、`src/vendor/module-factories.json`、`web/vendor/` 运行时，以及内置人物、动作和姿势资源。它与 GitHub 自动生成的 **Source code (zip)** 不同；请下载 **Qihui-Previz-V1.5-Full-Project.zip**。
+本包包含可编辑代码、`src/vendor/module-factories.json`、`web/vendor/` 运行时，以及内置人物、动作和姿势资源。当前 main 分支也已包含全部运行资源，可以使用 **Code → Download ZIP** 或克隆下载。历史 v1.5.0 发布页请选择 **Qihui-Previz-V1.5-Full-Project.zip**，该旧标签自动生成的 Source code ZIP 仍为当时的适配层源码。
 
 ## 第一次使用
 
@@ -39,4 +39,4 @@ npm start
 
 ## 资源与许可
 
-第三方编译模块、人物、动作和素材保留各自来源及适用条款，不属于原创适配代码的 MIT 授权。请阅读 `THIRD_PARTY.md` 及 `sources/motions/` 中的来源说明。`FULL-PROJECT-MANIFEST.json` 列出本包文件及 SHA-256 校验值。
+第三方编译模块、人物、动作和素材保留各自来源及适用条款，不属于原创适配代码的 MIT 授权。请阅读 `THIRD_PARTY.md` 及 `sources/motions/` 中的来源说明。完整发行包内的 `FULL-PROJECT-MANIFEST.json` 列出包内文件及 SHA-256 校验值。

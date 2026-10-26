@@ -1,53 +1,48 @@
-# 绮绘预演台 V1.5 · 源码
+# 绮绘预演台 V1.5 · 完整项目
 
-这是绮绘预演台（3D 导演台）的**原创适配层源码仓库**，用于代码阅读、问题反馈和贡献。仓库刻意不携带第三方编译模块、人物/动作/模型资产或模型补充包；因此它不是下载后即可运行的完整发行包。
+本仓库包含可编辑的适配代码、编译核心、浏览器运行时、内置人物、动作和姿势资源。现在克隆仓库或选择 **Code → Download ZIP** 即可获得完整项目；浏览器版安装 Node.js 22 或更新版本后即可启动，无需安装 npm 依赖。
 
-当前版本：**1.5.0**。相机统一使用位置 XYZ 与旋转 XYZ，默认固定、手动记录运镜关键帧；新增相机独立控制，支持整体变换打点及折叠轨道中的关键帧编辑。完整变更见 [更新记录](CHANGELOG.md)。
+当前版本：**1.5.0**。相机采用位置 XYZ 与旋转 XYZ，默认固定、手动记录运镜关键帧；支持独立机位、分层镜头剪辑、骨骼关键帧、动作预览和本地资产管理。详细操作见 [使用教程](docs/user-guide.html)，变更见 [更新记录](CHANGELOG.md)。
 
-## 下载可运行的完整项目
+## 下载与启动
 
-前往 [V1.5 完整项目发布页](https://github.com/zhengttmy-creator/3d-director-stage-source/releases/tag/v1.5.0)，在 **Assets** 中下载 **Qihui-Previz-V1.5-Full-Project.zip**。该附件包含运行所需的编译核心、`web/vendor/`、12 种人物体型、16 个动作和 10 个姿势；不含个人场景或另行提供的 150 款模型补充包。
+可以使用当前仓库的 **Code → Download ZIP**、git clone，或下载 [V1.5 完整项目 ZIP](https://github.com/zhengttmy-creator/3d-director-stage-source/releases/download/v1.5.0/Qihui-Previz-V1.5-Full-Project.zip)。历史 v1.5.0 标签的自动 Source code ZIP 仍指向当时的适配层源码；从历史发布页下载时请选择明确标为 Full-Project 的附件。
 
-解压并安装 Node.js 22 或更新版本后，Windows 双击 `start-windows.cmd`，Mac 双击 `start-macos.command`，或在项目根目录运行 `node scripts/start-local.mjs`。浏览器运行不需要 `npm install`，也不需要重新构建。详细说明见 [START-HERE.md](START-HERE.md)。
+1. 安装 [Node.js 22 或更新版本](https://nodejs.org/)。
+2. 完整解压到可写文件夹，或克隆本仓库。
+3. Windows 双击 start-windows.cmd；Mac 双击 start-macos.command。也可在项目目录的终端运行：
 
-**不要选择 GitHub 自动生成的 Source code (zip) / Source code (tar.gz)** 来运行应用：它们仍然只含本仓库的适配层源码。完整项目附件中的第三方内容不适用本仓库原创代码的 MIT 许可，来源见 [THIRD_PARTY.md](THIRD_PARTY.md)。
+```sh
+node scripts/start-local.mjs
+```
 
-## 公开范围
+浏览器会自动打开。保持终端运行，按 Ctrl+C 停止服务；默认端口被占用时会自动改用空闲端口。Mac 若不能双击脚本，使用上述终端命令。更多步骤见 [START-HERE.md](START-HERE.md)。
 
-公开内容包括：
+## 资源与补充包
 
-- 本地界面适配、时间轴、相机剪辑、骨骼关键帧和资产管理代码
-- Electron 宿主、浏览器扩展、本地服务器和打包脚本
-- 动作/姿势转换器、测试和离线文档
+- 仓库内置 12 种人物体型、16 个动态动作和 10 个静态姿势，包含真实预览与运行资源。
+- [150 款模型补充包 V1.0（兼容 V1.5）](https://github.com/zhengttmy-creator/3d-director-stage-source/releases/tag/model-pack-v1.0) 单独下载，约 553 MB，不放进 Git 历史。将解压后的 Assets/models 内容放入软件实际使用的资产目录；安装说明与校验值随包提供。
+- 首次启动为空白场景。个人项目保存在 web/state/；自定义资产放入 web/state/Assets/ 对应子目录。个人项目、账号、截图、缓存和 npm 依赖不随仓库上传。
 
-未公开内容包括：
+## 开发与打包
 
-- `src/vendor/` 与 `web/vendor/` 中的已有编译模块
-- `web/assets/` 中的人物、动作、姿势和其他运行时资产
-- `sources/motions/` 中的 FBX/GLB 源文件
-- 150 款模型补充包、应用安装包和构建产物
-
-原创代码的许可范围见 [LICENSE](LICENSE)。第三方来源和资源边界见 [THIRD_PARTY.md](THIRD_PARTY.md)。
-
-## 本地开发
-
-需要 Node.js 22 或更高版本。要运行完整应用，需要先在本地放入你有权使用的运行时模块和资产：
-
-- `src/vendor/module-factories.json`
-- `web/vendor/`
-- `web/assets/`
-- 必要的动作转换输入放在 `sources/motions/`
-
-这些目录已经在 `.gitignore` 中排除，不应提交到源码仓库。准备好本地资源后：
+浏览器运行已有构建不需要以下步骤；修改编译补丁、运行 Electron 或制作发行包时执行：
 
 ```sh
 npm ci
 npm run build
-node web/server.mjs
+npm start
 ```
 
-然后打开 http://127.0.0.1:4202/。桌面封装和浏览器扩展的命令见 `package.json`，离线使用教程见 [`docs/user-guide.html`](docs/user-guide.html)。
+- npm run dist:project：生成完整项目 ZIP 与 SHA-256 清单。
+- npm run dist:win:all：Windows 安装版和便携版。
+- npm run dist:mac:arm64 -- /path/to/electron-cache：Mac M 系列构建，说明见 [Mac 安装说明](docs/mac-install.html)。
+- npm run dist:extension：Edge / Chrome 扩展，说明见 [扩展安装说明](extension/INSTALL.md)。
 
-## 贡献
+src/patches/ 为功能适配代码；src/vendor/module-factories.json 为现有编译模块输入；web/vendor/ 为运行时；web/assets/ 为内置资源；sources/motions/ 保存动作转换输入及来源。第三方编译模块不是原站完整 TypeScript 工程，仓库不包含原站云端服务或账号系统。
 
-提交问题或补丁时，请不要上传个人项目、浏览器数据、账号信息、安装包、模型文件或任何第三方未授权资源。新增第三方依赖或素材前，请在 `THIRD_PARTY.md` 中记录来源、版本、许可证和再分发范围。
+## 许可与贡献
+
+[MIT LICENSE](LICENSE) 仅适用于本项目原创代码。第三方编译模块、模型、动作、字体和素材保留各自来源及条款，详见 [THIRD_PARTY.md](THIRD_PARTY.md) 和素材来源记录。完整资源的提供不改变其许可范围。
+
+提交问题或补丁时，请勿提交个人项目、浏览器缓存、账号凭据或其他用户数据。

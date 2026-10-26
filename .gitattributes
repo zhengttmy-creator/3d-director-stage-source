@@ -1,0 +1,15 @@
+* text=auto
+*.js text eol=lf
+*.cjs text eol=lf
+*.mjs text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.fbx binary
+*.glb binary
+*.png binary
+*.ico binary
+*.wasm binary
+*.command text eol=lf
+# Generated third-party bundles retain their existing formatting.
+web/vendor/** -whitespace
+src/vendor/** -whitespace

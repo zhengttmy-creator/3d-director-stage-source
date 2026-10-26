@@ -1,1 +1,1 @@
-本目录是源码公开仓库的占位说明。完整运行时需要本地提供 `web/vendor` 与 `web/assets` 内容；这些内容不提交到本源码树。若要直接运行，请下载 [V1.5 发布页](https://github.com/zhengttmy-creator/3d-director-stage-source/releases/tag/v1.5.0) 的 `Qihui-Previz-V1.5-Full-Project.zip`，不要选择自动生成的 Source code ZIP。第三方内容保留各自来源和适用条款。
+当前仓库已经包含 src/vendor/module-factories.json、web/vendor/ 和 web/assets/，可直接使用 Node.js 22 或更新版本运行 node scripts/start-local.mjs。无需额外补文件或安装 npm 依赖。历史 v1.5.0 标签的自动源码包仍不含运行时，需要选择发布页的 Full-Project 附件；从当前 main 分支克隆或 Download ZIP 则为完整工程。

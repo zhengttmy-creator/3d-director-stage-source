@@ -1,0 +1,4817 @@
+{
+  "format": "local-director-pose-catalog",
+  "version": 1,
+  "targetSkeletonBones": 65,
+  "poses": [
+    {
+      "assetId": "local-pose-standing",
+      "displayName": "自然站立",
+      "nameFallback": "自然站立",
+      "description": "自然站立 / Mixamo 源姿态",
+      "descriptionFallback": "自然站立",
+      "category": "站立",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/standing.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/mrdoob/three.js/1a1c86699f9c38d4bef1cf51652e5f0e0680d745/examples/models/gltf/Xbot.glb",
+        "sha256": "002f8d269de68e5dce3d25195caf390d1aa359bbfaae3fcf4c8dc78ec36c3ba5",
+        "filename": "xbot.glb",
+        "clipName": "idle",
+        "repository": "mrdoob/three.js",
+        "commit": "1a1c86699f9c38d4bef1cf51652e5f0e0680d745",
+        "sampleTimeSec": 0.4,
+        "sourceDurationSec": 2.5
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -4.841114149391082e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          -0.10307630130573119,
+          0,
+          1.9241652474017312
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.42500000000000004,
+            1.075,
+            1.975,
+            2.475
+          ],
+          "maxPositionErrorCentimeters": 2.7548292952016083e-7,
+          "maxQuaternionErrorRadians": 5.16191365590357e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492693713853,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 1.148464869875511,
+          "maxBodyDirectionErrorDegrees": 11.503084043653113,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005210985472587638,
+            "LeftForeArm->LeftHand": 0.005060385761708041,
+            "RightArm->RightForeArm": 0.004893125815009368,
+            "RightForeArm->RightHand": 0.004995913450666627,
+            "LeftUpLeg->LeftLeg": 1.1483721804469527,
+            "LeftLeg->LeftFoot": 1.0887353271032574,
+            "RightUpLeg->RightLeg": 1.148464869875511,
+            "RightLeg->RightFoot": 1.0888971994001415,
+            "Spine->Spine2": 0.13491387121287696,
+            "Neck->Head": 6.995514787520765,
+            "Head->HeadTop_End": 11.503084043653113
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.030978890850555482,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  102.8405532836914,
+                  0
+                ],
+                "Head": [
+                  0.18025223041194965,
+                  158.87310738299732,
+                  -0.7703078430280768
+                ],
+                "LeftArm": [
+                  15.617619588176993,
+                  140.96816016679128,
+                  -1.6354057432588682
+                ],
+                "LeftHand": [
+                  25.345444369665742,
+                  86.2314985384798,
+                  3.412530575525656
+                ],
+                "RightArm": [
+                  -14.653909664233995,
+                  141.1055163686767,
+                  -2.1774709569176993
+                ],
+                "RightHand": [
+                  -25.149398030881073,
+                  86.25507367124767,
+                  2.6093760070295158
+                ],
+                "LeftUpLeg": [
+                  8.273253018733106,
+                  96.14688461844653,
+                  -1.503293461033425
+                ],
+                "LeftLeg": [
+                  14.949787648611043,
+                  52.40290441252997,
+                  1.769081260402031
+                ],
+                "LeftFoot": [
+                  21.486606382334138,
+                  8.789692157834551,
+                  -4.3861280376217255
+                ],
+                "RightUpLeg": [
+                  -8.10661320348029,
+                  96.27192443287981,
+                  -2.578256251505187
+                ],
+                "RightLeg": [
+                  -14.66023377988506,
+                  52.50219561712537,
+                  0.5976696964468999
+                ],
+                "RightFoot": [
+                  -21.779421637444415,
+                  8.771627561743024,
+                  -3.838547962202272
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000005822054845339153,
+                  98.72129821777344,
+                  -1.9312363862991333
+                ],
+                "Head": [
+                  0.08793159602617506,
+                  159.4033280158498,
+                  0.20041100839084702
+                ],
+                "LeftArm": [
+                  19.269528600690247,
+                  140.2720549125103,
+                  -1.8338515681248855
+                ],
+                "LeftHand": [
+                  28.81748908308577,
+                  86.65859044594453,
+                  3.087651162068104
+                ],
+                "RightArm": [
+                  -18.280793784665704,
+                  140.45013822712318,
+                  -2.526164969230776
+                ],
+                "RightHand": [
+                  -28.561496226152915,
+                  86.72234321162836,
+                  2.144505910513171
+                ],
+                "LeftUpLeg": [
+                  9.08656104113638,
+                  92.01380245087391,
+                  -1.8307220678899914
+                ],
+                "LeftLeg": [
+                  15.31499113249411,
+                  51.95478760260401,
+                  0.3592768169360723
+                ],
+                "LeftFoot": [
+                  21.46361407685594,
+                  10.611761278913427,
+                  -4.668293035178167
+                ],
+                "RightUpLeg": [
+                  -9.122645254485118,
+                  92.15275087252783,
+                  -3.025742791697734
+                ],
+                "RightLeg": [
+                  -15.188101959453412,
+                  52.06370827713023,
+                  -0.9296607361783171
+                ],
+                "RightFoot": [
+                  -21.843817781668513,
+                  10.633594879247369,
+                  -4.331899219184809
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  102.8405532836914,
+                  0
+                ],
+                "Head": [
+                  0.18025223041194965,
+                  158.87310738299732,
+                  -0.7703078430280768
+                ],
+                "LeftArm": [
+                  15.617619588176993,
+                  140.96816016679128,
+                  -1.6354057432588682
+                ],
+                "LeftHand": [
+                  25.345444369665742,
+                  86.2314985384798,
+                  3.412530575525656
+                ],
+                "RightArm": [
+                  -14.653909664233995,
+                  141.1055163686767,
+                  -2.1774709569176993
+                ],
+                "RightHand": [
+                  -25.149398030881073,
+                  86.25507367124767,
+                  2.6093760070295158
+                ],
+                "LeftUpLeg": [
+                  8.273253018733106,
+                  96.14688461844653,
+                  -1.503293461033425
+                ],
+                "LeftLeg": [
+                  14.949787648611043,
+                  52.40290441252997,
+                  1.769081260402031
+                ],
+                "LeftFoot": [
+                  21.486606382334138,
+                  8.789692157834551,
+                  -4.3861280376217255
+                ],
+                "RightUpLeg": [
+                  -8.10661320348029,
+                  96.27192443287981,
+                  -2.578256251505187
+                ],
+                "RightLeg": [
+                  -14.66023377988506,
+                  52.50219561712537,
+                  0.5976696964468999
+                ],
+                "RightFoot": [
+                  -21.779421637444415,
+                  8.771627561743024,
+                  -3.838547962202272
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000005822054845339153,
+                  98.72129821777344,
+                  -1.9312363862991333
+                ],
+                "Head": [
+                  0.08793159602617506,
+                  159.4033280158498,
+                  0.20041100839084702
+                ],
+                "LeftArm": [
+                  19.269528600690247,
+                  140.2720549125103,
+                  -1.8338515681248855
+                ],
+                "LeftHand": [
+                  28.81748908308577,
+                  86.65859044594453,
+                  3.087651162068104
+                ],
+                "RightArm": [
+                  -18.280793784665704,
+                  140.45013822712318,
+                  -2.526164969230776
+                ],
+                "RightHand": [
+                  -28.561496226152915,
+                  86.72234321162836,
+                  2.144505910513171
+                ],
+                "LeftUpLeg": [
+                  9.08656104113638,
+                  92.01380245087391,
+                  -1.8307220678899914
+                ],
+                "LeftLeg": [
+                  15.31499113249411,
+                  51.95478760260401,
+                  0.3592768169360723
+                ],
+                "LeftFoot": [
+                  21.46361407685594,
+                  10.611761278913427,
+                  -4.668293035178167
+                ],
+                "RightUpLeg": [
+                  -9.122645254485118,
+                  92.15275087252783,
+                  -3.025742791697734
+                ],
+                "RightLeg": [
+                  -15.188101959453412,
+                  52.06370827713023,
+                  -0.9296607361783171
+                ],
+                "RightFoot": [
+                  -21.843817781668513,
+                  10.633594879247369,
+                  -4.331899219184809
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  102.8405532836914,
+                  0
+                ],
+                "Head": [
+                  0.18025223041194965,
+                  158.87310738299732,
+                  -0.7703078430280768
+                ],
+                "LeftArm": [
+                  15.617619588176993,
+                  140.96816016679128,
+                  -1.6354057432588682
+                ],
+                "LeftHand": [
+                  25.345444369665742,
+                  86.2314985384798,
+                  3.412530575525656
+                ],
+                "RightArm": [
+                  -14.653909664233995,
+                  141.1055163686767,
+                  -2.1774709569176993
+                ],
+                "RightHand": [
+                  -25.149398030881073,
+                  86.25507367124767,
+                  2.6093760070295158
+                ],
+                "LeftUpLeg": [
+                  8.273253018733106,
+                  96.14688461844653,
+                  -1.503293461033425
+                ],
+                "LeftLeg": [
+                  14.949787648611043,
+                  52.40290441252997,
+                  1.769081260402031
+                ],
+                "LeftFoot": [
+                  21.486606382334138,
+                  8.789692157834551,
+                  -4.3861280376217255
+                ],
+                "RightUpLeg": [
+                  -8.10661320348029,
+                  96.27192443287981,
+                  -2.578256251505187
+                ],
+                "RightLeg": [
+                  -14.66023377988506,
+                  52.50219561712537,
+                  0.5976696964468999
+                ],
+                "RightFoot": [
+                  -21.779421637444415,
+                  8.771627561743024,
+                  -3.838547962202272
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000005822054845339153,
+                  98.72129821777344,
+                  -1.9312363862991333
+                ],
+                "Head": [
+                  0.08793159602617506,
+                  159.4033280158498,
+                  0.20041100839084702
+                ],
+                "LeftArm": [
+                  19.269528600690247,
+                  140.2720549125103,
+                  -1.8338515681248855
+                ],
+                "LeftHand": [
+                  28.81748908308577,
+                  86.65859044594453,
+                  3.087651162068104
+                ],
+                "RightArm": [
+                  -18.280793784665704,
+                  140.45013822712318,
+                  -2.526164969230776
+                ],
+                "RightHand": [
+                  -28.561496226152915,
+                  86.72234321162836,
+                  2.144505910513171
+                ],
+                "LeftUpLeg": [
+                  9.08656104113638,
+                  92.01380245087391,
+                  -1.8307220678899914
+                ],
+                "LeftLeg": [
+                  15.31499113249411,
+                  51.95478760260401,
+                  0.3592768169360723
+                ],
+                "LeftFoot": [
+                  21.46361407685594,
+                  10.611761278913427,
+                  -4.668293035178167
+                ],
+                "RightUpLeg": [
+                  -9.122645254485118,
+                  92.15275087252783,
+                  -3.025742791697734
+                ],
+                "RightLeg": [
+                  -15.188101959453412,
+                  52.06370827713023,
+                  -0.9296607361783171
+                ],
+                "RightFoot": [
+                  -21.843817781668513,
+                  10.633594879247369,
+                  -4.331899219184809
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 8.881784197001252e-16,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 8.881784197001253e-18
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 98.72129821777344,
+          "leftKneeAngleDegrees": 170.04192864231865,
+          "rightKneeAngleDegrees": 172.38722287945632,
+          "leftKneeHeightCentimeters": 51.95478760260401,
+          "rightKneeHeightCentimeters": 52.06370827713023,
+          "leftFootHeightCentimeters": 10.611761278913427,
+          "rightFootHeightCentimeters": 10.633594879247369
+        }
+      },
+      "bytes": 51623,
+      "sha256": "8b482c73af7e407cbb502c43328d2ae8711c04293290a7c5285129842996db09"
+    },
+    {
+      "assetId": "local-pose-crouching",
+      "displayName": "下蹲",
+      "nameFallback": "下蹲",
+      "description": "下蹲 / Mixamo 源姿态",
+      "descriptionFallback": "下蹲",
+      "category": "蹲姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/crouching.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Standing%20To%20Crouched.fbx",
+        "sha256": "67b7e9b06bb44a75de99aaeef403b150db5a7d595dd5d2ea2dab5176c00225f8",
+        "filename": "crouch-down.fbx",
+        "clipName": "mixamo.com",
+        "normalizedMotion": "crouch-down",
+        "sampleTimeSec": 1.2,
+        "sourceDurationSec": 1.2666666507720947
+      },
+      "conversion": {
+        "promotedExistingNodes": [],
+        "createdBones": 24,
+        "originalSourceJointCount": 41,
+        "staticReferenceJointsAdded": [
+          "mixamorigLeftHandMiddle1",
+          "mixamorigLeftHandMiddle2",
+          "mixamorigLeftHandMiddle3",
+          "mixamorigLeftHandMiddle4",
+          "mixamorigLeftHandRing1",
+          "mixamorigLeftHandRing2",
+          "mixamorigLeftHandRing3",
+          "mixamorigLeftHandRing4",
+          "mixamorigLeftHandPinky1",
+          "mixamorigLeftHandPinky2",
+          "mixamorigLeftHandPinky3",
+          "mixamorigLeftHandPinky4",
+          "mixamorigRightHandMiddle1",
+          "mixamorigRightHandMiddle2",
+          "mixamorigRightHandMiddle3",
+          "mixamorigRightHandMiddle4",
+          "mixamorigRightHandRing1",
+          "mixamorigRightHandRing2",
+          "mixamorigRightHandRing3",
+          "mixamorigRightHandRing4",
+          "mixamorigRightHandPinky1",
+          "mixamorigRightHandPinky2",
+          "mixamorigRightHandPinky3",
+          "mixamorigRightHandPinky4"
+        ],
+        "addedJointAnimationTracks": 0,
+        "parentRotationAndHeadingBaked": [
+          0,
+          -3.655088148467526e-7,
+          0,
+          0.9999999999999334
+        ],
+        "parentTranslationBaked": [
+          0,
+          0,
+          0
+        ],
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "originalParentScale": 1,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          0.6686094266203148,
+          0,
+          -19.55612945205213
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "reuseValidatedNormalizedMotion": true
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 1.0812876308882087,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 5.75487575370981,
+          "maxBodyDirectionErrorDegrees": 12.554353578340722,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.0050616923803266135,
+            "LeftForeArm->LeftHand": 0.005058581477214168,
+            "RightArm->RightForeArm": 0.0049346310959977905,
+            "RightForeArm->RightHand": 0.004964070967219724,
+            "LeftUpLeg->LeftLeg": 5.75487575370981,
+            "LeftLeg->LeftFoot": 5.2864024043234545,
+            "RightUpLeg->RightLeg": 5.752672460292879,
+            "RightLeg->RightFoot": 5.284372022024267,
+            "Spine->Spine2": 7.311397510648406,
+            "Neck->Head": 4.981315317635643,
+            "Head->HeadTop_End": 12.554353578340722
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.000004011810202535571,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  48.916664123535156,
+                  0
+                ],
+                "Head": [
+                  6.030448576152464,
+                  76.88332283813388,
+                  61.67799682317183
+                ],
+                "LeftArm": [
+                  26.39223299268437,
+                  75.8185103253083,
+                  39.04498740741671
+                ],
+                "LeftHand": [
+                  26.405321991209398,
+                  28.75533189040308,
+                  43.852503148493085
+                ],
+                "RightArm": [
+                  -18.10420536053962,
+                  70.70469620523774,
+                  44.473870357608256
+                ],
+                "RightHand": [
+                  -28.051489101941282,
+                  12.876871459683084,
+                  50.11054296685829
+                ],
+                "LeftUpLeg": [
+                  13.146647075201557,
+                  44.146106342252956,
+                  -5.076638869671329
+                ],
+                "LeftLeg": [
+                  35.04138648147588,
+                  40.53170936624282,
+                  23.1484336482386
+                ],
+                "LeftFoot": [
+                  26.510816274263522,
+                  22.135036647854292,
+                  -11.998664985860223
+                ],
+                "RightUpLeg": [
+                  -12.744276544289125,
+                  41.94097318834331,
+                  -3.2074858511110174
+                ],
+                "RightLeg": [
+                  -17.300089906056474,
+                  42.10766610196016,
+                  32.40597008761181
+                ],
+                "RightFoot": [
+                  -11.356320444348519,
+                  23.11793706547223,
+                  -2.957721556855738
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  44.47863006591797,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  4.666232144108504,
+                  71.78956556039377,
+                  50.261623805244625
+                ],
+                "LeftArm": [
+                  19.924351808858848,
+                  72.51646803154586,
+                  28.681723463280225
+                ],
+                "LeftHand": [
+                  20.138683776758903,
+                  32.31439068595745,
+                  32.6401808898003
+                ],
+                "RightArm": [
+                  -16.07362730192449,
+                  65.12308654193056,
+                  32.70757842819808
+                ],
+                "RightHand": [
+                  -24.719791033558653,
+                  16.01323041200127,
+                  37.311305870247395
+                ],
+                "LeftUpLeg": [
+                  9.161610815364165,
+                  40.342534238145745,
+                  -5.150075286957482
+                ],
+                "LeftLeg": [
+                  35.552784499924535,
+                  33.061782253358004,
+                  24.830096863832953
+                ],
+                "LeftFoot": [
+                  29.441062651123158,
+                  11.375097282341255,
+                  -10.731995941912668
+                ],
+                "RightUpLeg": [
+                  -8.974603841043082,
+                  38.797866661284,
+                  -3.8407643503536586
+                ],
+                "RightLeg": [
+                  -13.818513082828352,
+                  34.926084836801614,
+                  36.2822995529059
+                ],
+                "RightFoot": [
+                  -7.356853465655492,
+                  11.926580330685198,
+                  1.6182363758293263
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  48.916664123535156,
+                  0
+                ],
+                "Head": [
+                  6.030448576152464,
+                  76.88332283813388,
+                  61.67799682317183
+                ],
+                "LeftArm": [
+                  26.39223299268437,
+                  75.8185103253083,
+                  39.04498740741671
+                ],
+                "LeftHand": [
+                  26.405321991209398,
+                  28.75533189040308,
+                  43.852503148493085
+                ],
+                "RightArm": [
+                  -18.10420536053962,
+                  70.70469620523774,
+                  44.473870357608256
+                ],
+                "RightHand": [
+                  -28.051489101941282,
+                  12.876871459683084,
+                  50.11054296685829
+                ],
+                "LeftUpLeg": [
+                  13.146647075201557,
+                  44.146106342252956,
+                  -5.076638869671329
+                ],
+                "LeftLeg": [
+                  35.04138648147588,
+                  40.53170936624282,
+                  23.1484336482386
+                ],
+                "LeftFoot": [
+                  26.510816274263522,
+                  22.135036647854292,
+                  -11.998664985860223
+                ],
+                "RightUpLeg": [
+                  -12.744276544289125,
+                  41.94097318834331,
+                  -3.2074858511110174
+                ],
+                "RightLeg": [
+                  -17.300089906056474,
+                  42.10766610196016,
+                  32.40597008761181
+                ],
+                "RightFoot": [
+                  -11.356320444348519,
+                  23.11793706547223,
+                  -2.957721556855738
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  44.47863006591797,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  4.666232144108504,
+                  71.78956556039377,
+                  50.261623805244625
+                ],
+                "LeftArm": [
+                  19.924351808858848,
+                  72.51646803154586,
+                  28.681723463280225
+                ],
+                "LeftHand": [
+                  20.138683776758903,
+                  32.31439068595745,
+                  32.6401808898003
+                ],
+                "RightArm": [
+                  -16.07362730192449,
+                  65.12308654193056,
+                  32.70757842819808
+                ],
+                "RightHand": [
+                  -24.719791033558653,
+                  16.01323041200127,
+                  37.311305870247395
+                ],
+                "LeftUpLeg": [
+                  9.161610815364165,
+                  40.342534238145745,
+                  -5.150075286957482
+                ],
+                "LeftLeg": [
+                  35.552784499924535,
+                  33.061782253358004,
+                  24.830096863832953
+                ],
+                "LeftFoot": [
+                  29.441062651123158,
+                  11.375097282341255,
+                  -10.731995941912668
+                ],
+                "RightUpLeg": [
+                  -8.974603841043082,
+                  38.797866661284,
+                  -3.8407643503536586
+                ],
+                "RightLeg": [
+                  -13.818513082828352,
+                  34.926084836801614,
+                  36.2822995529059
+                ],
+                "RightFoot": [
+                  -7.356853465655492,
+                  11.926580330685198,
+                  1.6182363758293263
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  48.916664123535156,
+                  0
+                ],
+                "Head": [
+                  6.030448576152464,
+                  76.88332283813388,
+                  61.67799682317183
+                ],
+                "LeftArm": [
+                  26.39223299268437,
+                  75.8185103253083,
+                  39.04498740741671
+                ],
+                "LeftHand": [
+                  26.405321991209398,
+                  28.75533189040308,
+                  43.852503148493085
+                ],
+                "RightArm": [
+                  -18.10420536053962,
+                  70.70469620523774,
+                  44.473870357608256
+                ],
+                "RightHand": [
+                  -28.051489101941282,
+                  12.876871459683084,
+                  50.11054296685829
+                ],
+                "LeftUpLeg": [
+                  13.146647075201557,
+                  44.146106342252956,
+                  -5.076638869671329
+                ],
+                "LeftLeg": [
+                  35.04138648147588,
+                  40.53170936624282,
+                  23.1484336482386
+                ],
+                "LeftFoot": [
+                  26.510816274263522,
+                  22.135036647854292,
+                  -11.998664985860223
+                ],
+                "RightUpLeg": [
+                  -12.744276544289125,
+                  41.94097318834331,
+                  -3.2074858511110174
+                ],
+                "RightLeg": [
+                  -17.300089906056474,
+                  42.10766610196016,
+                  32.40597008761181
+                ],
+                "RightFoot": [
+                  -11.356320444348519,
+                  23.11793706547223,
+                  -2.957721556855738
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  44.47863006591797,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  4.666232144108504,
+                  71.78956556039377,
+                  50.261623805244625
+                ],
+                "LeftArm": [
+                  19.924351808858848,
+                  72.51646803154586,
+                  28.681723463280225
+                ],
+                "LeftHand": [
+                  20.138683776758903,
+                  32.31439068595745,
+                  32.6401808898003
+                ],
+                "RightArm": [
+                  -16.07362730192449,
+                  65.12308654193056,
+                  32.70757842819808
+                ],
+                "RightHand": [
+                  -24.719791033558653,
+                  16.01323041200127,
+                  37.311305870247395
+                ],
+                "LeftUpLeg": [
+                  9.161610815364165,
+                  40.342534238145745,
+                  -5.150075286957482
+                ],
+                "LeftLeg": [
+                  35.552784499924535,
+                  33.061782253358004,
+                  24.830096863832953
+                ],
+                "LeftFoot": [
+                  29.441062651123158,
+                  11.375097282341255,
+                  -10.731995941912668
+                ],
+                "RightUpLeg": [
+                  -8.974603841043082,
+                  38.797866661284,
+                  -3.8407643503536586
+                ],
+                "RightLeg": [
+                  -13.818513082828352,
+                  34.926084836801614,
+                  36.2822995529059
+                ],
+                "RightFoot": [
+                  -7.356853465655492,
+                  11.926580330685198,
+                  1.6182363758293263
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 44.47863006591797,
+          "leftKneeAngleDegrees": 51.26153931439287,
+          "rightKneeAngleDegrees": 38.74447545741587,
+          "leftKneeHeightCentimeters": 33.061782253358004,
+          "rightKneeHeightCentimeters": 34.926084836801614,
+          "leftFootHeightCentimeters": 11.375097282341255,
+          "rightFootHeightCentimeters": 11.926580330685198
+        }
+      },
+      "bytes": 50666,
+      "sha256": "10c0b576a9047cd7f767f387b231ad8500f7f2ef121d51628f385c8abd008feb"
+    },
+    {
+      "assetId": "local-pose-sneaking",
+      "displayName": "俯身警戒",
+      "nameFallback": "俯身警戒",
+      "description": "俯身警戒 / Mixamo 源姿态",
+      "descriptionFallback": "俯身警戒",
+      "category": "站立",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/sneaking.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/aaronsnoswell/3DCharacter/1902fb9674350f2b68b5a26b8eccd64570ac8dd4/Mixamo/Sneaking%20Forward.fbx",
+        "sha256": "7c6d9ccefbdd48c4e99cb39ec69f4fc4db15592806b40594c5b3b8c9692d583d",
+        "filename": "sneak.fbx",
+        "clipName": "mixamo.com",
+        "normalizedMotion": "sneak",
+        "sampleTimeSec": 0.35,
+        "sourceDurationSec": 2.3333332538604736
+      },
+      "conversion": {
+        "promotedExistingNodes": [],
+        "createdBones": 24,
+        "originalSourceJointCount": 41,
+        "staticReferenceJointsAdded": [
+          "mixamorigLeftHandMiddle1",
+          "mixamorigLeftHandMiddle2",
+          "mixamorigLeftHandMiddle3",
+          "mixamorigLeftHandMiddle4",
+          "mixamorigLeftHandRing1",
+          "mixamorigLeftHandRing2",
+          "mixamorigLeftHandRing3",
+          "mixamorigLeftHandRing4",
+          "mixamorigLeftHandPinky1",
+          "mixamorigLeftHandPinky2",
+          "mixamorigLeftHandPinky3",
+          "mixamorigLeftHandPinky4",
+          "mixamorigRightHandMiddle1",
+          "mixamorigRightHandMiddle2",
+          "mixamorigRightHandMiddle3",
+          "mixamorigRightHandMiddle4",
+          "mixamorigRightHandRing1",
+          "mixamorigRightHandRing2",
+          "mixamorigRightHandRing3",
+          "mixamorigRightHandRing4",
+          "mixamorigRightHandPinky1",
+          "mixamorigRightHandPinky2",
+          "mixamorigRightHandPinky3",
+          "mixamorigRightHandPinky4"
+        ],
+        "addedJointAnimationTracks": 0,
+        "parentRotationAndHeadingBaked": [
+          0,
+          -3.655088148467526e-7,
+          0,
+          0.9999999999999334
+        ],
+        "parentTranslationBaked": [
+          0,
+          0,
+          0
+        ],
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "originalParentScale": 1,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          1.0815703550061764,
+          0,
+          49.464392136687046
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "reuseValidatedNormalizedMotion": true
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 1.0812876308882087,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 5.754874196938778,
+          "maxBodyDirectionErrorDegrees": 12.554357000092589,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005059606411644771,
+            "LeftForeArm->LeftHand": 0.005060020231223347,
+            "RightArm->RightForeArm": 0.004935069796311048,
+            "RightForeArm->RightHand": 0.00497039608090089,
+            "LeftUpLeg->LeftLeg": 5.754874196938778,
+            "LeftLeg->LeftFoot": 5.286401846967672,
+            "RightUpLeg->RightLeg": 5.7526761024533,
+            "RightLeg->RightFoot": 5.2843721317250445,
+            "Spine->Spine2": 7.13579821467941,
+            "Neck->Head": 4.981313839505264,
+            "Head->HeadTop_End": 12.554357000092589
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.000004121510979630245,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  81.79613494873047,
+                  0
+                ],
+                "Head": [
+                  -10.952060732428686,
+                  115.31176252225411,
+                  54.57540410208529
+                ],
+                "LeftArm": [
+                  15.404206965824459,
+                  112.35463938708777,
+                  41.79296692795841
+                ],
+                "LeftHand": [
+                  44.328841467065075,
+                  64.91710123556496,
+                  47.14262295022585
+                ],
+                "RightArm": [
+                  -31.154856419223837,
+                  115.5929559135768,
+                  30.983680968128063
+                ],
+                "RightHand": [
+                  -66.3650324437117,
+                  76.511198419892,
+                  26.42012534136504
+                ],
+                "LeftUpLeg": [
+                  12.902754345568,
+                  74.50663351838362,
+                  1.3217087691441431
+                ],
+                "LeftLeg": [
+                  8.239184380306922,
+                  58.76214451518035,
+                  33.25069753566511
+                ],
+                "LeftFoot": [
+                  5.77120411868186,
+                  18.77962893031109,
+                  39.71861377571667
+                ],
+                "RightUpLeg": [
+                  -12.04996431692233,
+                  75.54780111137258,
+                  -6.092741439107375
+                ],
+                "RightLeg": [
+                  -18.86277072938293,
+                  41.4089051717623,
+                  2.6949081447568837
+                ],
+                "RightFoot": [
+                  -14.410361921218524,
+                  24.270688177675456,
+                  -33.81517615521072
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  80.03079223632812,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -8.091375013903782,
+                  110.81213533793355,
+                  43.80626010012823
+                ],
+                "LeftArm": [
+                  13.25606826784471,
+                  110.48446802001398,
+                  29.94255721676328
+                ],
+                "LeftHand": [
+                  38.08924722464334,
+                  70.0453417630272,
+                  34.403744119689016
+                ],
+                "RightArm": [
+                  -23.281562926566455,
+                  113.26374670839722,
+                  21.527456248551417
+                ],
+                "RightHand": [
+                  -53.294300327710125,
+                  80.19716811073087,
+                  17.313493973389065
+                ],
+                "LeftUpLeg": [
+                  9.37000665718335,
+                  73.73468181220038,
+                  -0.35792096756195296
+                ],
+                "LeftLeg": [
+                  4.441771263266335,
+                  52.36260371497713,
+                  33.80727738338068
+                ],
+                "LeftFoot": [
+                  1.2466408056234752,
+                  11.70679573255434,
+                  44.258301614884004
+                ],
+                "RightUpLeg": [
+                  -8.109008763601445,
+                  74.46399968069112,
+                  -5.551637469728966
+                ],
+                "RightLeg": [
+                  -15.47473502228334,
+                  34.98737031225777,
+                  0.4196684956300709
+                ],
+                "RightFoot": [
+                  -11.55976374812915,
+                  13.795974068458822,
+                  -35.74558500449057
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  81.79613494873047,
+                  0
+                ],
+                "Head": [
+                  -10.952060732428686,
+                  115.31176252225411,
+                  54.57540410208529
+                ],
+                "LeftArm": [
+                  15.404206965824459,
+                  112.35463938708777,
+                  41.79296692795841
+                ],
+                "LeftHand": [
+                  44.328841467065075,
+                  64.91710123556496,
+                  47.14262295022585
+                ],
+                "RightArm": [
+                  -31.154856419223837,
+                  115.5929559135768,
+                  30.983680968128063
+                ],
+                "RightHand": [
+                  -66.3650324437117,
+                  76.511198419892,
+                  26.42012534136504
+                ],
+                "LeftUpLeg": [
+                  12.902754345568,
+                  74.50663351838362,
+                  1.3217087691441431
+                ],
+                "LeftLeg": [
+                  8.239184380306922,
+                  58.76214451518035,
+                  33.25069753566511
+                ],
+                "LeftFoot": [
+                  5.77120411868186,
+                  18.77962893031109,
+                  39.71861377571667
+                ],
+                "RightUpLeg": [
+                  -12.04996431692233,
+                  75.54780111137258,
+                  -6.092741439107375
+                ],
+                "RightLeg": [
+                  -18.86277072938293,
+                  41.4089051717623,
+                  2.6949081447568837
+                ],
+                "RightFoot": [
+                  -14.410361921218524,
+                  24.270688177675456,
+                  -33.81517615521072
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  80.03079223632812,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -8.091375013903782,
+                  110.81213533793355,
+                  43.80626010012823
+                ],
+                "LeftArm": [
+                  13.25606826784471,
+                  110.48446802001398,
+                  29.94255721676328
+                ],
+                "LeftHand": [
+                  38.08924722464334,
+                  70.0453417630272,
+                  34.403744119689016
+                ],
+                "RightArm": [
+                  -23.281562926566455,
+                  113.26374670839722,
+                  21.527456248551417
+                ],
+                "RightHand": [
+                  -53.294300327710125,
+                  80.19716811073087,
+                  17.313493973389065
+                ],
+                "LeftUpLeg": [
+                  9.37000665718335,
+                  73.73468181220038,
+                  -0.35792096756195296
+                ],
+                "LeftLeg": [
+                  4.441771263266335,
+                  52.36260371497713,
+                  33.80727738338068
+                ],
+                "LeftFoot": [
+                  1.2466408056234752,
+                  11.70679573255434,
+                  44.258301614884004
+                ],
+                "RightUpLeg": [
+                  -8.109008763601445,
+                  74.46399968069112,
+                  -5.551637469728966
+                ],
+                "RightLeg": [
+                  -15.47473502228334,
+                  34.98737031225777,
+                  0.4196684956300709
+                ],
+                "RightFoot": [
+                  -11.55976374812915,
+                  13.795974068458822,
+                  -35.74558500449057
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  81.79613494873047,
+                  0
+                ],
+                "Head": [
+                  -10.952060732428686,
+                  115.31176252225411,
+                  54.57540410208529
+                ],
+                "LeftArm": [
+                  15.404206965824459,
+                  112.35463938708777,
+                  41.79296692795841
+                ],
+                "LeftHand": [
+                  44.328841467065075,
+                  64.91710123556496,
+                  47.14262295022585
+                ],
+                "RightArm": [
+                  -31.154856419223837,
+                  115.5929559135768,
+                  30.983680968128063
+                ],
+                "RightHand": [
+                  -66.3650324437117,
+                  76.511198419892,
+                  26.42012534136504
+                ],
+                "LeftUpLeg": [
+                  12.902754345568,
+                  74.50663351838362,
+                  1.3217087691441431
+                ],
+                "LeftLeg": [
+                  8.239184380306922,
+                  58.76214451518035,
+                  33.25069753566511
+                ],
+                "LeftFoot": [
+                  5.77120411868186,
+                  18.77962893031109,
+                  39.71861377571667
+                ],
+                "RightUpLeg": [
+                  -12.04996431692233,
+                  75.54780111137258,
+                  -6.092741439107375
+                ],
+                "RightLeg": [
+                  -18.86277072938293,
+                  41.4089051717623,
+                  2.6949081447568837
+                ],
+                "RightFoot": [
+                  -14.410361921218524,
+                  24.270688177675456,
+                  -33.81517615521072
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  80.03079223632812,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -8.091375013903782,
+                  110.81213533793355,
+                  43.80626010012823
+                ],
+                "LeftArm": [
+                  13.25606826784471,
+                  110.48446802001398,
+                  29.94255721676328
+                ],
+                "LeftHand": [
+                  38.08924722464334,
+                  70.0453417630272,
+                  34.403744119689016
+                ],
+                "RightArm": [
+                  -23.281562926566455,
+                  113.26374670839722,
+                  21.527456248551417
+                ],
+                "RightHand": [
+                  -53.294300327710125,
+                  80.19716811073087,
+                  17.313493973389065
+                ],
+                "LeftUpLeg": [
+                  9.37000665718335,
+                  73.73468181220038,
+                  -0.35792096756195296
+                ],
+                "LeftLeg": [
+                  4.441771263266335,
+                  52.36260371497713,
+                  33.80727738338068
+                ],
+                "LeftFoot": [
+                  1.2466408056234752,
+                  11.70679573255434,
+                  44.258301614884004
+                ],
+                "RightUpLeg": [
+                  -8.109008763601445,
+                  74.46399968069112,
+                  -5.551637469728966
+                ],
+                "RightLeg": [
+                  -15.47473502228334,
+                  34.98737031225777,
+                  0.4196684956300709
+                ],
+                "RightFoot": [
+                  -11.55976374812915,
+                  13.795974068458822,
+                  -35.74558500449057
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 80.03079223632812,
+          "leftKneeAngleDegrees": 136.59258396454192,
+          "rightKneeAngleDegrees": 110.25687106605295,
+          "leftKneeHeightCentimeters": 52.36260371497713,
+          "rightKneeHeightCentimeters": 34.98737031225777,
+          "leftFootHeightCentimeters": 11.70679573255434,
+          "rightFootHeightCentimeters": 13.795974068458822
+        }
+      },
+      "bytes": 50584,
+      "sha256": "ef1b670a250a2fac6ef20a932d2e319bd60d0d4ba1ddcf1de50e8eef4ffa3961"
+    },
+    {
+      "assetId": "local-pose-sitting",
+      "displayName": "坐地屈膝",
+      "nameFallback": "坐地屈膝",
+      "description": "坐地屈膝 / Mixamo 源姿态",
+      "descriptionFallback": "坐地屈膝",
+      "category": "坐姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/sitting.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/SittingIdle.fbx",
+        "sha256": "1643c88aca3cf47cd1105e2e8f9e54252427932b8b3e4d1e3f6b16f51a2ea686",
+        "filename": "sitting-idle.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 1,
+        "sourceDurationSec": 3.2666666507720947
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          0.7954301834106445,
+          0,
+          0.7863407135009766
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.5553333306312561,
+            1.4046666598320008,
+            2.580666654109955,
+            3.233999984264374
+          ],
+          "maxPositionErrorCentimeters": 0.0000018510568290246592,
+          "maxQuaternionErrorRadians": 4.2146848510894035e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492695914149,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 1.225342220810851,
+          "maxBodyDirectionErrorDegrees": 6.995658158749113,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005062272415489411,
+            "LeftForeArm->LeftHand": 0.005062016678286845,
+            "RightArm->RightForeArm": 0.004935088554680585,
+            "RightForeArm->RightHand": 0.004969529132342005,
+            "LeftUpLeg->LeftLeg": 1.225342220810851,
+            "LeftLeg->LeftFoot": 1.1653628556764113,
+            "RightUpLeg->RightLeg": 1.2223176088138588,
+            "RightLeg->RightFoot": 1.162486338012846,
+            "Spine->Spine2": 2.7458956709138955,
+            "Neck->Head": 6.995658158749113,
+            "Head->HeadTop_End": 0.9615985930674861
+          },
+          "maxErrorAboveBindDifferenceDegrees": 1.2424381668636137,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  13.895610809326172,
+                  0
+                ],
+                "Head": [
+                  0.04523067115593127,
+                  64.21599900164075,
+                  9.4471186252472
+                ],
+                "LeftArm": [
+                  15.076941709505649,
+                  50.39700429958104,
+                  6.60162567352903
+                ],
+                "LeftHand": [
+                  -5.50639581803296,
+                  30.358848962096644,
+                  35.090143409602646
+                ],
+                "RightArm": [
+                  -13.440306928799053,
+                  49.797982713500105,
+                  -3.067272798941082
+                ],
+                "RightHand": [
+                  -24.176814839220686,
+                  11.584881002115601,
+                  22.270843732914912
+                ],
+                "LeftUpLeg": [
+                  6.427783661127139,
+                  6.330124271792732,
+                  4.118132303512065
+                ],
+                "LeftLeg": [
+                  14.839390519480288,
+                  40.517632717169455,
+                  31.12331847881457
+                ],
+                "LeftFoot": [
+                  20.12229583943673,
+                  9.800176558883589,
+                  62.92353520651514
+                ],
+                "RightUpLeg": [
+                  -9.216969027296592,
+                  8.382743017329322,
+                  -0.4096029399982053
+                ],
+                "RightLeg": [
+                  -44.426776926398034,
+                  5.882326149359811,
+                  26.476213212314146
+                ],
+                "RightFoot": [
+                  -0.7853861735299432,
+                  5.148424746800987,
+                  35.286166534058225
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  15.716670989990234,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.6714196221116944,
+                  67.68591170471282,
+                  12.93689136110615
+                ],
+                "LeftArm": [
+                  17.812333556644553,
+                  53.75916627148439,
+                  10.049946209401336
+                ],
+                "LeftHand": [
+                  -2.2103418394222665,
+                  34.162066559165766,
+                  38.07409133710713
+                ],
+                "RightArm": [
+                  -17.456102366295518,
+                  52.97357246219625,
+                  -1.7035187864043992
+                ],
+                "RightHand": [
+                  -28.0920167260504,
+                  15.524174585749527,
+                  23.033852632863866
+                ],
+                "LeftUpLeg": [
+                  7.056180362129799,
+                  8.91862830194604,
+                  5.618156458472407
+                ],
+                "LeftLeg": [
+                  14.955664485733672,
+                  39.639312301703995,
+                  30.95887272765359
+                ],
+                "LeftFoot": [
+                  19.806321117856818,
+                  11.198520903842144,
+                  61.616991725588036
+                ],
+                "RightUpLeg": [
+                  -10.335791217049342,
+                  11.200480453341633,
+                  0.5847630308376986
+                ],
+                "RightLeg": [
+                  -42.08338529870274,
+                  8.441449847511265,
+                  25.740133483555173
+                ],
+                "RightFoot": [
+                  -0.9962557867087796,
+                  7.86871845217449,
+                  34.89699106888972
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  13.895610809326172,
+                  0
+                ],
+                "Head": [
+                  0.04523067115593127,
+                  64.21599900164075,
+                  9.4471186252472
+                ],
+                "LeftArm": [
+                  15.076941709505649,
+                  50.39700429958104,
+                  6.60162567352903
+                ],
+                "LeftHand": [
+                  -5.50639581803296,
+                  30.358848962096644,
+                  35.090143409602646
+                ],
+                "RightArm": [
+                  -13.440306928799053,
+                  49.797982713500105,
+                  -3.067272798941082
+                ],
+                "RightHand": [
+                  -24.176814839220686,
+                  11.584881002115601,
+                  22.270843732914912
+                ],
+                "LeftUpLeg": [
+                  6.427783661127139,
+                  6.330124271792732,
+                  4.118132303512065
+                ],
+                "LeftLeg": [
+                  14.839390519480288,
+                  40.517632717169455,
+                  31.12331847881457
+                ],
+                "LeftFoot": [
+                  20.12229583943673,
+                  9.800176558883589,
+                  62.92353520651514
+                ],
+                "RightUpLeg": [
+                  -9.216969027296592,
+                  8.382743017329322,
+                  -0.4096029399982053
+                ],
+                "RightLeg": [
+                  -44.426776926398034,
+                  5.882326149359811,
+                  26.476213212314146
+                ],
+                "RightFoot": [
+                  -0.7853861735299432,
+                  5.148424746800987,
+                  35.286166534058225
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  15.716670989990234,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.6714196221116944,
+                  67.68591170471282,
+                  12.93689136110615
+                ],
+                "LeftArm": [
+                  17.812333556644553,
+                  53.75916627148439,
+                  10.049946209401336
+                ],
+                "LeftHand": [
+                  -2.2103418394222665,
+                  34.162066559165766,
+                  38.07409133710713
+                ],
+                "RightArm": [
+                  -17.456102366295518,
+                  52.97357246219625,
+                  -1.7035187864043992
+                ],
+                "RightHand": [
+                  -28.0920167260504,
+                  15.524174585749527,
+                  23.033852632863866
+                ],
+                "LeftUpLeg": [
+                  7.056180362129799,
+                  8.91862830194604,
+                  5.618156458472407
+                ],
+                "LeftLeg": [
+                  14.955664485733672,
+                  39.639312301703995,
+                  30.95887272765359
+                ],
+                "LeftFoot": [
+                  19.806321117856818,
+                  11.198520903842144,
+                  61.616991725588036
+                ],
+                "RightUpLeg": [
+                  -10.335791217049342,
+                  11.200480453341633,
+                  0.5847630308376986
+                ],
+                "RightLeg": [
+                  -42.08338529870274,
+                  8.441449847511265,
+                  25.740133483555173
+                ],
+                "RightFoot": [
+                  -0.9962557867087796,
+                  7.86871845217449,
+                  34.89699106888972
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  13.895610809326172,
+                  0
+                ],
+                "Head": [
+                  0.04523067115593127,
+                  64.21599900164075,
+                  9.4471186252472
+                ],
+                "LeftArm": [
+                  15.076941709505649,
+                  50.39700429958104,
+                  6.60162567352903
+                ],
+                "LeftHand": [
+                  -5.50639581803296,
+                  30.358848962096644,
+                  35.090143409602646
+                ],
+                "RightArm": [
+                  -13.440306928799053,
+                  49.797982713500105,
+                  -3.067272798941082
+                ],
+                "RightHand": [
+                  -24.176814839220686,
+                  11.584881002115601,
+                  22.270843732914912
+                ],
+                "LeftUpLeg": [
+                  6.427783661127139,
+                  6.330124271792732,
+                  4.118132303512065
+                ],
+                "LeftLeg": [
+                  14.839390519480288,
+                  40.517632717169455,
+                  31.12331847881457
+                ],
+                "LeftFoot": [
+                  20.12229583943673,
+                  9.800176558883589,
+                  62.92353520651514
+                ],
+                "RightUpLeg": [
+                  -9.216969027296592,
+                  8.382743017329322,
+                  -0.4096029399982053
+                ],
+                "RightLeg": [
+                  -44.426776926398034,
+                  5.882326149359811,
+                  26.476213212314146
+                ],
+                "RightFoot": [
+                  -0.7853861735299432,
+                  5.148424746800987,
+                  35.286166534058225
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  15.716670989990234,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.6714196221116944,
+                  67.68591170471282,
+                  12.93689136110615
+                ],
+                "LeftArm": [
+                  17.812333556644553,
+                  53.75916627148439,
+                  10.049946209401336
+                ],
+                "LeftHand": [
+                  -2.2103418394222665,
+                  34.162066559165766,
+                  38.07409133710713
+                ],
+                "RightArm": [
+                  -17.456102366295518,
+                  52.97357246219625,
+                  -1.7035187864043992
+                ],
+                "RightHand": [
+                  -28.0920167260504,
+                  15.524174585749527,
+                  23.033852632863866
+                ],
+                "LeftUpLeg": [
+                  7.056180362129799,
+                  8.91862830194604,
+                  5.618156458472407
+                ],
+                "LeftLeg": [
+                  14.955664485733672,
+                  39.639312301703995,
+                  30.95887272765359
+                ],
+                "LeftFoot": [
+                  19.806321117856818,
+                  11.198520903842144,
+                  61.616991725588036
+                ],
+                "RightUpLeg": [
+                  -10.335791217049342,
+                  11.200480453341633,
+                  0.5847630308376986
+                ],
+                "RightLeg": [
+                  -42.08338529870274,
+                  8.441449847511265,
+                  25.740133483555173
+                ],
+                "RightFoot": [
+                  -0.9962557867087796,
+                  7.86871845217449,
+                  34.89699106888972
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 15.716670989990234,
+          "leftKneeAngleDegrees": 88.03843639423384,
+          "rightKneeAngleDegrees": 51.13528781025193,
+          "leftKneeHeightCentimeters": 39.639312301703995,
+          "rightKneeHeightCentimeters": 8.441449847511265,
+          "leftFootHeightCentimeters": 11.198520903842144,
+          "rightFootHeightCentimeters": 7.86871845217449
+        }
+      },
+      "bytes": 49538,
+      "sha256": "8306c7154b71a98868c36c01362490d6d4b4c160688479dda1af5e36e3eec17c"
+    },
+    {
+      "assetId": "local-pose-sitting-closed",
+      "displayName": "交腿坐姿",
+      "nameFallback": "交腿坐姿",
+      "description": "交腿坐姿 / Mixamo 源姿态",
+      "descriptionFallback": "交腿坐姿",
+      "category": "坐姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/sitting-closed.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/FemaleSittingPose.fbx",
+        "sha256": "45bb447e369e44088028b9f34912d88e0c373987b8fb88a507b93dd7c490cfb5",
+        "filename": "female-sitting.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 0,
+        "sourceDurationSec": 0.03333333507180214
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          -0.18173444271087646,
+          0,
+          -0.1680963784456253
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.005666666962206364,
+            0.01433333408087492,
+            0.02633333470672369,
+            0.03300000172108412
+          ],
+          "maxPositionErrorCentimeters": 0.0000026657774558174453,
+          "maxQuaternionErrorRadians": 5.16191365590357e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492695914149,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 1.2253466270400368,
+          "maxBodyDirectionErrorDegrees": 6.99565794794599,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.0050613239918070405,
+            "LeftForeArm->LeftHand": 0.005061742351215424,
+            "RightArm->RightForeArm": 0.004934548152143953,
+            "RightForeArm->RightHand": 0.004969173347799681,
+            "LeftUpLeg->LeftLeg": 1.2253466270400368,
+            "LeftLeg->LeftFoot": 1.1653607022773802,
+            "RightUpLeg->RightLeg": 1.2223164950542795,
+            "RightLeg->RightFoot": 1.1624880031660878,
+            "Spine->Spine2": 2.1166290761624875,
+            "Neck->Head": 6.99565794794599,
+            "Head->HeadTop_End": 0.9615992466422097
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.6131715721122056,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  58.38657760620117,
+                  0
+                ],
+                "Head": [
+                  4.02448154034256,
+                  112.70713542228162,
+                  3.1875334256189753
+                ],
+                "LeftArm": [
+                  11.36068740144775,
+                  98.20060550540524,
+                  -11.332238112236475
+                ],
+                "LeftHand": [
+                  30.63589788332367,
+                  74.31913502989491,
+                  34.58135855122627
+                ],
+                "RightArm": [
+                  -11.145249556253134,
+                  98.56035841909397,
+                  9.689935451335899
+                ],
+                "RightHand": [
+                  31.315591081452574,
+                  71.46426939159983,
+                  29.674348866501155
+                ],
+                "LeftUpLeg": [
+                  7.191158485342307,
+                  51.82481447525551,
+                  -4.55439435976043
+                ],
+                "LeftLeg": [
+                  22.286643063480906,
+                  56.53458058579288,
+                  36.90360302297453
+                ],
+                "LeftFoot": [
+                  27.86299649488429,
+                  12.364382406870568,
+                  36.11433927466003
+                ],
+                "RightUpLeg": [
+                  -5.765146535469335,
+                  51.1773798706454,
+                  5.504775737134496
+                ],
+                "RightLeg": [
+                  25.019261017170574,
+                  69.79599404686233,
+                  31.47586029905119
+                ],
+                "RightFoot": [
+                  48.57378837324407,
+                  32.36040611737994,
+                  36.6223043702508
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  57.1043586730957,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  6.833412201314408,
+                  114.31849077251006,
+                  5.990881992219625
+                ],
+                "LeftArm": [
+                  16.01654679924545,
+                  99.5406184794755,
+                  -12.204455015248845
+                ],
+                "LeftHand": [
+                  34.92616210535597,
+                  76.12107543733734,
+                  32.74128794046707
+                ],
+                "RightArm": [
+                  -11.73845148622672,
+                  99.99309675751634,
+                  13.770634242686938
+                ],
+                "RightHand": [
+                  29.807910020283593,
+                  73.40083640104946,
+                  33.37078216863595
+                ],
+                "LeftUpLeg": [
+                  8.764869934289877,
+                  51.19729505611421,
+                  -3.9811367188361415
+                ],
+                "LeftLeg": [
+                  22.92835407026771,
+                  54.71409262087545,
+                  33.90477515035335
+                ],
+                "LeftFoot": [
+                  28.255783806061295,
+                  12.953644203765208,
+                  34.01303150443741
+                ],
+                "RightUpLeg": [
+                  -5.638403707551615,
+                  50.477549276056514,
+                  7.20144992402903
+                ],
+                "RightLeg": [
+                  22.781824666127203,
+                  66.72380011852329,
+                  31.21528551524112
+                ],
+                "RightFoot": [
+                  45.763928158778114,
+                  31.797256892399176,
+                  36.14350310524981
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  58.38657760620117,
+                  0
+                ],
+                "Head": [
+                  4.02448154034256,
+                  112.70713542228162,
+                  3.1875334256189753
+                ],
+                "LeftArm": [
+                  11.36068740144775,
+                  98.20060550540524,
+                  -11.332238112236475
+                ],
+                "LeftHand": [
+                  30.63589788332367,
+                  74.31913502989491,
+                  34.58135855122627
+                ],
+                "RightArm": [
+                  -11.145249556253134,
+                  98.56035841909397,
+                  9.689935451335899
+                ],
+                "RightHand": [
+                  31.315591081452574,
+                  71.46426939159983,
+                  29.674348866501155
+                ],
+                "LeftUpLeg": [
+                  7.191158485342307,
+                  51.82481447525551,
+                  -4.55439435976043
+                ],
+                "LeftLeg": [
+                  22.286643063480906,
+                  56.53458058579288,
+                  36.90360302297453
+                ],
+                "LeftFoot": [
+                  27.86299649488429,
+                  12.364382406870568,
+                  36.11433927466003
+                ],
+                "RightUpLeg": [
+                  -5.765146535469335,
+                  51.1773798706454,
+                  5.504775737134496
+                ],
+                "RightLeg": [
+                  25.019261017170574,
+                  69.79599404686233,
+                  31.47586029905119
+                ],
+                "RightFoot": [
+                  48.57378837324407,
+                  32.36040611737994,
+                  36.6223043702508
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  57.1043586730957,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  6.833412201314408,
+                  114.31849077251006,
+                  5.990881992219625
+                ],
+                "LeftArm": [
+                  16.01654679924545,
+                  99.5406184794755,
+                  -12.204455015248845
+                ],
+                "LeftHand": [
+                  34.92616210535597,
+                  76.12107543733734,
+                  32.74128794046707
+                ],
+                "RightArm": [
+                  -11.73845148622672,
+                  99.99309675751634,
+                  13.770634242686938
+                ],
+                "RightHand": [
+                  29.807910020283593,
+                  73.40083640104946,
+                  33.37078216863595
+                ],
+                "LeftUpLeg": [
+                  8.764869934289877,
+                  51.19729505611421,
+                  -3.9811367188361415
+                ],
+                "LeftLeg": [
+                  22.92835407026771,
+                  54.71409262087545,
+                  33.90477515035335
+                ],
+                "LeftFoot": [
+                  28.255783806061295,
+                  12.953644203765208,
+                  34.01303150443741
+                ],
+                "RightUpLeg": [
+                  -5.638403707551615,
+                  50.477549276056514,
+                  7.20144992402903
+                ],
+                "RightLeg": [
+                  22.781824666127203,
+                  66.72380011852329,
+                  31.21528551524112
+                ],
+                "RightFoot": [
+                  45.763928158778114,
+                  31.797256892399176,
+                  36.14350310524981
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  58.38657760620117,
+                  0
+                ],
+                "Head": [
+                  4.02448154034256,
+                  112.70713542228162,
+                  3.1875334256189753
+                ],
+                "LeftArm": [
+                  11.36068740144775,
+                  98.20060550540524,
+                  -11.332238112236475
+                ],
+                "LeftHand": [
+                  30.63589788332367,
+                  74.31913502989491,
+                  34.58135855122627
+                ],
+                "RightArm": [
+                  -11.145249556253134,
+                  98.56035841909397,
+                  9.689935451335899
+                ],
+                "RightHand": [
+                  31.315591081452574,
+                  71.46426939159983,
+                  29.674348866501155
+                ],
+                "LeftUpLeg": [
+                  7.191158485342307,
+                  51.82481447525551,
+                  -4.55439435976043
+                ],
+                "LeftLeg": [
+                  22.286643063480906,
+                  56.53458058579288,
+                  36.90360302297453
+                ],
+                "LeftFoot": [
+                  27.86299649488429,
+                  12.364382406870568,
+                  36.11433927466003
+                ],
+                "RightUpLeg": [
+                  -5.765146535469335,
+                  51.1773798706454,
+                  5.504775737134496
+                ],
+                "RightLeg": [
+                  25.019261017170574,
+                  69.79599404686233,
+                  31.47586029905119
+                ],
+                "RightFoot": [
+                  48.57378837324407,
+                  32.36040611737994,
+                  36.6223043702508
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  57.1043586730957,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  6.833412201314408,
+                  114.31849077251006,
+                  5.990881992219625
+                ],
+                "LeftArm": [
+                  16.01654679924545,
+                  99.5406184794755,
+                  -12.204455015248845
+                ],
+                "LeftHand": [
+                  34.92616210535597,
+                  76.12107543733734,
+                  32.74128794046707
+                ],
+                "RightArm": [
+                  -11.73845148622672,
+                  99.99309675751634,
+                  13.770634242686938
+                ],
+                "RightHand": [
+                  29.807910020283593,
+                  73.40083640104946,
+                  33.37078216863595
+                ],
+                "LeftUpLeg": [
+                  8.764869934289877,
+                  51.19729505611421,
+                  -3.9811367188361415
+                ],
+                "LeftLeg": [
+                  22.92835407026771,
+                  54.71409262087545,
+                  33.90477515035335
+                ],
+                "LeftFoot": [
+                  28.255783806061295,
+                  12.953644203765208,
+                  34.01303150443741
+                ],
+                "RightUpLeg": [
+                  -5.638403707551615,
+                  50.477549276056514,
+                  7.20144992402903
+                ],
+                "RightLeg": [
+                  22.781824666127203,
+                  66.72380011852329,
+                  31.21528551524112
+                ],
+                "RightFoot": [
+                  45.763928158778114,
+                  31.797256892399176,
+                  36.14350310524981
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 57.1043586730957,
+          "leftKneeAngleDegrees": 87.74315865110867,
+          "rightKneeAngleDegrees": 96.85742777767473,
+          "leftKneeHeightCentimeters": 54.71409262087545,
+          "rightKneeHeightCentimeters": 66.72380011852329,
+          "leftFootHeightCentimeters": 12.953644203765208,
+          "rightFootHeightCentimeters": 31.797256892399176
+        }
+      },
+      "bytes": 49577,
+      "sha256": "28050a49769e9f188d4d6320aeecfe0e6a7c25355781e22cfd5ab1ebc1eb7c88"
+    },
+    {
+      "assetId": "local-pose-sitting-relaxed",
+      "displayName": "架腿坐姿",
+      "nameFallback": "架腿坐姿",
+      "description": "架腿坐姿 / Mixamo 源姿态",
+      "descriptionFallback": "架腿坐姿",
+      "category": "坐姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/sitting-relaxed.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/Male_Sitting_Pose_1.fbx",
+        "sha256": "d551537cfc1329d3487fac765d50dd669a9566ed2bfde7ce943e9ae719210546",
+        "filename": "male-sitting.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 0,
+        "sourceDurationSec": 0.03333333507180214
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          0.14270177483558655,
+          0,
+          0.8468142747879028
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.005666666962206364,
+            0.01433333408087492,
+            0.02633333470672369,
+            0.03300000172108412
+          ],
+          "maxPositionErrorCentimeters": 0.000001913105957148025,
+          "maxQuaternionErrorRadians": 4.2146848510894035e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492695914149,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 1.2253403868072583,
+          "maxBodyDirectionErrorDegrees": 6.995656128592677,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005066443744563369,
+            "LeftForeArm->LeftHand": 0.005061361436743116,
+            "RightArm->RightForeArm": 0.004930598100321894,
+            "RightForeArm->RightHand": 0.004970517949043554,
+            "LeftUpLeg->LeftLeg": 1.2253403868072583,
+            "LeftLeg->LeftFoot": 1.1653669490976466,
+            "RightUpLeg->RightLeg": 1.2223138717473643,
+            "RightLeg->RightFoot": 1.1624954963181688,
+            "Spine->Spine2": 1.4226124884805764,
+            "Neck->Head": 6.995656128592677,
+            "Head->HeadTop_End": 0.9615973870478067
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.000006534944717170306,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  60.32667922973633,
+                  0
+                ],
+                "Head": [
+                  2.583085005083721,
+                  106.19707197577576,
+                  -28.373947736090628
+                ],
+                "LeftArm": [
+                  16.750294291791658,
+                  92.62086392413981,
+                  -30.165070186184902
+                ],
+                "LeftHand": [
+                  9.82007472341866,
+                  116.71289171579762,
+                  -36.28696685110518
+                ],
+                "RightArm": [
+                  -11.310566660979744,
+                  96.55519446734314,
+                  -29.624660221956038
+                ],
+                "RightHand": [
+                  -10.443905073841819,
+                  116.37072850276382,
+                  -40.56957232587791
+                ],
+                "LeftUpLeg": [
+                  7.334122947039398,
+                  53.434200784583524,
+                  3.7704621404880347
+                ],
+                "LeftLeg": [
+                  23.76504521822526,
+                  70.43353108825985,
+                  41.318676302128765
+                ],
+                "LeftFoot": [
+                  -19.17553163555258,
+                  60.1290091355698,
+                  47.03258781362209
+                ],
+                "RightUpLeg": [
+                  -8.96507363105795,
+                  55.255353145136944,
+                  3.069382660323982
+                ],
+                "RightLeg": [
+                  -8.154926112744526,
+                  51.474292612870194,
+                  47.272063382814174
+                ],
+                "RightFoot": [
+                  -6.2435814964920855,
+                  8.729618189940382,
+                  59.59945958192267
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  58.90913772583008,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  2.7933841110375615,
+                  109.58502700805784,
+                  -27.555226794987483
+                ],
+                "LeftArm": [
+                  20.269591707588496,
+                  95.5010335575857,
+                  -31.50062439467346
+                ],
+                "LeftHand": [
+                  13.66987669263964,
+                  119.1803840011297,
+                  -37.37656452363801
+                ],
+                "RightArm": [
+                  -14.20277039546318,
+                  100.21219075929905,
+                  -30.816054382280768
+                ],
+                "RightHand": [
+                  -13.57340339161549,
+                  119.67657776749243,
+                  -41.443693871236654
+                ],
+                "LeftUpLeg": [
+                  8.323453061649834,
+                  53.03383699505231,
+                  4.87520568854144
+                ],
+                "LeftLeg": [
+                  22.719870200052682,
+                  68.20033176236869,
+                  39.67512944579648
+                ],
+                "LeftFoot": [
+                  -17.834451458239336,
+                  58.75628457652089,
+                  45.878740174049696
+                ],
+                "RightUpLeg": [
+                  -9.79605042372295,
+                  55.058373115448475,
+                  4.095832784710067
+                ],
+                "RightLeg": [
+                  -9.268165654783882,
+                  50.762861530083626,
+                  44.46394516812104
+                ],
+                "RightFoot": [
+                  -7.320120396297133,
+                  10.597260463580426,
+                  56.924184214307274
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  60.32667922973633,
+                  0
+                ],
+                "Head": [
+                  2.583085005083721,
+                  106.19707197577576,
+                  -28.373947736090628
+                ],
+                "LeftArm": [
+                  16.750294291791658,
+                  92.62086392413981,
+                  -30.165070186184902
+                ],
+                "LeftHand": [
+                  9.82007472341866,
+                  116.71289171579762,
+                  -36.28696685110518
+                ],
+                "RightArm": [
+                  -11.310566660979744,
+                  96.55519446734314,
+                  -29.624660221956038
+                ],
+                "RightHand": [
+                  -10.443905073841819,
+                  116.37072850276382,
+                  -40.56957232587791
+                ],
+                "LeftUpLeg": [
+                  7.334122947039398,
+                  53.434200784583524,
+                  3.7704621404880347
+                ],
+                "LeftLeg": [
+                  23.76504521822526,
+                  70.43353108825985,
+                  41.318676302128765
+                ],
+                "LeftFoot": [
+                  -19.17553163555258,
+                  60.1290091355698,
+                  47.03258781362209
+                ],
+                "RightUpLeg": [
+                  -8.96507363105795,
+                  55.255353145136944,
+                  3.069382660323982
+                ],
+                "RightLeg": [
+                  -8.154926112744526,
+                  51.474292612870194,
+                  47.272063382814174
+                ],
+                "RightFoot": [
+                  -6.2435814964920855,
+                  8.729618189940382,
+                  59.59945958192267
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  58.90913772583008,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  2.7933841110375615,
+                  109.58502700805784,
+                  -27.555226794987483
+                ],
+                "LeftArm": [
+                  20.269591707588496,
+                  95.5010335575857,
+                  -31.50062439467346
+                ],
+                "LeftHand": [
+                  13.66987669263964,
+                  119.1803840011297,
+                  -37.37656452363801
+                ],
+                "RightArm": [
+                  -14.20277039546318,
+                  100.21219075929905,
+                  -30.816054382280768
+                ],
+                "RightHand": [
+                  -13.57340339161549,
+                  119.67657776749243,
+                  -41.443693871236654
+                ],
+                "LeftUpLeg": [
+                  8.323453061649834,
+                  53.03383699505231,
+                  4.87520568854144
+                ],
+                "LeftLeg": [
+                  22.719870200052682,
+                  68.20033176236869,
+                  39.67512944579648
+                ],
+                "LeftFoot": [
+                  -17.834451458239336,
+                  58.75628457652089,
+                  45.878740174049696
+                ],
+                "RightUpLeg": [
+                  -9.79605042372295,
+                  55.058373115448475,
+                  4.095832784710067
+                ],
+                "RightLeg": [
+                  -9.268165654783882,
+                  50.762861530083626,
+                  44.46394516812104
+                ],
+                "RightFoot": [
+                  -7.320120396297133,
+                  10.597260463580426,
+                  56.924184214307274
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  60.32667922973633,
+                  0
+                ],
+                "Head": [
+                  2.583085005083721,
+                  106.19707197577576,
+                  -28.373947736090628
+                ],
+                "LeftArm": [
+                  16.750294291791658,
+                  92.62086392413981,
+                  -30.165070186184902
+                ],
+                "LeftHand": [
+                  9.82007472341866,
+                  116.71289171579762,
+                  -36.28696685110518
+                ],
+                "RightArm": [
+                  -11.310566660979744,
+                  96.55519446734314,
+                  -29.624660221956038
+                ],
+                "RightHand": [
+                  -10.443905073841819,
+                  116.37072850276382,
+                  -40.56957232587791
+                ],
+                "LeftUpLeg": [
+                  7.334122947039398,
+                  53.434200784583524,
+                  3.7704621404880347
+                ],
+                "LeftLeg": [
+                  23.76504521822526,
+                  70.43353108825985,
+                  41.318676302128765
+                ],
+                "LeftFoot": [
+                  -19.17553163555258,
+                  60.1290091355698,
+                  47.03258781362209
+                ],
+                "RightUpLeg": [
+                  -8.96507363105795,
+                  55.255353145136944,
+                  3.069382660323982
+                ],
+                "RightLeg": [
+                  -8.154926112744526,
+                  51.474292612870194,
+                  47.272063382814174
+                ],
+                "RightFoot": [
+                  -6.2435814964920855,
+                  8.729618189940382,
+                  59.59945958192267
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  58.90913772583008,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  2.7933841110375615,
+                  109.58502700805784,
+                  -27.555226794987483
+                ],
+                "LeftArm": [
+                  20.269591707588496,
+                  95.5010335575857,
+                  -31.50062439467346
+                ],
+                "LeftHand": [
+                  13.66987669263964,
+                  119.1803840011297,
+                  -37.37656452363801
+                ],
+                "RightArm": [
+                  -14.20277039546318,
+                  100.21219075929905,
+                  -30.816054382280768
+                ],
+                "RightHand": [
+                  -13.57340339161549,
+                  119.67657776749243,
+                  -41.443693871236654
+                ],
+                "LeftUpLeg": [
+                  8.323453061649834,
+                  53.03383699505231,
+                  4.87520568854144
+                ],
+                "LeftLeg": [
+                  22.719870200052682,
+                  68.20033176236869,
+                  39.67512944579648
+                ],
+                "LeftFoot": [
+                  -17.834451458239336,
+                  58.75628457652089,
+                  45.878740174049696
+                ],
+                "RightUpLeg": [
+                  -9.79605042372295,
+                  55.058373115448475,
+                  4.095832784710067
+                ],
+                "RightLeg": [
+                  -9.268165654783882,
+                  50.762861530083626,
+                  44.46394516812104
+                ],
+                "RightFoot": [
+                  -7.320120396297133,
+                  10.597260463580426,
+                  56.924184214307274
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 58.90913772583008,
+          "leftKneeAngleDegrees": 72.597704345862,
+          "rightKneeAngleDegrees": 113.31793434985607,
+          "leftKneeHeightCentimeters": 68.20033176236869,
+          "rightKneeHeightCentimeters": 50.762861530083626,
+          "leftFootHeightCentimeters": 58.75628457652089,
+          "rightFootHeightCentimeters": 10.597260463580426
+        }
+      },
+      "bytes": 49598,
+      "sha256": "20ae23870f0f752a21fa77251c078419efc5f6376f7e18a9f420493fec07ada9"
+    },
+    {
+      "assetId": "local-pose-kneeling",
+      "displayName": "双膝跪姿",
+      "nameFallback": "双膝跪姿",
+      "description": "双膝跪姿 / Mixamo 源姿态",
+      "descriptionFallback": "双膝跪姿",
+      "category": "跪姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/kneeling.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/animation-sources/kneeling%20idle.fbx",
+        "sha256": "e2ca7d82c9d1713e2901890d5c7830938b614accd28d94a2fd90fcc380cf5612",
+        "filename": "kneeling-idle.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 1,
+        "sourceDurationSec": 4.25
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -0.009481769516769082,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          -0.041189417243003845,
+          0,
+          -0.4472403824329376
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.7225,
+            1.8275,
+            3.3575,
+            4.2075
+          ],
+          "maxPositionErrorCentimeters": 5.9527428881016986e-8,
+          "maxQuaternionErrorRadians": 4.2146848510894035e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 1.0484935692009063,
+          "maxJointMovementCentimeters": 1.4210854715202004e-14,
+          "maxLimbDirectionErrorDegrees": 3.227036488509778,
+          "maxBodyDirectionErrorDegrees": 3.227036488509778,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.5432626808732682,
+            "LeftForeArm->LeftHand": 0.5432351342300727,
+            "RightArm->RightForeArm": 0.5432878014364094,
+            "RightForeArm->RightHand": 0.5433169484462549,
+            "LeftUpLeg->LeftLeg": 3.227036488509778,
+            "LeftLeg->LeftFoot": 0.37103152551196494,
+            "RightUpLeg->RightLeg": 3.2180606494219095,
+            "RightLeg->RightFoot": 0.7842547162425331,
+            "Spine->Spine2": 2.511042487262099,
+            "Neck->Head": 1.506036208391031,
+            "Head->HeadTop_End": 1.339936150953483
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.00035023308942665036,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  49.831119537353516,
+                  0
+                ],
+                "Head": [
+                  -0.7320341064249092,
+                  109.88959704316106,
+                  -0.4185124100409183
+                ],
+                "LeftArm": [
+                  18.643602423863367,
+                  93.07975607590298,
+                  -3.2349191806697606
+                ],
+                "LeftHand": [
+                  27.857477396098584,
+                  46.81117906768248,
+                  2.9438329528764013
+                ],
+                "RightArm": [
+                  -19.518830288543107,
+                  92.44360019957455,
+                  -1.608311095580167
+                ],
+                "RightHand": [
+                  -26.491783486768263,
+                  45.58454011136898,
+                  3.521201754486891
+                ],
+                "LeftUpLeg": [
+                  8.851196305443928,
+                  44.07272922928437,
+                  0.22695259960594297
+                ],
+                "LeftLeg": [
+                  18.579616086909784,
+                  4.330287197438906,
+                  0.7531317424558365
+                ],
+                "LeftFoot": [
+                  14.67409417158542,
+                  13.66969532007047,
+                  -35.83267959908006
+                ],
+                "RightUpLeg": [
+                  -8.67583008388909,
+                  43.81217418410218,
+                  0.4164732354061792
+                ],
+                "RightLeg": [
+                  -17.06333874409938,
+                  3.7921968688677836,
+                  -1.1192090247038409
+                ],
+                "RightFoot": [
+                  -11.319564693557128,
+                  14.595779251255921,
+                  -37.04181135884607
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  52.433067321777344,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.71803777033241,
+                  112.52192367751134,
+                  1.0698598876890348
+                ],
+                "LeftArm": [
+                  17.39100760403528,
+                  92.08927052804538,
+                  -5.513691760409812
+                ],
+                "LeftHand": [
+                  27.858156885074408,
+                  39.63550776688894,
+                  1.4572766548595766
+                ],
+                "RightArm": [
+                  -18.618207184079786,
+                  91.42041736061952,
+                  -3.555852610521041
+                ],
+                "RightHand": [
+                  -26.1692678975588,
+                  38.34012829807857,
+                  3.1553917958090274
+                ],
+                "LeftUpLeg": [
+                  9.220877291440742,
+                  45.913386213824644,
+                  -0.18798231057221246
+                ],
+                "LeftLeg": [
+                  19.101208060019086,
+                  6.6336401985026185,
+                  2.6039586705061093
+                ],
+                "LeftFoot": [
+                  14.571022908008048,
+                  17.165416978598664,
+                  -37.90390441839853
+                ],
+                "RightUpLeg": [
+                  -9.02494623729545,
+                  45.6421402624538,
+                  0.009310707368700592
+                ],
+                "RightLeg": [
+                  -17.694802984539095,
+                  5.985908969253671,
+                  0.7383269434505899
+                ],
+                "RightFoot": [
+                  -11.150971345519634,
+                  18.48803235135682,
+                  -38.92529763631168
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  49.831119537353516,
+                  0
+                ],
+                "Head": [
+                  -0.7320341064249092,
+                  109.88959704316106,
+                  -0.4185124100409183
+                ],
+                "LeftArm": [
+                  18.643602423863367,
+                  93.07975607590298,
+                  -3.2349191806697606
+                ],
+                "LeftHand": [
+                  27.857477396098584,
+                  46.81117906768248,
+                  2.9438329528764013
+                ],
+                "RightArm": [
+                  -19.518830288543107,
+                  92.44360019957455,
+                  -1.608311095580167
+                ],
+                "RightHand": [
+                  -26.491783486768263,
+                  45.58454011136898,
+                  3.521201754486891
+                ],
+                "LeftUpLeg": [
+                  8.851196305443928,
+                  44.07272922928437,
+                  0.22695259960594297
+                ],
+                "LeftLeg": [
+                  18.579616086909784,
+                  4.330287197438906,
+                  0.7531317424558365
+                ],
+                "LeftFoot": [
+                  14.67409417158542,
+                  13.66969532007047,
+                  -35.83267959908006
+                ],
+                "RightUpLeg": [
+                  -8.67583008388909,
+                  43.81217418410218,
+                  0.4164732354061792
+                ],
+                "RightLeg": [
+                  -17.06333874409938,
+                  3.7921968688677836,
+                  -1.1192090247038409
+                ],
+                "RightFoot": [
+                  -11.319564693557128,
+                  14.595779251255921,
+                  -37.04181135884607
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  52.433067321777344,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.71803777033241,
+                  112.52192367751134,
+                  1.0698598876890348
+                ],
+                "LeftArm": [
+                  17.39100760403528,
+                  92.08927052804538,
+                  -5.513691760409812
+                ],
+                "LeftHand": [
+                  27.858156885074408,
+                  39.63550776688894,
+                  1.4572766548595766
+                ],
+                "RightArm": [
+                  -18.618207184079786,
+                  91.42041736061952,
+                  -3.555852610521041
+                ],
+                "RightHand": [
+                  -26.1692678975588,
+                  38.34012829807857,
+                  3.1553917958090274
+                ],
+                "LeftUpLeg": [
+                  9.220877291440742,
+                  45.913386213824644,
+                  -0.18798231057221246
+                ],
+                "LeftLeg": [
+                  19.101208060019086,
+                  6.6336401985026185,
+                  2.6039586705061093
+                ],
+                "LeftFoot": [
+                  14.571022908008048,
+                  17.165416978598664,
+                  -37.90390441839853
+                ],
+                "RightUpLeg": [
+                  -9.02494623729545,
+                  45.6421402624538,
+                  0.009310707368700592
+                ],
+                "RightLeg": [
+                  -17.694802984539095,
+                  5.985908969253671,
+                  0.7383269434505899
+                ],
+                "RightFoot": [
+                  -11.150971345519634,
+                  18.48803235135682,
+                  -38.92529763631168
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  49.831119537353516,
+                  0
+                ],
+                "Head": [
+                  -0.7320341064249092,
+                  109.88959704316106,
+                  -0.4185124100409183
+                ],
+                "LeftArm": [
+                  18.643602423863367,
+                  93.07975607590298,
+                  -3.2349191806697606
+                ],
+                "LeftHand": [
+                  27.857477396098584,
+                  46.81117906768248,
+                  2.9438329528764013
+                ],
+                "RightArm": [
+                  -19.518830288543107,
+                  92.44360019957455,
+                  -1.608311095580167
+                ],
+                "RightHand": [
+                  -26.491783486768263,
+                  45.58454011136898,
+                  3.521201754486891
+                ],
+                "LeftUpLeg": [
+                  8.851196305443928,
+                  44.07272922928437,
+                  0.22695259960594297
+                ],
+                "LeftLeg": [
+                  18.579616086909784,
+                  4.330287197438906,
+                  0.7531317424558365
+                ],
+                "LeftFoot": [
+                  14.67409417158542,
+                  13.66969532007047,
+                  -35.83267959908006
+                ],
+                "RightUpLeg": [
+                  -8.67583008388909,
+                  43.81217418410218,
+                  0.4164732354061792
+                ],
+                "RightLeg": [
+                  -17.06333874409938,
+                  3.7921968688677836,
+                  -1.1192090247038409
+                ],
+                "RightFoot": [
+                  -11.319564693557128,
+                  14.595779251255921,
+                  -37.04181135884607
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  52.433067321777344,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.71803777033241,
+                  112.52192367751134,
+                  1.0698598876890348
+                ],
+                "LeftArm": [
+                  17.39100760403528,
+                  92.08927052804538,
+                  -5.513691760409812
+                ],
+                "LeftHand": [
+                  27.858156885074408,
+                  39.63550776688894,
+                  1.4572766548595766
+                ],
+                "RightArm": [
+                  -18.618207184079786,
+                  91.42041736061952,
+                  -3.555852610521041
+                ],
+                "RightHand": [
+                  -26.1692678975588,
+                  38.34012829807857,
+                  3.1553917958090274
+                ],
+                "LeftUpLeg": [
+                  9.220877291440742,
+                  45.913386213824644,
+                  -0.18798231057221246
+                ],
+                "LeftLeg": [
+                  19.101208060019086,
+                  6.6336401985026185,
+                  2.6039586705061093
+                ],
+                "LeftFoot": [
+                  14.571022908008048,
+                  17.165416978598664,
+                  -37.90390441839853
+                ],
+                "RightUpLeg": [
+                  -9.02494623729545,
+                  45.6421402624538,
+                  0.009310707368700592
+                ],
+                "RightLeg": [
+                  -17.694802984539095,
+                  5.985908969253671,
+                  0.7383269434505899
+                ],
+                "RightFoot": [
+                  -11.150971345519634,
+                  18.48803235135682,
+                  -38.92529763631168
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 52.433067321777344,
+          "leftKneeAngleDegrees": 70.46446197544111,
+          "rightKneeAngleDegrees": 70.11208718484448,
+          "leftKneeHeightCentimeters": 6.6336401985026185,
+          "rightKneeHeightCentimeters": 5.985908969253671,
+          "leftFootHeightCentimeters": 17.165416978598664,
+          "rightFootHeightCentimeters": 18.48803235135682
+        }
+      },
+      "bytes": 50127,
+      "sha256": "96f16630c5255af0a4a4a760efb2120c171765f65e31a04525443976e934999b"
+    },
+    {
+      "assetId": "local-pose-kneeling-pointing",
+      "displayName": "单膝跪姿指向",
+      "nameFallback": "单膝跪姿指向",
+      "description": "单膝跪姿指向 / Mixamo 源姿态",
+      "descriptionFallback": "单膝跪姿指向",
+      "category": "跪姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/kneeling-pointing.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/lora-assets/animations/KneelingPointing.fbx",
+        "sha256": "ef4b03935ac12da800abad46c7801e45987276fe10c3b1b6eba126cfb6721060",
+        "filename": "kneeling-pointing.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 1.3,
+        "sourceDurationSec": 3.9000000953674316
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          1.7672408387923606,
+          0,
+          3.597978310092003
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.6630000162124634,
+            1.6770000410079955,
+            3.0810000753402713,
+            3.8610000944137575
+          ],
+          "maxPositionErrorCentimeters": 8.646506863847098e-7,
+          "maxQuaternionErrorRadians": 4.2146848510894035e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492695914149,
+          "maxJointMovementCentimeters": 1.4210854715202004e-14,
+          "maxLimbDirectionErrorDegrees": 1.225348921780258,
+          "maxBodyDirectionErrorDegrees": 6.995657159178959,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005057427051679178,
+            "LeftForeArm->LeftHand": 0.005061483706932132,
+            "RightArm->RightForeArm": 0.0049327500771131,
+            "RightForeArm->RightHand": 0.004968059770439044,
+            "LeftUpLeg->LeftLeg": 1.225348921780258,
+            "LeftLeg->LeftFoot": 1.1653614957795677,
+            "RightUpLeg->RightLeg": 1.2223122453194657,
+            "RightLeg->RightFoot": 1.162490325856112,
+            "Spine->Spine2": 2.478167496892403,
+            "Neck->Head": 6.995657159178959,
+            "Head->HeadTop_End": 0.9615971306017386
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.9747099928421213,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  43.509586334228516,
+                  0
+                ],
+                "Head": [
+                  -6.593444059210413,
+                  95.74097081326748,
+                  7.27265243946531
+                ],
+                "LeftArm": [
+                  8.928467005620522,
+                  81.28701477190536,
+                  -1.2728806102458035
+                ],
+                "LeftHand": [
+                  24.810191811296775,
+                  52.570562345369254,
+                  27.909079439600333
+                ],
+                "RightArm": [
+                  -21.223169326266326,
+                  85.6314839696587,
+                  0.4436994272627322
+                ],
+                "RightHand": [
+                  -70.52212694454516,
+                  97.82358561944532,
+                  18.793681727068847
+                ],
+                "LeftUpLeg": [
+                  9.117917518065774,
+                  38.5444896366549,
+                  -2.779100426361078
+                ],
+                "LeftLeg": [
+                  37.41988352898153,
+                  45.261515628520435,
+                  30.727632110209147
+                ],
+                "LeftFoot": [
+                  16.8005119856081,
+                  9.096039003917312,
+                  14.928114481794761
+                ],
+                "RightUpLeg": [
+                  -5.8677701185849225,
+                  34.98399665165995,
+                  2.8975161112839682
+                ],
+                "RightLeg": [
+                  -0.9750509064486508,
+                  11.331882442201405,
+                  40.119404067994566
+                ],
+                "RightFoot": [
+                  -8.839176441574491,
+                  16.552615381768874,
+                  -3.3963973825084395
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  43.26504898071289,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -7.560984985928459,
+                  97.93639117229932,
+                  9.801313835898819
+                ],
+                "LeftArm": [
+                  11.723580985630187,
+                  83.22057092873618,
+                  -0.44488078927021923
+                ],
+                "LeftHand": [
+                  27.362952555331276,
+                  55.01523019165438,
+                  28.016698090715554
+                ],
+                "RightArm": [
+                  -25.45999473480523,
+                  88.37373156751255,
+                  1.7130342066543187
+                ],
+                "RightHand": [
+                  -73.77845738963492,
+                  100.27845024619555,
+                  19.630955182245458
+                ],
+                "LeftUpLeg": [
+                  10.344627118757494,
+                  39.06644068528386,
+                  -1.7106645135919571
+                ],
+                "LeftLeg": [
+                  36.43974595320562,
+                  44.36740293409574,
+                  28.936666899270648
+                ],
+                "LeftFoot": [
+                  17.118109098535758,
+                  9.766573374364341,
+                  14.731573801691589
+                ],
+                "RightUpLeg": [
+                  -6.314671613767619,
+                  35.10830439129939,
+                  4.599921904004098
+                ],
+                "RightLeg": [
+                  -2.312100650389053,
+                  12.833039366065414,
+                  38.30610250685661
+                ],
+                "RightFoot": [
+                  -9.643217521261022,
+                  16.928492299963136,
+                  -2.946893658784397
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  43.509586334228516,
+                  0
+                ],
+                "Head": [
+                  -6.593444059210413,
+                  95.74097081326748,
+                  7.27265243946531
+                ],
+                "LeftArm": [
+                  8.928467005620522,
+                  81.28701477190536,
+                  -1.2728806102458035
+                ],
+                "LeftHand": [
+                  24.810191811296775,
+                  52.570562345369254,
+                  27.909079439600333
+                ],
+                "RightArm": [
+                  -21.223169326266326,
+                  85.6314839696587,
+                  0.4436994272627322
+                ],
+                "RightHand": [
+                  -70.52212694454516,
+                  97.82358561944532,
+                  18.793681727068847
+                ],
+                "LeftUpLeg": [
+                  9.117917518065774,
+                  38.5444896366549,
+                  -2.779100426361078
+                ],
+                "LeftLeg": [
+                  37.41988352898153,
+                  45.261515628520435,
+                  30.727632110209147
+                ],
+                "LeftFoot": [
+                  16.8005119856081,
+                  9.096039003917312,
+                  14.928114481794761
+                ],
+                "RightUpLeg": [
+                  -5.8677701185849225,
+                  34.98399665165995,
+                  2.8975161112839682
+                ],
+                "RightLeg": [
+                  -0.9750509064486508,
+                  11.331882442201405,
+                  40.119404067994566
+                ],
+                "RightFoot": [
+                  -8.839176441574491,
+                  16.552615381768874,
+                  -3.3963973825084395
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  43.26504898071289,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -7.560984985928459,
+                  97.93639117229932,
+                  9.801313835898819
+                ],
+                "LeftArm": [
+                  11.723580985630187,
+                  83.22057092873618,
+                  -0.44488078927021923
+                ],
+                "LeftHand": [
+                  27.362952555331276,
+                  55.01523019165438,
+                  28.016698090715554
+                ],
+                "RightArm": [
+                  -25.45999473480523,
+                  88.37373156751255,
+                  1.7130342066543187
+                ],
+                "RightHand": [
+                  -73.77845738963492,
+                  100.27845024619555,
+                  19.630955182245458
+                ],
+                "LeftUpLeg": [
+                  10.344627118757494,
+                  39.06644068528386,
+                  -1.7106645135919571
+                ],
+                "LeftLeg": [
+                  36.43974595320562,
+                  44.36740293409574,
+                  28.936666899270648
+                ],
+                "LeftFoot": [
+                  17.118109098535758,
+                  9.766573374364341,
+                  14.731573801691589
+                ],
+                "RightUpLeg": [
+                  -6.314671613767619,
+                  35.10830439129939,
+                  4.599921904004098
+                ],
+                "RightLeg": [
+                  -2.312100650389053,
+                  12.833039366065414,
+                  38.30610250685661
+                ],
+                "RightFoot": [
+                  -9.643217521261022,
+                  16.928492299963136,
+                  -2.946893658784397
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  43.509586334228516,
+                  0
+                ],
+                "Head": [
+                  -6.593444059210413,
+                  95.74097081326748,
+                  7.27265243946531
+                ],
+                "LeftArm": [
+                  8.928467005620522,
+                  81.28701477190536,
+                  -1.2728806102458035
+                ],
+                "LeftHand": [
+                  24.810191811296775,
+                  52.570562345369254,
+                  27.909079439600333
+                ],
+                "RightArm": [
+                  -21.223169326266326,
+                  85.6314839696587,
+                  0.4436994272627322
+                ],
+                "RightHand": [
+                  -70.52212694454516,
+                  97.82358561944532,
+                  18.793681727068847
+                ],
+                "LeftUpLeg": [
+                  9.117917518065774,
+                  38.5444896366549,
+                  -2.779100426361078
+                ],
+                "LeftLeg": [
+                  37.41988352898153,
+                  45.261515628520435,
+                  30.727632110209147
+                ],
+                "LeftFoot": [
+                  16.8005119856081,
+                  9.096039003917312,
+                  14.928114481794761
+                ],
+                "RightUpLeg": [
+                  -5.8677701185849225,
+                  34.98399665165995,
+                  2.8975161112839682
+                ],
+                "RightLeg": [
+                  -0.9750509064486508,
+                  11.331882442201405,
+                  40.119404067994566
+                ],
+                "RightFoot": [
+                  -8.839176441574491,
+                  16.552615381768874,
+                  -3.3963973825084395
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  43.26504898071289,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -7.560984985928459,
+                  97.93639117229932,
+                  9.801313835898819
+                ],
+                "LeftArm": [
+                  11.723580985630187,
+                  83.22057092873618,
+                  -0.44488078927021923
+                ],
+                "LeftHand": [
+                  27.362952555331276,
+                  55.01523019165438,
+                  28.016698090715554
+                ],
+                "RightArm": [
+                  -25.45999473480523,
+                  88.37373156751255,
+                  1.7130342066543187
+                ],
+                "RightHand": [
+                  -73.77845738963492,
+                  100.27845024619555,
+                  19.630955182245458
+                ],
+                "LeftUpLeg": [
+                  10.344627118757494,
+                  39.06644068528386,
+                  -1.7106645135919571
+                ],
+                "LeftLeg": [
+                  36.43974595320562,
+                  44.36740293409574,
+                  28.936666899270648
+                ],
+                "LeftFoot": [
+                  17.118109098535758,
+                  9.766573374364341,
+                  14.731573801691589
+                ],
+                "RightUpLeg": [
+                  -6.314671613767619,
+                  35.10830439129939,
+                  4.599921904004098
+                ],
+                "RightLeg": [
+                  -2.312100650389053,
+                  12.833039366065414,
+                  38.30610250685661
+                ],
+                "RightFoot": [
+                  -9.643217521261022,
+                  16.928492299963136,
+                  -2.946893658784397
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 43.26504898071289,
+          "leftKneeAngleDegrees": 48.92745370524573,
+          "rightKneeAngleDegrees": 27.862568523681222,
+          "leftKneeHeightCentimeters": 44.36740293409574,
+          "rightKneeHeightCentimeters": 12.833039366065414,
+          "leftFootHeightCentimeters": 9.766573374364341,
+          "rightFootHeightCentimeters": 16.928492299963136
+        }
+      },
+      "bytes": 49321,
+      "sha256": "217dbab0035ddb26842c7ed4198637f3de57d96ecbf2ddd00f008e0c5a54524b"
+    },
+    {
+      "assetId": "local-pose-chair-sitting",
+      "displayName": "椅子坐姿",
+      "nameFallback": "椅子坐姿",
+      "description": "椅子坐姿 / Mixamo 源姿态",
+      "descriptionFallback": "椅子坐姿",
+      "category": "坐姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/chair-sitting.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/character-studio/public/sprite-atlas-assets/animations/Sitting.fbx",
+        "sha256": "14fb42f155c6985fa3326ff76226fd4ca8ac2821a04d2fa34b76e31a806f204d",
+        "filename": "sitting-down.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 0.5,
+        "sourceDurationSec": 1.1666666269302368
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          0.7872282266616821,
+          0,
+          -23.174358367919922
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.19833332657814026,
+            0.5016666495800018,
+            0.9216666352748871,
+            1.1549999606609345
+          ],
+          "maxPositionErrorCentimeters": 0.000002082051619410275,
+          "maxQuaternionErrorRadians": 4.2146848510894035e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492695914149,
+          "maxJointMovementCentimeters": 1.4210854715202004e-14,
+          "maxLimbDirectionErrorDegrees": 1.2253458363049763,
+          "maxBodyDirectionErrorDegrees": 6.995656160278805,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005065378677393801,
+            "LeftForeArm->LeftHand": 0.005061930421665739,
+            "RightArm->RightForeArm": 0.004934709607016709,
+            "RightForeArm->RightHand": 0.004969400565851745,
+            "LeftUpLeg->LeftLeg": 1.2253458363049763,
+            "LeftLeg->LeftFoot": 1.1653554564598538,
+            "RightUpLeg->RightLeg": 1.2223133793279306,
+            "RightLeg->RightFoot": 1.162486282310635,
+            "Spine->Spine2": 1.5395602612022186,
+            "Neck->Head": 6.995656160278805,
+            "Head->HeadTop_End": 0.9615968288165826
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.03610275715193673,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  62.245506286621094,
+                  0
+                ],
+                "Head": [
+                  -0.7122969677920277,
+                  115.8421926243772,
+                  0.18160059638500226
+                ],
+                "LeftArm": [
+                  14.597078698873272,
+                  101.4452195480639,
+                  -8.810111641053613
+                ],
+                "LeftHand": [
+                  13.587800229441651,
+                  60.66449294369559,
+                  5.826956208946221
+                ],
+                "RightArm": [
+                  -15.326303568943882,
+                  100.2021024515407,
+                  -8.426927728853967
+                ],
+                "RightHand": [
+                  -15.388224256254599,
+                  62.532400777659795,
+                  7.849245327217574
+                ],
+                "LeftUpLeg": [
+                  8.017472821015003,
+                  55.3184731378347,
+                  1.802316729776594
+                ],
+                "LeftLeg": [
+                  11.210552883303974,
+                  54.40062605127943,
+                  46.0491579898068
+                ],
+                "LeftFoot": [
+                  10.630818611189435,
+                  10.08680694235872,
+                  41.727784630983216
+                ],
+                "RightUpLeg": [
+                  -8.391397102602463,
+                  55.7094137967298,
+                  1.5414129449193945
+                ],
+                "RightLeg": [
+                  -18.955054605390302,
+                  53.22448876354197,
+                  44.565406973319504
+                ],
+                "RightFoot": [
+                  -13.323942218865211,
+                  9.486221640995431,
+                  38.40262021901661
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  60.69412612915039,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.8387625193631224,
+                  117.35656374990624,
+                  3.7909067380598858
+                ],
+                "LeftArm": [
+                  18.076620164363796,
+                  102.93749787918316,
+                  -7.273754763545185
+                ],
+                "LeftHand": [
+                  17.215897931327056,
+                  62.952907462743475,
+                  6.958133585898974
+                ],
+                "RightArm": [
+                  -19.029120473717207,
+                  101.39265245418345,
+                  -6.8461111047144305
+                ],
+                "RightHand": [
+                  -19.16230786298748,
+                  64.42990634500394,
+                  8.941925441128207
+                ],
+                "LeftUpLeg": [
+                  8.931502047796597,
+                  54.53783337658606,
+                  3.1456024097650395
+                ],
+                "LeftLeg": [
+                  12.01455372358283,
+                  52.845766273411186,
+                  43.59243170132605
+                ],
+                "LeftFoot": [
+                  11.301077824218863,
+                  10.878324329062472,
+                  40.34391579877931
+                ],
+                "RightUpLeg": [
+                  -9.309922740322625,
+                  54.972429815423006,
+                  2.8555631480256176
+                ],
+                "RightLeg": [
+                  -19.089885084676794,
+                  51.844634797118715,
+                  42.13511940260543
+                ],
+                "RightFoot": [
+                  -13.73682604659648,
+                  10.385313982214598,
+                  37.15542580403655
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  62.245506286621094,
+                  0
+                ],
+                "Head": [
+                  -0.7122969677920277,
+                  115.8421926243772,
+                  0.18160059638500226
+                ],
+                "LeftArm": [
+                  14.597078698873272,
+                  101.4452195480639,
+                  -8.810111641053613
+                ],
+                "LeftHand": [
+                  13.587800229441651,
+                  60.66449294369559,
+                  5.826956208946221
+                ],
+                "RightArm": [
+                  -15.326303568943882,
+                  100.2021024515407,
+                  -8.426927728853967
+                ],
+                "RightHand": [
+                  -15.388224256254599,
+                  62.532400777659795,
+                  7.849245327217574
+                ],
+                "LeftUpLeg": [
+                  8.017472821015003,
+                  55.3184731378347,
+                  1.802316729776594
+                ],
+                "LeftLeg": [
+                  11.210552883303974,
+                  54.40062605127943,
+                  46.0491579898068
+                ],
+                "LeftFoot": [
+                  10.630818611189435,
+                  10.08680694235872,
+                  41.727784630983216
+                ],
+                "RightUpLeg": [
+                  -8.391397102602463,
+                  55.7094137967298,
+                  1.5414129449193945
+                ],
+                "RightLeg": [
+                  -18.955054605390302,
+                  53.22448876354197,
+                  44.565406973319504
+                ],
+                "RightFoot": [
+                  -13.323942218865211,
+                  9.486221640995431,
+                  38.40262021901661
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  60.69412612915039,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.8387625193631224,
+                  117.35656374990624,
+                  3.7909067380598858
+                ],
+                "LeftArm": [
+                  18.076620164363796,
+                  102.93749787918316,
+                  -7.273754763545185
+                ],
+                "LeftHand": [
+                  17.215897931327056,
+                  62.952907462743475,
+                  6.958133585898974
+                ],
+                "RightArm": [
+                  -19.029120473717207,
+                  101.39265245418345,
+                  -6.8461111047144305
+                ],
+                "RightHand": [
+                  -19.16230786298748,
+                  64.42990634500394,
+                  8.941925441128207
+                ],
+                "LeftUpLeg": [
+                  8.931502047796597,
+                  54.53783337658606,
+                  3.1456024097650395
+                ],
+                "LeftLeg": [
+                  12.01455372358283,
+                  52.845766273411186,
+                  43.59243170132605
+                ],
+                "LeftFoot": [
+                  11.301077824218863,
+                  10.878324329062472,
+                  40.34391579877931
+                ],
+                "RightUpLeg": [
+                  -9.309922740322625,
+                  54.972429815423006,
+                  2.8555631480256176
+                ],
+                "RightLeg": [
+                  -19.089885084676794,
+                  51.844634797118715,
+                  42.13511940260543
+                ],
+                "RightFoot": [
+                  -13.73682604659648,
+                  10.385313982214598,
+                  37.15542580403655
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  62.245506286621094,
+                  0
+                ],
+                "Head": [
+                  -0.7122969677920277,
+                  115.8421926243772,
+                  0.18160059638500226
+                ],
+                "LeftArm": [
+                  14.597078698873272,
+                  101.4452195480639,
+                  -8.810111641053613
+                ],
+                "LeftHand": [
+                  13.587800229441651,
+                  60.66449294369559,
+                  5.826956208946221
+                ],
+                "RightArm": [
+                  -15.326303568943882,
+                  100.2021024515407,
+                  -8.426927728853967
+                ],
+                "RightHand": [
+                  -15.388224256254599,
+                  62.532400777659795,
+                  7.849245327217574
+                ],
+                "LeftUpLeg": [
+                  8.017472821015003,
+                  55.3184731378347,
+                  1.802316729776594
+                ],
+                "LeftLeg": [
+                  11.210552883303974,
+                  54.40062605127943,
+                  46.0491579898068
+                ],
+                "LeftFoot": [
+                  10.630818611189435,
+                  10.08680694235872,
+                  41.727784630983216
+                ],
+                "RightUpLeg": [
+                  -8.391397102602463,
+                  55.7094137967298,
+                  1.5414129449193945
+                ],
+                "RightLeg": [
+                  -18.955054605390302,
+                  53.22448876354197,
+                  44.565406973319504
+                ],
+                "RightFoot": [
+                  -13.323942218865211,
+                  9.486221640995431,
+                  38.40262021901661
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  60.69412612915039,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.8387625193631224,
+                  117.35656374990624,
+                  3.7909067380598858
+                ],
+                "LeftArm": [
+                  18.076620164363796,
+                  102.93749787918316,
+                  -7.273754763545185
+                ],
+                "LeftHand": [
+                  17.215897931327056,
+                  62.952907462743475,
+                  6.958133585898974
+                ],
+                "RightArm": [
+                  -19.029120473717207,
+                  101.39265245418345,
+                  -6.8461111047144305
+                ],
+                "RightHand": [
+                  -19.16230786298748,
+                  64.42990634500394,
+                  8.941925441128207
+                ],
+                "LeftUpLeg": [
+                  8.931502047796597,
+                  54.53783337658606,
+                  3.1456024097650395
+                ],
+                "LeftLeg": [
+                  12.01455372358283,
+                  52.845766273411186,
+                  43.59243170132605
+                ],
+                "LeftFoot": [
+                  11.301077824218863,
+                  10.878324329062472,
+                  40.34391579877931
+                ],
+                "RightUpLeg": [
+                  -9.309922740322625,
+                  54.972429815423006,
+                  2.8555631480256176
+                ],
+                "RightLeg": [
+                  -19.089885084676794,
+                  51.844634797118715,
+                  42.13511940260543
+                ],
+                "RightFoot": [
+                  -13.73682604659648,
+                  10.385313982214598,
+                  37.15542580403655
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 60.69412612915039,
+          "leftKneeAngleDegrees": 87.90171703291469,
+          "rightKneeAngleDegrees": 86.03195406375845,
+          "leftKneeHeightCentimeters": 52.845766273411186,
+          "rightKneeHeightCentimeters": 51.844634797118715,
+          "leftFootHeightCentimeters": 10.878324329062472,
+          "rightFootHeightCentimeters": 10.385313982214598
+        }
+      },
+      "bytes": 49651,
+      "sha256": "d29389cc7ad77da76f68316e991f83059d7c7a448105b4b8dad8897377c41e74"
+    },
+    {
+      "assetId": "local-pose-sitting-clap",
+      "displayName": "坐姿鼓掌",
+      "nameFallback": "坐姿鼓掌",
+      "description": "坐姿鼓掌 / Mixamo 源姿态",
+      "descriptionFallback": "坐姿鼓掌",
+      "category": "坐姿",
+      "localPosePreset": true,
+      "motionUsage": "direct",
+      "mediaUrl": "/assets/poses/sitting-clap.motion.json",
+      "extension": ".motion.json",
+      "durationSec": 1,
+      "fps": 30,
+      "trackCount": 195,
+      "dynamicTracks": 0,
+      "source": {
+        "url": "https://raw.githubusercontent.com/nirholas/three.ws/8866e5471c1e25d41070f1e1992ecc1dbba80f22/animation-sources/Sitting%20Clap.fbx",
+        "sha256": "fe97f4286aac0ba807e33b50bf64721418101a260247a22a7a9a045090aad07d",
+        "filename": "sitting-clap.fbx",
+        "clipName": "mixamo.com",
+        "repository": "nirholas/three.ws",
+        "commit": "8866e5471c1e25d41070f1e1992ecc1dbba80f22",
+        "sampleTimeSec": 1.1,
+        "sourceDurationSec": 5.666666507720947
+      },
+      "conversion": {
+        "originalSourceJointCount": 65,
+        "staticReferenceJointsAdded": [],
+        "addedJointAnimationTracks": 0,
+        "headingAlignmentRadians": -7.310176296935213e-7,
+        "preservedSourceUnits": "centimeters",
+        "staticFrame": true,
+        "horizontalCenteringOffsetCentimeters": [
+          0.23573230105836537,
+          0,
+          3.5551988885220385
+        ],
+        "generatedAnimation": false
+      },
+      "validation": {
+        "roundtrip": {
+          "sampleTimes": [
+            0,
+            0.9633333063125611,
+            2.436666598320007,
+            4.476666541099549,
+            5.609999842643738
+          ],
+          "maxPositionErrorCentimeters": 1.0731181507069733e-7,
+          "maxQuaternionErrorRadians": 5.16191365590357e-8
+        },
+        "retargeted": {
+          "engine": "Original director vv.prepareClip + bundled vf.NM",
+          "samples": 63,
+          "legScale": 0.9302492695914149,
+          "maxJointMovementCentimeters": 2.842170943040401e-14,
+          "maxLimbDirectionErrorDegrees": 1.2253387494386172,
+          "maxBodyDirectionErrorDegrees": 6.995656669234414,
+          "segmentDirectionErrorsDegrees": {
+            "LeftArm->LeftForeArm": 0.005059671890312436,
+            "LeftForeArm->LeftHand": 0.005065599565577258,
+            "RightArm->RightForeArm": 0.004933707629940214,
+            "RightForeArm->RightHand": 0.004967423024471094,
+            "LeftUpLeg->LeftLeg": 1.2253387494386172,
+            "LeftLeg->LeftFoot": 1.1653618021813077,
+            "RightUpLeg->RightLeg": 1.222307380819483,
+            "RightLeg->RightFoot": 1.1624857432738538,
+            "Spine->Spine2": 1.4816115941293382,
+            "Neck->Head": 6.995656669234414,
+            "Head->HeadTop_End": 0.9615973764203428
+          },
+          "maxErrorAboveBindDifferenceDegrees": 0.0000033591165316345718,
+          "finite": true,
+          "landmarks": [
+            {
+              "time": 0,
+              "source": {
+                "Hips": [
+                  0,
+                  61.71232223510742,
+                  0
+                ],
+                "Head": [
+                  -0.8315718870441113,
+                  117.42012719589552,
+                  4.457460138629818
+                ],
+                "LeftArm": [
+                  15.046470273642944,
+                  101.78016645086535,
+                  0.2732775775278187
+                ],
+                "LeftHand": [
+                  12.532888036735011,
+                  83.10212005312063,
+                  30.507556257961106
+                ],
+                "RightArm": [
+                  -15.1259203359932,
+                  100.52644039283567,
+                  -2.3504377986989153
+                ],
+                "RightHand": [
+                  -17.225249733883963,
+                  84.75653681073126,
+                  33.52322950138534
+                ],
+                "LeftUpLeg": [
+                  8.29984452334754,
+                  55.10282395037981,
+                  -1.7143854084087022
+                ],
+                "LeftLeg": [
+                  17.030660328816847,
+                  53.03193264353111,
+                  41.740251039785754
+                ],
+                "LeftFoot": [
+                  21.653665445752054,
+                  8.747643378882586,
+                  41.235393929902436
+                ],
+                "RightUpLeg": [
+                  -8.113241964877469,
+                  54.8446913636331,
+                  -1.588381267361054
+                ],
+                "RightLeg": [
+                  -13.884584573534578,
+                  52.86350062399035,
+                  42.361549914138344
+                ],
+                "RightFoot": [
+                  -19.91159747803002,
+                  8.745857544039133,
+                  42.17693388405607
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  60.1981315612793,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.8288340282997165,
+                  119.86227634588175,
+                  7.988557437755078
+                ],
+                "LeftArm": [
+                  18.747993829339862,
+                  103.70697863273978,
+                  2.3227593121711876
+                ],
+                "LeftHand": [
+                  16.413027042358205,
+                  85.26938390554436,
+                  31.857462925621252
+                ],
+                "RightArm": [
+                  -18.654830387851405,
+                  102.17726521036788,
+                  -0.7874676639409577
+                ],
+                "RightHand": [
+                  -20.76257247803106,
+                  86.56358517369392,
+                  34.27272896079553
+                ],
+                "LeftUpLeg": [
+                  9.22689697982489,
+                  53.686652847510516,
+                  -0.17656509228203393
+                ],
+                "LeftLeg": [
+                  17.532936873306447,
+                  50.99137255487966,
+                  39.47263921171193
+                ],
+                "LeftFoot": [
+                  21.915912091117594,
+                  9.122840038539422,
+                  39.85148782168352
+                ],
+                "RightUpLeg": [
+                  -9.01921504617948,
+                  53.39968647382606,
+                  -0.03648875734244193
+                ],
+                "RightLeg": [
+                  -14.625985579065691,
+                  50.78938393913314,
+                  40.08912130810817
+                ],
+                "RightFoot": [
+                  -20.278077711262934,
+                  9.077023170791513,
+                  40.76746636111242
+                ]
+              }
+            },
+            {
+              "time": 0.4,
+              "source": {
+                "Hips": [
+                  0,
+                  61.71232223510742,
+                  0
+                ],
+                "Head": [
+                  -0.8315718870441113,
+                  117.42012719589552,
+                  4.457460138629818
+                ],
+                "LeftArm": [
+                  15.046470273642944,
+                  101.78016645086535,
+                  0.2732775775278187
+                ],
+                "LeftHand": [
+                  12.532888036735011,
+                  83.10212005312063,
+                  30.507556257961106
+                ],
+                "RightArm": [
+                  -15.1259203359932,
+                  100.52644039283567,
+                  -2.3504377986989153
+                ],
+                "RightHand": [
+                  -17.225249733883963,
+                  84.75653681073126,
+                  33.52322950138534
+                ],
+                "LeftUpLeg": [
+                  8.29984452334754,
+                  55.10282395037981,
+                  -1.7143854084087022
+                ],
+                "LeftLeg": [
+                  17.030660328816847,
+                  53.03193264353111,
+                  41.740251039785754
+                ],
+                "LeftFoot": [
+                  21.653665445752054,
+                  8.747643378882586,
+                  41.235393929902436
+                ],
+                "RightUpLeg": [
+                  -8.113241964877469,
+                  54.8446913636331,
+                  -1.588381267361054
+                ],
+                "RightLeg": [
+                  -13.884584573534578,
+                  52.86350062399035,
+                  42.361549914138344
+                ],
+                "RightFoot": [
+                  -19.91159747803002,
+                  8.745857544039133,
+                  42.17693388405607
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  60.1981315612793,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.8288340282997165,
+                  119.86227634588175,
+                  7.988557437755078
+                ],
+                "LeftArm": [
+                  18.747993829339862,
+                  103.70697863273978,
+                  2.3227593121711876
+                ],
+                "LeftHand": [
+                  16.413027042358205,
+                  85.26938390554436,
+                  31.857462925621252
+                ],
+                "RightArm": [
+                  -18.654830387851405,
+                  102.17726521036788,
+                  -0.7874676639409577
+                ],
+                "RightHand": [
+                  -20.76257247803106,
+                  86.56358517369392,
+                  34.27272896079553
+                ],
+                "LeftUpLeg": [
+                  9.22689697982489,
+                  53.686652847510516,
+                  -0.17656509228203393
+                ],
+                "LeftLeg": [
+                  17.532936873306447,
+                  50.99137255487966,
+                  39.47263921171193
+                ],
+                "LeftFoot": [
+                  21.915912091117594,
+                  9.122840038539422,
+                  39.85148782168352
+                ],
+                "RightUpLeg": [
+                  -9.01921504617948,
+                  53.39968647382606,
+                  -0.03648875734244193
+                ],
+                "RightLeg": [
+                  -14.625985579065691,
+                  50.78938393913314,
+                  40.08912130810817
+                ],
+                "RightFoot": [
+                  -20.278077711262934,
+                  9.077023170791513,
+                  40.76746636111242
+                ]
+              }
+            },
+            {
+              "time": 0.8,
+              "source": {
+                "Hips": [
+                  0,
+                  61.71232223510742,
+                  0
+                ],
+                "Head": [
+                  -0.8315718870441113,
+                  117.42012719589552,
+                  4.457460138629818
+                ],
+                "LeftArm": [
+                  15.046470273642944,
+                  101.78016645086535,
+                  0.2732775775278187
+                ],
+                "LeftHand": [
+                  12.532888036735011,
+                  83.10212005312063,
+                  30.507556257961106
+                ],
+                "RightArm": [
+                  -15.1259203359932,
+                  100.52644039283567,
+                  -2.3504377986989153
+                ],
+                "RightHand": [
+                  -17.225249733883963,
+                  84.75653681073126,
+                  33.52322950138534
+                ],
+                "LeftUpLeg": [
+                  8.29984452334754,
+                  55.10282395037981,
+                  -1.7143854084087022
+                ],
+                "LeftLeg": [
+                  17.030660328816847,
+                  53.03193264353111,
+                  41.740251039785754
+                ],
+                "LeftFoot": [
+                  21.653665445752054,
+                  8.747643378882586,
+                  41.235393929902436
+                ],
+                "RightUpLeg": [
+                  -8.113241964877469,
+                  54.8446913636331,
+                  -1.588381267361054
+                ],
+                "RightLeg": [
+                  -13.884584573534578,
+                  52.86350062399035,
+                  42.361549914138344
+                ],
+                "RightFoot": [
+                  -19.91159747803002,
+                  8.745857544039133,
+                  42.17693388405607
+                ]
+              },
+              "target": {
+                "Hips": [
+                  -0.000006757011760782916,
+                  60.1981315612793,
+                  0.00004844740033149719
+                ],
+                "Head": [
+                  -0.8288340282997165,
+                  119.86227634588175,
+                  7.988557437755078
+                ],
+                "LeftArm": [
+                  18.747993829339862,
+                  103.70697863273978,
+                  2.3227593121711876
+                ],
+                "LeftHand": [
+                  16.413027042358205,
+                  85.26938390554436,
+                  31.857462925621252
+                ],
+                "RightArm": [
+                  -18.654830387851405,
+                  102.17726521036788,
+                  -0.7874676639409577
+                ],
+                "RightHand": [
+                  -20.76257247803106,
+                  86.56358517369392,
+                  34.27272896079553
+                ],
+                "LeftUpLeg": [
+                  9.22689697982489,
+                  53.686652847510516,
+                  -0.17656509228203393
+                ],
+                "LeftLeg": [
+                  17.532936873306447,
+                  50.99137255487966,
+                  39.47263921171193
+                ],
+                "LeftFoot": [
+                  21.915912091117594,
+                  9.122840038539422,
+                  39.85148782168352
+                ],
+                "RightUpLeg": [
+                  -9.01921504617948,
+                  53.39968647382606,
+                  -0.03648875734244193
+                ],
+                "RightLeg": [
+                  -14.625985579065691,
+                  50.78938393913314,
+                  40.08912130810817
+                ],
+                "RightFoot": [
+                  -20.278077711262934,
+                  9.077023170791513,
+                  40.76746636111242
+                ]
+              }
+            }
+          ],
+          "footExcursionCentimeters": {
+            "LeftFoot": 0,
+            "RightFoot": 0
+          },
+          "pathCycleEstimateMeters": 0
+        },
+        "poseGeometry": {
+          "hipsHeightCentimeters": 60.1981315612793,
+          "leftKneeAngleDegrees": 95.5153029259318,
+          "rightKneeAngleDegrees": 95.6337692207637,
+          "leftKneeHeightCentimeters": 50.99137255487966,
+          "rightKneeHeightCentimeters": 50.78938393913314,
+          "leftFootHeightCentimeters": 9.122840038539422,
+          "rightFootHeightCentimeters": 9.077023170791513
+        }
+      },
+      "bytes": 49517,
+      "sha256": "c34b44ac9334eb39ee7c65ae9c70db2a44c3cfdd784a1b9a5265a22516393867"
+    }
+  ]
+}
